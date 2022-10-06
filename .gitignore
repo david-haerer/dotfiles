@@ -6,3 +6,6 @@
 !/.local
 /.local/*
 !/.local/bin
+/.local/bin/*
+!/.local/bin/git
+!/.local/bin/shell
