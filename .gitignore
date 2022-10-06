@@ -1,3 +1,6 @@
 *
 !.gitignore
 !README.md
+!.zshrc
+!.local/bin/git
+!.local/bin/shell
