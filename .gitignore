@@ -9,3 +9,12 @@
 /.local/bin/*
 !/.local/bin/git
 !/.local/bin/shell
+
+!/.config
+/.config/*
+!/.config/alacritty
+!/.config/newsboat
+!/.config/nvim
+/.config/nvim/*
+!/.config/shell
+!/.config/starship.toml
