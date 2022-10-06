@@ -1,0 +1,118 @@
+#!/bin/sh
+
+# shell
+alias e="exit"
+alias c="clear && l"
+alias o="xdg-open"
+alias v="nvim"
+alias md="mkdir"
+alias cm="chmod"
+alias sw="source workspace"
+alias fd="fdfind"
+alias s="search"
+
+# ls: Show hidden files by default.
+alias ls="ls -a"
+
+# cd: Navigate quickly.
+alias d="cd"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ..3="cd ../../.."
+alias ..4="cd ../../../.."
+alias ..5="cd ../../../../.."
+alias b="cd -"
+
+# xclip
+alias copy="xclip"
+alias paste="xclip -o"
+
+# grep
+# TODO: Use rip-grep.
+alias grep='grep --color=auto'
+
+# bat
+alias bat="batcat"
+alias b="batcat"
+
+# scripts
+alias a="append"
+alias u="source update"
+
+# exa: Use as default list tool.
+alias l="exa --color=always --group-directories-first --icons"
+alias ls="exa -al --color=always --group-directories-first --icons"
+alias la="exa -a --color=always --group-directories-first --icons"
+alias ll="exa -l --color=always --group-directories-first --icons"
+alias lt="exa -aT --color=always --group-directories-first --icons"
+alias l.="exa -a --color=always --group-directories-first --icons | grep '^\.'"
+
+# tmux: Use UTF-8 in tmux.
+alias tmux="tmux -u"
+
+# git: Use lots of shortcuts.
+alias g="git"
+alias ga="git add"
+alias gb="git build"
+alias gc="git commit"
+alias gd="git diff"
+alias gi="git ignore"
+alias gl="git log"
+alias gr="git report"
+alias gs="git status"
+alias gt="git todo"
+alias gu="git update"
+alias gls="git ls-files"
+alias grm="git remove"
+alias gmv="git rename"
+
+# dotfiles: Manage dotfiles with a bare Git repository.
+alias dotfiles="git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME"
+
+# todo.txt
+alias t="bash $APPS/todo-txt/todo.sh"
+alias ta="append $TODO_FILE"
+alias to="nvim $TODO_FILE"
+alias td="icloud-todotxt download"
+alias tu="icloud-todotxt upload"
+alias idee="append $TODO_FILE +idee"
+alias frage="append $TODO_FILE +frage"
+alias wunsch="append $TODO_FILE +wunsch"
+alias notiz="append $TODO_FILE +notiz"
+alias aufgabe="append $TODO_FILE +aufgabe"
+
+# notes
+alias na="append $NOTES/$(date +%Y-%m-%d) $(date +%H:%M)"
+alias no="nvim "$NOTES""
+
+# newsboat
+alias feed="newsboat -u $HOME/Schreibtisch/rss"
+
+# docker
+alias dc="docker-compose"
+
+# downloads
+alias audio-dl="youtube-dl -o './%(upload_date)s - %(uploader)s - %(title)s.mp3' -f bestaudio "
+alias video-dl="youtube-dl -o './%(upload_date)s - %(uploader)s - %(title)s.mp4' -f bestvideo+bestaudio "
+alias captions-dl="youtube-dl -o './%(upload_date)s - %(uploader)s - %(title)s.mp4' --all-subs --skip-download"
+# alias spotify-dl="spotifydl --username $(pass spotify.com | grep -oP '(?<=username: )[^,]*') --password $(pass spotify.com | head -n 1)"
+
+# python
+alias python="python3"
+alias py="python"
+alias ipy="ipython"
+
+# R
+alias r="radian"
+
+# docker-compose
+alias dc="docker-compose"
+
+# pass
+alias otp="pass otp"
+
+# fdupes
+alias deduplicate="fdupes -r -N"
+
+# taffy
+alias tag-mp3="id3 -m '%g  -  %a  -  %l  -  %n  -  %t.mp3'"
