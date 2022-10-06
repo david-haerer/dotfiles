@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+for file in *.MTS
+do
+    ffmpeg -i $file -q:v 0 ${file/%.MTS/.mp4}
+    rm $file
+done

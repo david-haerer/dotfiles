@@ -1,0 +1,7 @@
+#!/bin/sh
+
+file="$1"
+
+git rm "$file"
+git commit -m "rm '$file'"
+

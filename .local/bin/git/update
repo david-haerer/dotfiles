@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -eu
+
+files="$@"
+
+if [ -z "$files" ]
+then
+    git pull
+    git push
+else
+    for file in $@
+    do
+        git add "$file"
+        git commit -m "$file"
+        git push
+    done
+fi

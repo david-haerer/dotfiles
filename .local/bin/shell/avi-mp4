@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+for file in *.AVI
+do
+    ffmpeg -i $file -q:v 0 ${file/%.AVI/.mp4}
+    rm $file
+done

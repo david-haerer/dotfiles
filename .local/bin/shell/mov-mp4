@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+for file in *.MOV
+do
+    ffmpeg -i $file -q:v 0 ${file/%.MOV/.mp4}
+    rm $file
+done

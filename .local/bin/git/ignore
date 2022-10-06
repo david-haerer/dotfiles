@@ -1,0 +1,6 @@
+#!/bin/sh
+
+file="$1"
+
+echo "$file" >> "$(git root)/.gitignore"
+
