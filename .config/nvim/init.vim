@@ -38,8 +38,8 @@ set hlsearch
 " Use the Solarized colorscheme.
 syntax on
 set background=dark
-" colorscheme nord
-colorscheme Atelier_ForestDark
+colorscheme nord
+" colorscheme Atelier_ForestDark
 let g:solarized_termcolors=256
 set termguicolors
 let g:airline_theme='base16_atelier_forest'
