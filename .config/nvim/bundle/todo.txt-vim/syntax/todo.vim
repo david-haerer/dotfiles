@@ -43,12 +43,12 @@ syntax  match  TodoContext    '\(^\|\W\)@[^[:blank:]]\+'  contains=NONE
 
 " Other priority colours might be defined by the user
 highlight  default  link  TodoDone       Comment
-highlight  default  link  TodoPriorityA  Statement
-highlight  default  link  TodoPriorityB  Identifier
-highlight  default  link  TodoPriorityC  Constant
-highlight  default  link  TodoDate       PreProc
-highlight  default  link  TodoProject    Special
-highlight  default  link  TodoContext    Special
+highlight  default  link  TodoPriorityA  Identifier
+highlight  default  link  TodoPriorityB  Constant
+highlight  default  link  TodoPriorityC  String
+highlight  default  link  TodoDate       Statement
+highlight  default  link  TodoProject    Statement
+highlight  default  link  TodoContext    Statement
 
 if exists('g:todo_load_python') && g:todo_load_python
     if has('python')
