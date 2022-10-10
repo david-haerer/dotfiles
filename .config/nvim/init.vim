@@ -37,14 +37,19 @@ set hlsearch
 
 " Use the Solarized colorscheme.
 syntax on
+set termguicolors
 set background=dark
+
 " colorscheme Atelier_ForestDark
 " let g:airline_theme='base16_atelier_forest'
+
+let g:onedark_config = {
+    \ 'style': 'warmer',
+\}
 colorscheme onedark
 let g:airline_theme='onedark'
-let g:onedark_terminal_italics=1
-let g:onedark_hide_endofbuffer=1
-set termguicolors
+" let g:onedark_terminal_italics=1
+" let g:onedark_hide_endofbuffer=1
 
 " Use four spaces for tabs.
 set tabstop=4
