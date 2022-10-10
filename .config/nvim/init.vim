@@ -124,13 +124,8 @@ syntax on
 " Format Go code with ':GoFmt'.
 :command GoFmt :! gofmt -s -w %
 
-" " Prettier Settings
-" let g:prettier#quickfix_enabled = 0
-" let g:prettier#autoformat_require_pragma = 0
-" au BufWritePre *.css,*.svelte,*.pcss,*.html,*.ts,*.js,*.json PrettierAsync
-
-" Remove trailing whitespace on save.
-" autocmd BufWritePre * :%s/\s\+$//e
+" Format JavaScript and TypeScript code with ':Prettier'.
+:command Prettier :! prettier --write %
 
 " VimDevIcons
 let g:webdevicons_conceal_nerdtree_brackets=1
