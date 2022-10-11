@@ -140,34 +140,34 @@ font:
 #     cyan: '#6d96a5'
 #     white: '#aeb3bb'
 
-# Atelier Forest Dark
-colors:
-  # Default colors
-  primary:
-    background: '0x1b1918'
-    foreground: '0xa8a19f'
+# # Atelier Forest Dark
+# colors:
+#   # Default colors
+#   primary:
+#     background: '0x1b1918'
+#     foreground: '0xa8a19f'
 
-  # Normal colors
-  normal:
-    black:   '0x1b1918'
-    red:     '0xf22c40'
-    green:   '0x5ab738'
-    yellow:  '0xd5911a'
-    blue:    '0x407ee7'
-    magenta: '0x6666ea'
-    cyan:    '0x00ad9c'
-    white:   '0xa8a19f'
+#   # Normal colors
+#   normal:
+#     black:   '0x1b1918'
+#     red:     '0xf22c40'
+#     green:   '0x5ab738'
+#     yellow:  '0xd5911a'
+#     blue:    '0x407ee7'
+#     magenta: '0x6666ea'
+#     cyan:    '0x00ad9c'
+#     white:   '0xa8a19f'
 
-  # Bright colors
-  bright:
-    black:   '0x766e6b'
-    red:     '0xf22c40'
-    green:   '0x5ab738'
-    yellow:  '0xd5911a'
-    blue:    '0x407ee7'
-    magenta: '0x6666ea'
-    cyan:    '0x00ad9c'
-    white:   '0xf1efee'
+#   # Bright colors
+#   bright:
+#     black:   '0x766e6b'
+#     red:     '0xf22c40'
+#     green:   '0x5ab738'
+#     yellow:  '0xd5911a'
+#     blue:    '0x407ee7'
+#     magenta: '0x6666ea'
+#     cyan:    '0x00ad9c'
+#     white:   '0xf1efee'
 
 # # Atelier Lakeside Dark
 # colors:
@@ -197,3 +197,110 @@ colors:
 #     magenta: '0x5d5db1'
 #     cyan:    '0x2d8f6f'
 #     white:   '0xebf8ff'
+
+# Colors (One Dark)
+colors:
+  # Default colors
+  primary:
+    background: '0x1e2127'
+    foreground: '0xabb2bf'
+
+  # Normal colors
+  normal:
+    black:   '0x1e2127'
+    red:     '0xe06c75'
+    green:   '0x98c379'
+    yellow:  '0xd19a66'
+    blue:    '0x61afef'
+    magenta: '0xc678dd'
+    cyan:    '0x56b6c2'
+    white:   '0xabb2bf'
+
+  # Bright colors
+  bright:
+    black:   '0x5c6370'
+    red:     '0xe06c75'
+    green:   '0x98c379'
+    yellow:  '0xd19a66'
+    blue:    '0x61afef'
+    magenta: '0xc678dd'
+    cyan:    '0x56b6c2'
+    white:   '0xffffff'
+
+colors:
+  # Default colors
+  primary:
+    background: '0x2c2c2c'
+    foreground: '0xd6d6d6'
+
+    dim_foreground:    '0xdbdbdb'
+    bright_foreground: '0xd9d9d9'
+    dim_background:    '0x202020' # not sure
+    bright_background: '0x3a3a3a' # not sure
+
+  # Cursor colors
+  cursor:
+    text:   '0x2c2c2c'
+    cursor: '0xd9d9d9'
+
+  # Normal colors
+  normal:
+    black:   '0x1c1c1c'
+    red:     '0xbc5653'
+    green:   '0x909d63'
+    yellow:  '0xebc17a'
+    blue:    '0x7eaac7'
+    magenta: '0xaa6292'
+    cyan:    '0x86d3ce'
+    white:   '0xcacaca'
+
+  # Bright colors
+  bright:
+    black:   '0x636363'
+    red:     '0xbc5653'
+    green:   '0x909d63'
+    yellow:  '0xebc17a'
+    blue:    '0x7eaac7'
+    magenta: '0xaa6292'
+    cyan:    '0x86d3ce'
+    white:   '0xf7f7f7'
+
+  # Dim colors
+  dim:
+    black:   '0x232323'
+    red:     '0x74423f'
+    green:   '0x5e6547'
+    yellow:  '0x8b7653'
+    blue:    '0x556b79'
+    magenta: '0x6e4962'
+    cyan:    '0x5c8482'
+    white:   '0x828282'
+
+# Colors (Ayu Dark)
+colors:
+  # Default colors
+  primary:
+    background: '0x0A0E14'
+    foreground: '0xB3B1AD'
+
+  # Normal colors
+  normal:
+    black:   '0x01060E'
+    red:     '0xEA6C73'
+    green:   '0x91B362'
+    yellow:  '0xF9AF4F'
+    blue:    '0x53BDFA'
+    magenta: '0xFAE994'
+    cyan:    '0x90E1C6'
+    white:   '0xC7C7C7'
+
+  # Bright colors
+  bright:
+    black:   '0x686868'
+    red:     '0xF07178'
+    green:   '0xC2D94C'
+    yellow:  '0xFFB454'
+    blue:    '0x59C2FF'
+    magenta: '0xFFEE99'
+    cyan:    '0x95E6CB'
+    white:   '0xFFFFFF'
