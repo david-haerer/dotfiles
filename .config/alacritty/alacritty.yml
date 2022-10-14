@@ -140,34 +140,34 @@ font:
 #     cyan: '#6d96a5'
 #     white: '#aeb3bb'
 
-# # Atelier Forest Dark
-# colors:
-#   # Default colors
-#   primary:
-#     background: '0x1b1918'
-#     foreground: '0xa8a19f'
+# Atelier Forest Dark
+colors:
+  # Default colors
+  primary:
+    background: '0x1b1918'
+    foreground: '0xa8a19f'
 
-#   # Normal colors
-#   normal:
-#     black:   '0x1b1918'
-#     red:     '0xf22c40'
-#     green:   '0x5ab738'
-#     yellow:  '0xd5911a'
-#     blue:    '0x407ee7'
-#     magenta: '0x6666ea'
-#     cyan:    '0x00ad9c'
-#     white:   '0xa8a19f'
+  # Normal colors
+  normal:
+    black:   '0x1b1918'
+    red:     '0xf22c40'
+    green:   '0x5ab738'
+    yellow:  '0xd5911a'
+    blue:    '0x407ee7'
+    magenta: '0x6666ea'
+    cyan:    '0x00ad9c'
+    white:   '0xa8a19f'
 
-#   # Bright colors
-#   bright:
-#     black:   '0x766e6b'
-#     red:     '0xf22c40'
-#     green:   '0x5ab738'
-#     yellow:  '0xd5911a'
-#     blue:    '0x407ee7'
-#     magenta: '0x6666ea'
-#     cyan:    '0x00ad9c'
-#     white:   '0xf1efee'
+  # Bright colors
+  bright:
+    black:   '0x766e6b'
+    red:     '0xf22c40'
+    green:   '0x5ab738'
+    yellow:  '0xd5911a'
+    blue:    '0x407ee7'
+    magenta: '0x6666ea'
+    cyan:    '0x00ad9c'
+    white:   '0xf1efee'
 
 # # Atelier Lakeside Dark
 # colors:
@@ -305,31 +305,31 @@ font:
 #     cyan:    '0x95E6CB'
 #     white:   '0xFFFFFF'
 
-# Colors (Ayu Dark)
-colors:
-  # Default colors
-  primary:
-    background: '0x14191F'
-    foreground: '0xE6E1CF'
+# # Colors (Ayu Dark)
+# colors:
+#   # Default colors
+#   primary:
+#     background: '0x14191F'
+#     foreground: '0xE6E1CF'
 
-  # Normal colors
-  normal:
-    black:   '0x737d87'
-    red:     '0xff3333'
-    green:   '0xc2d94c'
-    yellow:  '0xe7c547'
-    blue:    '0x59c2ff'
-    magenta: '0xb77ee0'
-    cyan:    '0x5ccfe6'
-    white:   '0xffffff'
+#   # Normal colors
+#   normal:
+#     black:   '0x737d87'
+#     red:     '0xff3333'
+#     green:   '0xc2d94c'
+#     yellow:  '0xe7c547'
+#     blue:    '0x59c2ff'
+#     magenta: '0xb77ee0'
+#     cyan:    '0x5ccfe6'
+#     white:   '0xffffff'
 
-  # Bright colors
-  bright:
-    black:   '0x737d87'
-    red:     '0xff3333'
-    green:   '0xc2d94c'
-    yellow:  '0xe7c547'
-    blue:    '0x59c2ff'
-    magenta: '0xb77ee0'
-    cyan:    '0x5ccfe6'
-    white:   '0xffffff'
+#   # Bright colors
+#   bright:
+#     black:   '0x737d87'
+#     red:     '0xff3333'
+#     green:   '0xc2d94c'
+#     yellow:  '0xe7c547'
+#     blue:    '0x59c2ff'
+#     magenta: '0xb77ee0'
+#     cyan:    '0x5ccfe6'
+#     white:   '0xffffff'
