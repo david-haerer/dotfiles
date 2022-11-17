@@ -1,0 +1,12 @@
+#!/bin/sh
+
+day=$(date "+%Y-%m-%d")
+filepath="$HOME/Schreibtisch/$day.md"
+
+if [ $# -eq 0 ]; then
+    $EDITOR "$filepath"
+else
+    echo "\n" >> "$filepath"
+    echo "$*" >> "$filepath"
+    echo "\n" >> "$filepath"
+fi
