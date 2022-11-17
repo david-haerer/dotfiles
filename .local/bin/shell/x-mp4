@@ -3,6 +3,6 @@
 for file in *.*;
 do
     ffmpeg -i "$file" -q:v 0 "${file%.*}.mp4"
-    rm $file
+    rm "$file"
 done
 
