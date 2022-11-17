@@ -10,6 +10,7 @@ alias cm="chmod"
 alias sw="source workspace"
 alias fd="fdfind"
 alias s="search"
+alias n="note"
 
 # ls: Show hidden files by default.
 alias ls="ls -a"
@@ -117,3 +118,14 @@ alias deduplicate="fdupes -r -N"
 
 # taffy
 alias tag-mp3="id3 -m '%g  -  %a  -  %l  -  %n  -  %t.mp3'"
+
+# crypto
+alias gen-pw="openssl rand -base64"
+alias gen-ssh="ssh-keygen -t ed25519"
+alias gen-pgp="gpg --default-new-key-algo 'ed25519/cert,sign+cv25519/encr' --quick-generate-key '$NAME <$EMAIL>' 'future-default' 'default' 'never'"
+alias backup-pgp="gpg --export-secret-key '$EMAIL' | paperkey --output paperkey.asc && echo '\n# Passphrase: $(pass pgp/$EMAIL | head -n 1)' >> paperkey.asc"
+alias restore-pgp="paperkey --pubring publickey.asc --secrets paperkey.txt | gpg --import"
+alias export-pgp="gpg --output private-key.asc --export-secret-key '$EMAIL'"
+
+# zsh
+alias reload="source ~/.zshrc && clear && l"
