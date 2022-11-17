@@ -7,7 +7,7 @@ set -a
 set +a
 
 # Source various profiles.
-source "$HOME/Schreibtisch/profile"
+source "$HOME/profile"
 source "$HOME/.config/shell/aliasrc"
 # source "$APPS/todo-txt/todo.cfg"
 export PATH="$HOME/.poetry/bin:$PATH"
