@@ -62,7 +62,11 @@ let g:airline_theme='ayu_dark'
 set tabstop=4
 set shiftwidth=4
 set expandtab
-" autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType typescript setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType r setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType markdown setlocal ts=2 sts=2 sw=2 expandtab
 
 " Move fast in a line.
 nnoremap j gj
@@ -108,9 +112,6 @@ sunmap w
 sunmap b
 sunmap e
 sunmap ge
-
-" Set yaml file indentation to 2 spaces
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " Docstrings
 let g:doge_doc_standard_python = 'google'
