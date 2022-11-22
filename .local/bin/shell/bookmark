@@ -5,7 +5,11 @@ basedir="$HOME/Schreibtisch/Public/Bookmarks"
 if [ -z $1 ]; then
     for path in $basedir/*.md; do
         name=$(basename "$path")
+        if [ "$name" = "Bookmarks.md" ]; then
+            continue
+        fi
         echo "${name%.*}"
+        cat "$path" | rg --color never "^\*" | sd "\*" "  *"
     done
     exit 0
 fi
@@ -28,7 +32,7 @@ fi
 
 if [ ! -f "$filepath" ]; then
     touch "$filepath"
-    echo "See [[bookmarks]]." >> "$filepath"
+    echo "See [[Bookmarks]]." >> "$filepath"
     echo "" >> "$filepath"
     echo "---" >> "$filepath"
     echo "" >> "$filepath"
