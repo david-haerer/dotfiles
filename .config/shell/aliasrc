@@ -11,6 +11,7 @@ alias sw="source workspace"
 alias fd="fdfind"
 alias s="search"
 alias n="note"
+alias bm="bookmark"
 
 # ls: Show hidden files by default.
 alias ls="ls -a"
