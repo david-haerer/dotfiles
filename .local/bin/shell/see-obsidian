@@ -1,0 +1,68 @@
+#!/usr/bin/env python3
+
+import os
+from os import listdir
+from os.path import isfile, join
+from pathlib import Path
+
+import pathlib
+
+home = os.getenv("HOME")
+basedir = Path(f"{home}/Schreibtisch")
+
+ignore = [
+    ".git",
+    ".gitignore",
+    ".obsidian",
+    "README.md",
+    "Public.md",
+]
+
+
+def get_files(basedir):
+    dirs = []
+    files = []
+
+    for p in pathlib.Path(basedir).iterdir():
+        if str(p.name) in ignore:
+            continue
+        if p.is_dir():
+            dirs.append(p)
+            continue
+        if p.is_file() and p.suffix == ".md":
+            files.append(p)
+
+    for d in dirs:
+        files += get_files(d)
+
+    return files
+
+
+def check_file(filepath):
+    see = "See" if "Public" in str(filepath) else "Siehe"
+    name = filepath.name[:-3]
+    parent = filepath.parents[0].name
+    if parent == name:
+        parent = filepath.parents[1].name
+    if parent == "Schreibtisch":
+        parent = "README"
+    header = f"{see} [[{parent}]].\n"
+
+    with open(filepath, "r") as f:
+        lines = f.readlines()
+
+    if len(lines) != 0 and lines[0] == header:
+        return
+
+    if len(lines) != 0 and lines[0].startswith(f"{see} [["):
+        lines = [header] + lines
+    else:
+        lines = [header, "\n", "---\n", "\n"] + lines
+
+    with open(filepath, "w") as f:
+        f.writelines(lines)
+
+
+files = get_files(basedir)
+for f in files:
+    check_file(f)
