@@ -1,0 +1,37 @@
+#!/bin/sh
+
+basedir="$HOME/Schreibtisch/Public/Bookmarks"
+
+if [ -z $1 ]; then
+    for path in $basedir/*.md; do
+        name=$(basename "$path")
+        echo "${name%.*}"
+    done
+    exit 0
+fi
+
+url="$1"
+
+if [ -z "$2" ]; then
+    title="$(echo $url | sd https:// '' | sd http:// '')"
+else
+    title="$2"
+fi
+filepath="$basedir/$title.md"
+
+if [ -z "$3" ]; then
+    description=""
+else
+    description=": $3"
+fi
+
+
+if [ ! -f "$filepath" ]; then
+    touch "$filepath"
+    echo "See [[bookmarks]]." >> "$filepath"
+    echo "" >> "$filepath"
+    echo "---" >> "$filepath"
+    echo "" >> "$filepath"
+fi
+
+echo "* [$title$description]($url)" >> "$filepath"
