@@ -1,6 +1,6 @@
 #!/bin/sh
 
-basedir="$HOME/Schreibtisch/Public/Bookmarks"
+basedir="$HOME/Schreibtisch/Bookmarks"
 
 if [ -z $1 ]; then
     for path in $basedir/*.md; do
@@ -27,15 +27,6 @@ if [ -z "$3" ]; then
     description=""
 else
     description=": $3"
-fi
-
-
-if [ ! -f "$filepath" ]; then
-    touch "$filepath"
-    echo "See [[Bookmarks]]." >> "$filepath"
-    echo "" >> "$filepath"
-    echo "---" >> "$filepath"
-    echo "" >> "$filepath"
 fi
 
 echo "* [$title$description]($url)" >> "$filepath"
