@@ -29,13 +29,7 @@ dotfiles config status.showUntrackedFiles no
 Add the `origin` remote to the repositrory.
 
 ```bash
-dotfiles remote add origin <remote-url>
-```
-
-Clone the existing dotfiles repo to a new machine.
-
-```bash
-git clone --separate-git-dir=$HOME/.dotfiles.git <remote-url> $HOME
+dotfiles remote add origin git@git.familie-haerer.de:david/dotfiles.git
 ```
 
 ## Usage
