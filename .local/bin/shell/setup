@@ -1,0 +1,10 @@
+sudo apt install -y \
+	zsh zsh-syntax-highlighting \
+	neovim \
+	alacritty tabbed wmctrl \
+	exa \
+    ripgrep silversearcher-ag \
+	git \
+	bat \
+	webext-browserpass \
+	pass-extension-otp \
