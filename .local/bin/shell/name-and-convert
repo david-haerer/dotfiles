@@ -1,0 +1,52 @@
+#!/bin/sh
+
+chmod -x *
+
+name="$@"
+
+if [ ! -z "$name" ]
+then
+    name=" $name"
+fi
+
+echo "Naming '.JPG' files..."
+exiftool -m "-filemodifydate<DateTimeOriginal" -r *.JPG
+exiftool -m '-FileName<DateTimeOriginal' -r -d "%Y-%m-%d %H-%M-%S%%-c$name.%%e" *.JPG
+
+echo "Naming '.jpg' files..."
+exiftool -m "-filemodifydate<DateTimeOriginal" -r *.jpg
+exiftool -m '-FileName<DateTimeOriginal' -r -d "%Y-%m-%d %H-%M-%S%%-c$name.%%e" *.jpg
+
+echo "Naming '.mp4' files..."
+exiftool -m "-filemodifydate<CreateDate" -r *.mp4
+exiftool -m '-FileName<CreateDate' -r -d "%Y-%m-%d %H-%M-%S%%-c$name.%%e" *.mp4
+
+echo "Naming '.MTS' files..."
+exiftool -m "-filemodifydate<DateTimeOriginal" -r *.MTS
+exiftool -m '-FileName<datetimeoriginal' -r -d "%Y-%m-%d %H-%M-%S%%-c$name.%%e" *.MTS
+
+echo "Naming '.mov' files..."
+exiftool -m "-filemodifydate<CreateDate" -r *.mov
+exiftool -m '-FileName<CreateDate' -r -d "%Y-%m-%d %H-%M-%S%%-c$name.%%e" *.mov
+
+echo "Naming '.MOV' files..."
+exiftool -m "-filemodifydate<CreateDate" -r *.MOV
+exiftool -m '-FileName<CreateDate' -r -d "%Y-%m-%d %H-%M-%S%%-c$name.%%e" *.MOV
+
+echo "Converting '.MTS' files to '.mp4'..."
+for file in *.MTS; do
+    ffmpeg -i "$file" -q:v 0 "${file%.*}.mp4"
+    rm "$file"
+done
+
+echo "Converting '.mov' files to '.mp4'..."
+for file in *.mov; do
+    ffmpeg -i "$file" -q:v 0 "${file%.*}.mp4"
+    rm "$file"
+done
+
+echo "Converting '.MOV' files to '.mp4'..."
+for file in *.MOV; do
+    ffmpeg -i "$file" -q:v 0 "${file%.*}.mp4"
+    rm "$file"
+done
