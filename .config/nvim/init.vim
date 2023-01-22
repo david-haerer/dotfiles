@@ -87,7 +87,7 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap no :nohlsearch<CR>
 
 " Check spelling for English and German.
-set spelllang=en,de
+set spell spelllang=en,de
 
 " Move to miss-spelled words with 'zn' / 'zN'.
 nnoremap zn ]s
