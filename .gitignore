@@ -7,6 +7,8 @@
 /.local/*
 !/.local/bin
 /.local/bin/*
+!/.local/bin/sd
+!/.local/bin/lf
 !/.local/bin/git
 !/.local/bin/shell
 
