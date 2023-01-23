@@ -11,6 +11,7 @@ sudo apt install -y \
     libimage-exiftool-perl perl-doc \
 	git \
 	bat \
+	rofi \
 	webext-browserpass \
 	pass-extension-otp
 sudo apt upgrade
