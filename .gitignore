@@ -20,3 +20,4 @@
 !/.config/shell
 !/.config/starship.toml
 !/.config/lf
+!/.config/rofi/
