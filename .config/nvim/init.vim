@@ -39,20 +39,6 @@ set hlsearch
 syntax on
 set termguicolors
 set background=dark
-
-" colorscheme Atelier_ForestDark
-" let g:airline_theme='base16_atelier_forest'
-
-" let g:onedark_config = {
-"     \ 'style': 'warmer',
-" \}
-" colorscheme onedark
-" let g:airline_theme='onedark'
-" let g:onedark_terminal_italics=1
-" let g:onedark_hide_endofbuffer=1
-
-" let ayucolor="light"
-" let ayucolor="mirage"
 let ayucolor="dark"
 colorscheme ayu
 highlight Comment cterm=italic gui=italic
@@ -102,8 +88,6 @@ nnoremap zN [s
 " Only allow certain plugins.
 :let g:airline_extensions = []
 
-" IDEA: Checkout the CtrlP plugin.
-
 map <silent> w <Plug>CamelCaseMotion_w
 map <silent> b <Plug>CamelCaseMotion_b
 map <silent> e <Plug>CamelCaseMotion_e
@@ -125,6 +109,7 @@ syntax on
 " Format Python code with ':Black'.
 :command Black :! black %
 
+" Sort Python imports with ':ISort'.
 :command ISort :! isort --profile black %
 
 " Lint Python code with ':Pylint'.
@@ -148,3 +133,5 @@ let g:webdevicons_conceal_nerdtree_brackets=1
 " coc.nvim
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+set guifont=ComicCode\ Nerd\ Font
