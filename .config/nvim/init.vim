@@ -125,6 +125,8 @@ syntax on
 " Format Python code with ':Black'.
 :command Black :! black %
 
+:command ISort :! isort --profile black %
+
 " Lint Python code with ':Pylint'.
 :command Pylint :! pylint %
 
