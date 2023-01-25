@@ -53,6 +53,7 @@ autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType typescript setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType r setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType markdown setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType lua setlocal ts=2 sts=2 sw=2 expandtab
 
 " Move fast in a line.
 nnoremap j gj
@@ -135,3 +136,7 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 set guifont=ComicCode\ Nerd\ Font
+
+filetype off
+set runtimepath+=/usr/share/lilypond/2.22.1/vim/
+filetype on
