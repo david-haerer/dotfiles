@@ -12,6 +12,7 @@ alias fd="fdfind"
 alias s="search"
 alias n="note"
 alias bm="bookmark"
+alias ly="lilypond"
 
 # ls: Show hidden files by default.
 alias ls="ls -a"
@@ -20,9 +21,9 @@ alias ls="ls -a"
 alias d="cd"
 alias ..="cd .."
 alias ...="cd ../.."
-alias ..3="cd ../../.."
-alias ..4="cd ../../../.."
-alias ..5="cd ../../../../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
 alias b="cd -"
 
 # xclip
@@ -122,6 +123,7 @@ alias tag-mp3="id3 -m '%g  -  %a  -  %l  -  %n  -  %t.mp3'"
 
 # crypto
 alias gen-pw="openssl rand -base64"
+alias gen-uuid="python -c 'import uuid; print(uuid.uuid4())'"
 alias gen-ssh="ssh-keygen -t ed25519"
 alias gen-pgp="gpg --default-new-key-algo 'ed25519/cert,sign+cv25519/encr' --quick-generate-key '$NAME <$EMAIL>' 'future-default' 'default' 'never'"
 alias backup-pgp="gpg --export-secret-key '$EMAIL' | paperkey --output paperkey.asc && echo '\n# Passphrase: $(pass pgp/$EMAIL | head -n 1)' >> paperkey.asc"
