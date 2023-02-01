@@ -140,3 +140,6 @@ set guifont=ComicCode\ Nerd\ Font
 filetype off
 set runtimepath+=/usr/share/lilypond/2.22.1/vim/
 filetype on
+
+" Define comments for lilypond
+autocmd FileType lilypond setlocal commentstring=%\ %s
