@@ -17,6 +17,7 @@
 !/.config/alacritty
 !/.config/newsboat
 !/.config/nvim
+/.config/nvim/spell
 !/.config/shell
 !/.config/starship.toml
 !/.config/lf
