@@ -10,6 +10,7 @@
 	rename = "! $GIT/rename"
 	root   = "! $GIT/root"
 	update = "! $GIT/update"
+	initialize = "! $GIT/initialize"
     subtree-add = "!f() { git subtree add --prefix $2 $1 ${3:-main} --squash; }; f"
     subtree-pull = "!f() { git subtree pull --prefix $2 $1 ${3:-main} --squash; }; f"
     subtree-push = "!f() { git subtree push --prefix $1 $2 ${3:-main}; }; f"
