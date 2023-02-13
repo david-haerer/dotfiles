@@ -1,0 +1,16 @@
+{
+    "workbench.colorTheme": "Mayukai Reversal",
+    "explorer.confirmDelete": false,
+    "keyboard.dispatch": "keyCode",
+    "editor.fontFamily": "ComicCode Nerd Font",
+    "window.zoomLevel": 1,
+    "[git-commit]":{
+        "editor.rulers": [
+            50, 72
+        ],
+        "workbench.editor.restoreViewState": false
+    },
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "git.confirmSync": false,
+    "git.autofetch": true
+}
