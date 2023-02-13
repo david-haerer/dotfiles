@@ -25,7 +25,7 @@ nnoremap <CR> i<CR><Right><ESC>
 set is hls
 
 " Set default width.
-set colorcolumn=100
+set colorcolumn=80,100,120
 " set textwidth=99
 
 " Show matching parenthesis.
@@ -82,6 +82,7 @@ nnoremap zN [s
 
 " Remove trailing whitespace with ':NoTWS'.
 :command NoTWS :%s/\s\+$/
+:command NoWS :%s/^  $/
 
 " Remove NeoVim swap files with ':NoSwap'.
 :command NoSwap :! rm -rf $HOME/.local/share/nvim/swap/*.swp
@@ -143,3 +144,6 @@ filetype on
 
 " Define comments for lilypond
 autocmd FileType lilypond setlocal commentstring=%\ %s
+
+" Save a macro for adding two space at the end of the line in register a.
+let @a = 'A  j^'
