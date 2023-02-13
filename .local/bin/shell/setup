@@ -2,16 +2,24 @@
 
 sudo apt update
 sudo apt install -y \
-	zsh zsh-syntax-highlighting \
-	neovim \
-	alacritty tabbed wmctrl \
-	exa \
-	sxiv \
+    zsh zsh-syntax-highlighting \
+    neovim \
+    alacritty tabbed wmctrl \
+    exa \
+    sxiv \
     ripgrep silversearcher-ag \
     libimage-exiftool-perl perl-doc \
-	git \
-	bat \
-	rofi \
-	webext-browserpass \
-	pass-extension-otp
+    git \
+    bat \
+    rofi \
+    webext-browserpass \
+    pass-extension-otp
 sudo apt upgrade
+
+rm ~/.gitconfig
+touch ~/.gitconfig
+echo "[user]" >> ~/.gitconfig
+echo "    name = \"$NAME\"" >> ~/.gitconfig
+echo "    email = \"$EMAIL\"" >> ~/.gitconfig
+echo "" >> ~/.gitconfig
+cat ~/.config/git/.gitconfig >> ~/.gitconfig
