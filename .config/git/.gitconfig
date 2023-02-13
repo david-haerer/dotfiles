@@ -1,18 +1,18 @@
 [alias]
-    check  = "! $GIT/check"
-	ignore = "! $GIT/ignore"
-	remove = "! $GIT/remove"
-	readme = "! $GIT/readme"
-	rename = "! $GIT/rename"
-	root   = "! $GIT/root"
-	update = "! $GIT/update"
-	initialize = "! $GIT/initialize"
-    subtree-add = "!f() { git subtree add --prefix $2 $1 ${3:-main} --squash; }; f"
+    force        = "push --force"
+    continue     = "rebase --continue"
+    remove       = "! $GIT/remove"
+    rename       = "! $GIT/rename"
+    root         = "! $GIT/root"
+    graph        = "! $GIT/graph"
+    update       = "! $GIT/update"
+    initialize   = "! $GIT/initialize"
+    subtree-add  = "!f() { git subtree add --prefix $2 $1 ${3:-main} --squash; }; f"
     subtree-pull = "!f() { git subtree pull --prefix $2 $1 ${3:-main} --squash; }; f"
     subtree-push = "!f() { git subtree push --prefix $1 $2 ${3:-main}; }; f"
 
 [init]
-	defaultBranch = main
+    defaultBranch = main
 
 [core]
     pager = delta
@@ -31,4 +31,7 @@
     colorMoved = default
 
 [log]
-	date = iso
+    date = iso
+
+[pull]
+    rebase = true
