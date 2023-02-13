@@ -5,8 +5,10 @@
 
 !/.local
 /.local/*
+
 !/.local/bin
 /.local/bin/*
+
 !/.local/bin/sd
 !/.local/bin/lf
 !/.local/bin/git
@@ -14,11 +16,22 @@
 
 !/.config
 /.config/*
+
 !/.config/alacritty
+!/.config/git
 !/.config/newsboat
-!/.config/nvim
-/.config/nvim/spell
 !/.config/shell
 !/.config/starship.toml
 !/.config/lf
 !/.config/rofi/
+
+!/.config/nvim
+/.config/nvim/spell
+
+
+!/.config/VSCodium
+/.config/VSCodium/*
+!/.config/VSCodium/User
+/.config/VSCodium/User/*
+!/.config/VSCodium/User/keybindings.json
+!/.config/VSCodium/User/settings.json
