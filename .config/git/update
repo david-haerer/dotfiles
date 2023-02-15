@@ -2,7 +2,7 @@
 
 set -eu
 
-files="$@"
+files="$1"
 
 if [ -z "$files" ]
 then

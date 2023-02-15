@@ -1,15 +1,18 @@
 [alias]
-    force        = "push --force"
+    amend        = "!f() { git add $1 && git commit --amend --no-edit; }; f"
     continue     = "rebase --continue"
-    remove       = "! $GIT/remove"
-    rename       = "! $GIT/rename"
-    root         = "! $GIT/root"
-    graph        = "! $GIT/graph"
-    update       = "! $GIT/update"
-    initialize   = "! $GIT/initialize"
+    force        = "push --force"
+    graph        = "! ~/.config/git/graph"
+    initialize   = "!f() { git init && git commit --allow-empty -m 'Initial commit'; }; f"
+    remove       = "! ~/.config/git/remove"
+    rename       = "! ~/.config/git/rename"
+    rewrite      = "!f() { git rebase -i HEAD~$1; }; f"
+    root         = "rev-parse --show-toplevel"
     subtree-add  = "!f() { git subtree add --prefix $2 $1 ${3:-main} --squash; }; f"
     subtree-pull = "!f() { git subtree pull --prefix $2 $1 ${3:-main} --squash; }; f"
     subtree-push = "!f() { git subtree push --prefix $1 $2 ${3:-main}; }; f"
+    stats        = "! ~/.config/git/stats"
+    update       = "! ~/.config/git/update"
 
 [init]
     defaultBranch = main
@@ -17,12 +20,17 @@
 [core]
     pager = delta
 
+[pager]
+    log = "batcat --style=grid"
+
 [interactive]
     diffFilter = delta --color-only
 
 [delta]
     navigate = true    # use n and N to move between diff sections
     light = false      # set to true if you're in a terminal w/ a light background color
+    side-by-side = true
+    numbers = true
 
 [merge]
     conflictstyle = diff3
