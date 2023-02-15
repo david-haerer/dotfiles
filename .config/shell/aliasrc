@@ -12,7 +12,7 @@ alias fd="fdfind"
 alias s="search"
 alias n="note"
 alias bm="bookmark"
-alias vs="codium"
+alias vs="code"
 alias ly="lilypond"
 alias tex-pdf="tectonic.AppImage"
 
