@@ -2,14 +2,12 @@
 
 set -eu
 
-files="$@"
-
-if [ -z "$files" ]
+if [ -z "$@" ]
 then
     git pull --rebase
     git push
 else
-    for file in "$files"
+    for file in "$@"
     do
         git add "$file"
         git commit -m "$file"
