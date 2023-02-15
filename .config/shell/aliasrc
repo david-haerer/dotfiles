@@ -107,6 +107,7 @@ alias captions-dl="youtube-dl -o './%(upload_date)s - %(uploader)s - %(title)s.m
 alias python="python3"
 alias py="python"
 alias ipy="ipython"
+alias isort="isort --profile=black"
 
 # R
 alias r="radian"
