@@ -2,10 +2,10 @@
 !/.gitignore
 !/README.md
 !/.zshrc
+!/.scripts
 
 !/.local
 /.local/*
-
 !/.local/bin
 /.local/bin/*
 
@@ -28,10 +28,9 @@
 !/.config/nvim
 /.config/nvim/spell
 
-
-!/.config/VSCodium
-/.config/VSCodium/*
-!/.config/VSCodium/User
-/.config/VSCodium/User/*
-!/.config/VSCodium/User/keybindings.json
-!/.config/VSCodium/User/settings.json
+!/.config/Code
+/.config/Code/*
+!/.config/Code/User
+/.config/Code/User/*
+!/.config/Code/User/keybindings.json
+!/.config/Code/User/settings.json
