@@ -1,0 +1,18 @@
+{
+    "telemetry.telemetryLevel": "off",
+    "workbench.colorTheme": "Mayukai Sunset",
+    "explorer.confirmDelete": false,
+    "keyboard.dispatch": "keyCode",
+    "editor.fontFamily": "ComicCode Nerd Font",
+    "editor.rulers": [80, 100, 120],
+    "window.zoomLevel": 0.75,
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "[git-commit]":{
+        "editor.rulers": [
+            50, 72
+        ],
+        "workbench.editor.restoreViewState": false
+    },
+    "git.confirmSync": false,
+    "git.autofetch": true
+}
