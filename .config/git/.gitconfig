@@ -5,6 +5,7 @@
     force        = "push --force"
     graph        = "! ~/.config/git/graph"
     initialize   = "!f() { git init && git commit --allow-empty -m 'Initial commit'; }; f"
+    remove       = "!f() { git pull --rebase origin $1; }; f"
     remove       = "! ~/.config/git/remove"
     rename       = "!f() { git mv $1 $2 && git commit -m 'rename '$1' -> '$2''; }; f"
     rewrite      = "!f() { git rebase -i HEAD~$1; }; f"
