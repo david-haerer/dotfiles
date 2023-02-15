@@ -12,7 +12,7 @@
 !/.local/bin/sd
 !/.local/bin/lf
 !/.local/bin/git
-!/.local/bin/shell
+!/.local/bin/sh
 
 !/.config
 /.config/*
