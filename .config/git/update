@@ -7,9 +7,9 @@ then
     git pull --rebase
     git push
 else
-    for file in "$@"
-    do
+    for file in "$@"; do
         git add "$file"
-        git commit -m "$file"
     done
+    git commit -m "$@"
 fi
+
