@@ -1,5 +1,6 @@
 [alias]
     amend        = "!f() { git add $1 && git commit --amend --no-edit; }; f"
+    abort        = "rebase --abort"
     continue     = "rebase --continue"
     force        = "push --force"
     graph        = "! ~/.config/git/graph"
