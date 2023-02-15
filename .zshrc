@@ -3,12 +3,12 @@ bindkey -v
 
 # Load and export setting variables.
 set -a
-. $HOME/.config/shell/setting.env
+. $HOME/.config/sh/setting.env
 set +a
 
 # Source various profiles.
 source "$HOME/profile"
-source "$HOME/.config/shell/aliasrc"
+source "$HOME/.config/sh/aliasrc"
 export PATH="$HOME/.scripts:$PATH"
 export PATH="$HOME/.poetry/bin:$PATH"
 
