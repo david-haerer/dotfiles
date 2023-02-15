@@ -6,7 +6,6 @@ import fileinput
 import datetime
 
 width, _ = shutil.get_terminal_size((80, 20))
-format = "%a %b %d %H:%M:%S %Y %z"
 commits = {}
 
 date = None
@@ -15,7 +14,7 @@ for line in fileinput.input():
         parts = line[8:38].split()
         parts[2] = parts[2].zfill(2)
         str_timestamp = " ".join(parts)
-        timestamp = datetime.datetime.strptime(str_timestamp, format)
+        timestamp = datetime.datetime.strptime(str_timestamp, "%Y-%m-%d %H:%M:%S %z")
         newer_date = date
         date = timestamp.date()
         if newer_date is not None:
