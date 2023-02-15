@@ -5,7 +5,7 @@
     graph        = "! ~/.config/git/graph"
     initialize   = "!f() { git init && git commit --allow-empty -m 'Initial commit'; }; f"
     remove       = "! ~/.config/git/remove"
-    rename       = "! ~/.config/git/rename"
+    rename       = "!f() { git mv $1 $2 && git commit -m 'rename '$1' -> '$2''; }; f"
     rewrite      = "!f() { git rebase -i HEAD~$1; }; f"
     root         = "rev-parse --show-toplevel"
     subtree-add  = "!f() { git subtree add --prefix $2 $1 ${3:-main} --squash; }; f"
@@ -13,6 +13,7 @@
     subtree-push = "!f() { git subtree push --prefix $1 $2 ${3:-main}; }; f"
     stats        = "! ~/.config/git/stats"
     update       = "! ~/.config/git/update"
+    view         = "!f() { git show HEAD~$1; }; f"
 
 [init]
     defaultBranch = main

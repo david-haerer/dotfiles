@@ -1,8 +1,0 @@
-#!/bin/sh
-
-old="$1"
-new="$2"
-
-git mv "$old" "$new"
-git commit -m "rename '$old' -> '$new'"
-
