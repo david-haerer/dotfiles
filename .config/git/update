@@ -2,14 +2,17 @@
 
 set -eu
 
-if [ -z "$@" ]
-then
+files="$@"
+
+if [ -z "$files" ]; then
     git pull --rebase
     git push
 else
     for file in "$@"; do
+        # echo "$file"
         git add "$file"
     done
-    git commit -m "$@"
+    # echo "'$@'"
+    git commit -m "$files"
 fi
 
