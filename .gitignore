@@ -11,8 +11,6 @@
 
 !/.local/bin/sd
 !/.local/bin/lf
-!/.local/bin/git
-!/.local/bin/sh
 
 !/.config
 /.config/*
@@ -20,7 +18,7 @@
 !/.config/alacritty
 !/.config/git
 !/.config/newsboat
-!/.config/shell
+!/.config/sh
 !/.config/starship.toml
 !/.config/lf
 !/.config/rofi/
