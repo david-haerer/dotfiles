@@ -23,10 +23,8 @@ function chpwd() {
     l
 }
 
-# Enable zsh syntax highlighting.
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# Enable zsh autoquoter.
+# Enable zsh syntax highlighting and auto-quoting.
+source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.config/zsh/zsh-autoquoter/zsh-autoquoter.zsh
 ZAQ_PREFIXES=('git commit( [^ ]##)# -[^ -]#m' 'ssh( [^ ]##)# [^ -][^ ]#' 'spotifydl' 'audio-dl' 'caption-dl' 'video-dl' 'rn' 'music' 's')
 ZSH_HIGHLIGHT_HIGHLIGHTERS+=(zaq)
