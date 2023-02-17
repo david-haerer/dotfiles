@@ -29,7 +29,7 @@ dotfiles config status.showUntrackedFiles no
 Add the `origin` remote to the repositrory.
 
 ```bash
-dotfiles remote add origin git@git.familie-haerer.de:david/dotfiles.git
+dotfiles remote add origin https://github.com/DavidHeresy/dotfiles.git
 ```
 
 ## Usage
