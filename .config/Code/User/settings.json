@@ -5,7 +5,7 @@
     "keyboard.dispatch": "keyCode",
     "editor.fontFamily": "ComicCode Nerd Font",
     "editor.rulers": [80, 100, 120],
-    "window.zoomLevel": 0.75,
+    "window.zoomLevel": 1,
     "terminal.integrated.defaultProfile.linux": "zsh",
     "[git-commit]":{
         "editor.rulers": [
