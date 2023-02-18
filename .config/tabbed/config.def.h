@@ -1,19 +1,19 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]        = "ComicCode Nerd Font:size=10";
-static const char* normbgcolor  = "#061923"; // unselected tab background
-static const char* normfgcolor  = "#e5c49e"; // unselected tab foreground
+static const char font[]        = "ComicCode Nerd Font:size=11";
+static const char* normbgcolor  = "#121517"; // unselected tab background
+static const char* normfgcolor  = "#aca49a"; // unselected tab foreground
 static const char* selbgcolor   = "#061923"; // selected tab background
 static const char* selfgcolor   = "#feaf3c"; // selected tab foreground
 static const char* urgbgcolor   = "#061923"; // urgent tab background
 static const char* urgfgcolor   = "#db662d"; // urgent tab foreground
 static const char before[]      = "<";
 static const char after[]       = ">";
-static const char titletrim[]   = "...";
+static const char titletrim[]   = "…";
 static const int  tabwidth      = 200;
 static const Bool foreground    = True;
-static       Bool urgentswitch  = False;
+static       Bool urgentswitch  = True;
 
 /*
  * Where to place a new tab when it is opened. When npisrelative is True,
