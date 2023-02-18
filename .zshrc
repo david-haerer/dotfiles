@@ -1,17 +1,14 @@
 # Use vi mode.
 bindkey -v
 
-# Source various profiles.
+# Source profile and aliasrc.
 source "$HOME/profile"
-source "$HOME/.config/sh/aliasrc"
+source "$HOME/.config/zsh/aliasrc"
 
-# Environment variables.
-export PATH="$HOME/.scripts:$PATH"
-export PATH="$HOME/.poetry/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-export GOPATH="$HOME/.go"
-export EDITOR="nvim"
-export BROWSER="brave-browser"
+# Load and export environment variables.
+set -a
+. $HOME/.config/zsh/zsh.env
+set +a
 
 # Setup nvm.
 export NVM_DIR="$HOME/.nvm"
@@ -34,6 +31,6 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS+=(zaq)
 # Use the 'starship' prompt.
 eval "$(starship init zsh)"
 
-# List files to start working.
+# List files at shell startup.
 l
 
