@@ -21,7 +21,8 @@
 !/.config/zsh
 !/.config/starship.toml
 !/.config/lf
-!/.config/rofi/
+!/.config/tabbed
+!/.config/rofi
 
 !/.config/nvim
 /.config/nvim/spell
