@@ -18,7 +18,7 @@
 !/.config/alacritty
 !/.config/git
 !/.config/newsboat
-!/.config/sh
+!/.config/zsh
 !/.config/starship.toml
 !/.config/lf
 !/.config/rofi/
