@@ -6,5 +6,5 @@ alias dot="git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME"
 dot config status.showUntrackedFiles no
 dot remote add origin git@github.com:david-haerer/dotfiles.git \
     || dot remote add origin https://github.com/DavidHeresy/dotfiles.git
-dot branch --set-upstream-to origin/main main
-dot pull
+dot fetch origin
+dot branch --set-upstream-to=origin/<branch> main
