@@ -6,40 +6,21 @@
     <em>Bare git repo to manage my dotfiles.</em>
 </p>
 
+## Requirements
+
+Curl and git must be installed and to push changes an SSH key must be added to GitHub.
+
 ## Setup
 
-In `$HOME`, create a bare `.dotfiles.git` repository.
+In `$HOME` execute the following command:
 
 ```bash
-git init --bare .dotfiles.git
-```
-
-In `$HOME/.zshrc` (or `.bashrc`), set the `dotfiles` alias.
-
-```bash
-alias dotfiles="git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME"
-```
-
-Source the `.zshrc` to activate the new alias and hide undtracked files in the status info.
-
-```bash
-dotfiles config status.showUntrackedFiles no
-```
-
-Add the `origin` remote to the repositrory.
-
-```bash
-dotfiles remote add origin https://github.com/DavidHeresy/dotfiles.git
+curl -sSL https://raw.githubusercontent.com/david-haerer/dotfiles/main/.scripts/dotfiles-init | sh
 ```
 
 ## Usage
 
-The `dotfiles` alias works like the normal `git` command:
-
-* `dotfiles ls-files`: Show files tracked in the repository.
-* `dotfiles status`: Show the repository status.
-* `dotfiles pull`: Pull changes from remote `origin`.
-* `dotfiles push`: Push changes to remote `origin`.
+The `dot` alias works like the normal `git` command.
 
 ## Further reading
 
