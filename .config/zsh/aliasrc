@@ -27,23 +27,14 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
-alias b="cd -"
-
-# xclip
-alias copy="xclip"
-alias paste="xclip -o"
-
-# grep
-# TODO: Use rip-grep.
-alias grep='grep --color=auto'
 
 # bat
 alias bat="batcat"
 alias b="batcat"
 
-# scripts
-alias a="append"
-alias u="source update"
+# apparition
+alias a="apparate"
+alias ap="apparition"
 
 # exa: Use as default list tool.
 alias l="exa --color=always --group-directories-first --icons"
@@ -61,6 +52,7 @@ alias g="git"
 alias ga="git add"
 alias gc="git commit"
 alias gd="git diff"
+alias gi="git initialize"
 alias gl="git log"
 alias gg="git graph"
 alias gr="git rewrite"
