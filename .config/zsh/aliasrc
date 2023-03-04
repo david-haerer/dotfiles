@@ -16,6 +16,8 @@ alias vs="code"
 alias ly="lilypond"
 alias ag="ag -W 255"
 alias tex-pdf="tectonic.AppImage"
+alias a="apparate"
+alias ap="apparition"
 
 # ls: Show hidden files by default.
 alias ls="ls -a"
