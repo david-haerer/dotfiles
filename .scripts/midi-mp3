@@ -1,12 +1,28 @@
 #!/bin/sh
 
-infile="$1"
-basepath=$(dirname "$infile")
-filename=$(basename "$infile")
-name="${filename%.*}"
-outfile="$basepath"/"$name"".mp3"
 
-rm -f "$outfile"
+if [ -z "$1" ]; then
+    for infile in *.midi; do
+        basepath=$(dirname "$infile")
+        filename=$(basename "$infile")
+        name="${filename%.*}"
+        outfile="$basepath"/"$name"".mp3"
 
-timidity "$infile" -Ow -o - \
-    | ffmpeg -i - -acodec libmp3lame -ab 64k "$outfile"
+        rm -f "$outfile"
+
+        timidity "$infile" -Ow -o - \
+            | ffmpeg -i - -acodec libmp3lame -ab 64k "$outfile"
+    done
+else
+    infile="$1"
+    basepath=$(dirname "$infile")
+    filename=$(basename "$infile")
+    name="${filename%.*}"
+    outfile="$basepath"/"$name"".mp3"
+
+    rm -f "$outfile"
+
+    timidity "$infile" -Ow -o - \
+        | ffmpeg -i - -acodec libmp3lame -ab 64k "$outfile"
+fi
+
