@@ -19,7 +19,7 @@ export NVM_DIR="$HOME/.nvm"
 function chpwd() {
     clear
     emulate -L zsh
-    print -Pn "\e]2;$(pwd)\a" # Set window title.
+    print -Pn "\e]2;$USER@$(hostname)$(pwd)\a" # Set window title.
     l
 }
 
@@ -31,10 +31,6 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS+=(zaq)
 
 # Use the 'starship' prompt.
 eval "$(starship init zsh)"
-
-# List files at shell startup.
-print -Pn "\e]2;$(pwd)\a" # Set window title.
-l
 
 ################################################################################
 # Shell function for safe use of `apparition apparate`.
@@ -65,3 +61,6 @@ autoload -Uz compinit
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
 
+# List files at shell startup.
+print -Pn "\e]2;$USER@$(hostname)$(pwd)\a" # Set window title.
+l
