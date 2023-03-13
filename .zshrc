@@ -15,11 +15,17 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
+
+# Set window title.
+function set-title() {
+    print -Pn "\e]2;$USER@$(hostname | sd '\..*' '')$(pwd)\a" # Set window title.
+}
+
 # List files at every directory change.
 function chpwd() {
     clear
     emulate -L zsh
-    print -Pn "\e]2;$USER@$(hostname)$(pwd)\a" # Set window title.
+    set-title
     l
 }
 
@@ -62,5 +68,5 @@ zstyle ':completion:*' menu select
 fpath+=~/.zfunc
 
 # List files at shell startup.
-print -Pn "\e]2;$USER@$(hostname)$(pwd)\a" # Set window title.
+set-title
 l
