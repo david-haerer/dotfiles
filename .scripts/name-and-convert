@@ -1,6 +1,6 @@
 #!/bin/sh
 
-chmod -x *
+chmod -x *.JPG *.jpg *.mp4 *.MTS *.mov *.MOV
 
 name="$@"
 
