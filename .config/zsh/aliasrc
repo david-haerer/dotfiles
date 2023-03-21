@@ -68,7 +68,6 @@ alias grm="git remove"
 alias gmv="git rename"
 
 # dotfiles: Manage dotfiles with a bare Git repository.
-alias dotfiles="git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME"
 alias dot="git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME"
 
 # todo.txt
