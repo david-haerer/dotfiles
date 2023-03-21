@@ -15,5 +15,9 @@
         "workbench.editor.restoreViewState": false
     },
     "git.confirmSync": false,
-    "git.autofetch": true
+    "git.autofetch": true,
+    "[python]": {
+        "editor.formatOnPaste": false
+    },
+    "security.workspace.trust.untrustedFiles": "open"
 }
