@@ -15,7 +15,6 @@
 !/.config
 /.config/*
 
-!/.config/alacritty
 !/.config/wezterm
 !/.config/rofimoji.rc
 !/.config/git
