@@ -25,7 +25,7 @@ function set-title() {
 function chpwd() {
     clear
     emulate -L zsh
-    set-title
+    # set-title
     l
 }
 
@@ -68,5 +68,5 @@ zstyle ':completion:*' menu select
 fpath+=~/.zfunc
 
 # List files at shell startup.
-set-title
+# set-title
 l
