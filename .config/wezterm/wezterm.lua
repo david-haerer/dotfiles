@@ -11,7 +11,7 @@ return {
   keys = {
     {
       key = 'w',
-      mods = 'CMD',
+      mods = 'CTRL',
       action = wezterm.action.CloseCurrentTab { confirm = true },
     },
   },
