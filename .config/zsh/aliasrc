@@ -76,11 +76,6 @@ alias ta="append $TODO_FILE"
 alias to="nvim $TODO_FILE"
 alias td="icloud-todotxt download"
 alias tu="icloud-todotxt upload"
-alias idee="append $TODO_FILE +idee"
-alias frage="append $TODO_FILE +frage"
-alias wunsch="append $TODO_FILE +wunsch"
-alias notiz="append $TODO_FILE +notiz"
-alias aufgabe="append $TODO_FILE +aufgabe"
 
 # notes
 alias na="append $NOTES/$(date +%Y-%m-%d) $(date +%H:%M)"
@@ -126,7 +121,7 @@ alias gen-ssh="ssh-keygen -t ed25519"
 alias gen-pgp="gpg --default-new-key-algo 'ed25519/cert,sign+cv25519/encr' --quick-generate-key '$NAME <$EMAIL>' 'future-default' 'default' 'never'"
 # alias backup-pgp="gpg --export-secret-key '$EMAIL' | paperkey --output paperkey.asc && echo '\n# Passphrase: $(pass pgp/$EMAIL | head -n 1)' >> paperkey.asc"
 alias restore-pgp="paperkey --pubring publickey.asc --secrets paperkey.txt | gpg --import"
-alias export-pgp="gpg --output private-key.asc --export-secret-key '$EMAIL'"
+alias export-pgp="gpg --output '$EMAIL.pgp' --export-secret-key '$EMAIL'"
 
 # zsh
 alias reload="source ~/.zshrc && clear && l"
