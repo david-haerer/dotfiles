@@ -16,6 +16,7 @@
 /.config/*
 
 !/.config/alacritty
+!/.config/wezterm
 !/.config/git
 !/.config/newsboat
 !/.config/zsh
