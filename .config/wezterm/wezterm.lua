@@ -6,6 +6,14 @@ return {
   font = wezterm.font_with_fallback {
     "ComicCodeLigatures Nerd Font",
     "FiraCode Nerd Font",
+    "Noto Sans Mono CJK SC",
+  },
+
+  -- line_height = 0.9,
+
+  window_frame = {
+    font = wezterm.font { family = 'ComicCodeLigatures Nerd Font', weight = 'Bold' },
+    font_size = 12.0,
   },
 
   keys = {
