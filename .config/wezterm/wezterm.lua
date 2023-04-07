@@ -15,12 +15,4 @@ return {
     font = wezterm.font { family = 'ComicCodeLigatures Nerd Font', weight = 'Bold' },
     font_size = 12.0,
   },
-
-  keys = {
-    {
-      key = 'w',
-      mods = 'CTRL',
-      action = wezterm.action.CloseCurrentTab { confirm = true },
-    },
-  },
 }
