@@ -23,16 +23,18 @@ function set-title() {
 
 # List files at every directory change.
 function chpwd() {
-    clear
     emulate -L zsh
-    # set-title
+    clear
     l
+    if [ -f "pyproject.toml" ]; then
+        poetry shell
+    fi
 }
 
 # Enable zsh syntax highlighting and auto-quoting.
 source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.config/zsh/zsh-autoquoter/zsh-autoquoter.zsh
-ZAQ_PREFIXES=('git commit( [^ ]##)# -[^ -]#m' 'ssh( [^ ]##)# [^ -][^ ]#' 'spotifydl' 'audio-dl' 'caption-dl' 'video-dl' 'rn' 'music' 's')
+ZAQ_PREFIXES=('git commit( [^ ]##)# -[^ -]#m' 'ssh( [^ ]##)# [^ -][^ ]#' 'spotifydl' 'audio-dl' 'caption-dl' 'video-dl' 'rn' 'music' 's' 'bm add')
 ZSH_HIGHLIGHT_HIGHLIGHTERS+=(zaq)
 
 # Use the 'starship' prompt.
@@ -70,3 +72,7 @@ fpath+=~/.zfunc
 # List files at shell startup.
 # set-title
 l
+
+if [ -f "pyproject.toml" ]; then
+    poetry shell
+fi
