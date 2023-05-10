@@ -56,6 +56,8 @@ autocmd FileType typescript setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType r setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType markdown setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType lua setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType tex setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType svg setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType caddyfile setlocal ts=4 sts=4 sw=4 noexpandtab
 
 " Move fast in a line.
