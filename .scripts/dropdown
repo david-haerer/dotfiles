@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# tdrop -ma -h 42% -w 90% -x 5% -y 31% alacritty
+tdrop -ma -h 100% -w 100% alacritty

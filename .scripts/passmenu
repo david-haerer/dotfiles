@@ -24,6 +24,6 @@ case "$field" in
     ;;
 
   *)
-    pass show "$entry" | rg "$field" | rg -o ": .*$" | sd ": " "" | xclip -selection c
+    pass show "$entry" | rg "^$field" | rg -o ": .*$" | sd ": " "" | xclip -selection c
     ;;
 esac
