@@ -28,6 +28,7 @@ __pycache__/
 !/.config/tabbed
 !/.config/rofi
 !/.config/qtile
+!/.config/fontconfig
 
 !/.config/nvim
 /.config/nvim/spell
