@@ -125,3 +125,6 @@ alias export-pgp="gpg --output '$EMAIL.pgp' --export-secret-key '$EMAIL'"
 
 # zsh
 alias reload="source ~/.zshrc && clear && l"
+
+# qtile
+alias qtile-reload="qtile check && qtile cmd-obj -o cmd -f reload_config"
