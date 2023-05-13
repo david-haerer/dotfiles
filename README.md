@@ -22,6 +22,14 @@ curl -sSL https://raw.githubusercontent.com/david-haerer/dotfiles/main/.scripts/
 
 The `dot` alias works like the normal `git` command.
 
+## Switching CapsLock and Esc
+
+Add the following line to your `~/.profile`:
+
+```bash
+setxkbmap -option caps:swapescape
+```
+
 ## Further reading
 
 * [GitHub does dotfiles - dotfiles.github.io](https://dotfiles.github.io/)
