@@ -25,6 +25,7 @@
 !/.config/lf
 !/.config/tabbed
 !/.config/rofi
+!/.config/qtile
 
 !/.config/nvim
 /.config/nvim/spell
