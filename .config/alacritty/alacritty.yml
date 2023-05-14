@@ -31,7 +31,7 @@ font:
   italic:
     family: ComicCodeLigatures Nerd Font
     style: Italic
-  size: 13
+  size: 9
 
 # Colors (SeaShells)
 # Source : https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/SeaShells.itermcolors
