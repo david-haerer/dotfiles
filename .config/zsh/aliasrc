@@ -115,7 +115,7 @@ alias deduplicate="fdupes -r -N"
 alias tag-mp3="id3 -m '%g  -  %a  -  %l  -  %n  -  %t.mp3'"
 
 # crypto
-alias gen-pw="openssl rand -base64"
+# alias gen-pw="openssl rand -base64"
 alias gen-uuid="python -c 'import uuid; print(uuid.uuid4())'"
 alias gen-ssh="ssh-keygen -t ed25519"
 alias gen-pgp="gpg --default-new-key-algo 'ed25519/cert,sign+cv25519/encr' --quick-generate-key '$NAME <$EMAIL>' 'future-default' 'default' 'never'"
