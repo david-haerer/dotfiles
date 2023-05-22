@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Blueman Applet
+GenericName=Bluetooth Menu
+Exec=blueman-applet
+Type=Application
+StartupNotify=false
