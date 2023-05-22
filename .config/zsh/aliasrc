@@ -19,6 +19,7 @@ alias tex-pdf="tectonic.AppImage"
 alias a="apparate"
 alias ap="apparition"
 alias utc="date -u --iso-8601=seconds | sd T ' ' | sd '\+00:00' '' | sd : -"
+alias ctrl-c='xclip -sel clip'
 
 # ls: Show hidden files by default.
 alias ls="ls -a"
