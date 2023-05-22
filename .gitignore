@@ -29,6 +29,7 @@ __pycache__/
 !/.config/rofi
 !/.config/qtile
 !/.config/fontconfig
+!/.config/autostart
 
 !/.config/nvim
 /.config/nvim/spell
