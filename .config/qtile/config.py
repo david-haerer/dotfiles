@@ -56,17 +56,8 @@ keys.extend(
 
 keys.extend(
     [
-        Key([MOD], "t", lazy.spawn(TERMINAL), desc="Launch terminal"),
-        Key([MOD], "numbersign", lazy.spawn(PASSWORD_MANAGER), desc="Launch password manager"),
-        Key([MOD], "space", lazy.spawn(LAUNCHER), desc="Application launcher"),
-        Key([MOD], "r", lazy.spawncmd(), desc="Command prompt"),
-    ]
-)
-
-keys.extend(
-    [
         Key([MOD], "m", lazy.next_layout(), desc="Toggle between layouts"),
-        Key([MOD], "w", lazy.window.kill(), desc="Kill focused window"),
+        Key([MOD], "q", lazy.window.kill(), desc="Kill focused window"),
         Key([MOD, "control"], "r", lazy.reload_config(), desc="Reload the config"),
         Key([MOD, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     ]
@@ -76,10 +67,10 @@ keys.extend(
     [
         Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),
         Key(
-            [], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 sset Master 1- unmute")
+            [], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 sset Master 6- unmute")
         ),
         Key(
-            [], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 sset Master 1+ unmute")
+            [], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 sset Master 6+ unmute")
         ),
     ]
 )
@@ -115,7 +106,21 @@ groups.append(
     )
 )
 
-keys.append(Key([MOD], "return", lazy.group["scratchpad"].dropdown_toggle("term")))
+keys.extend(
+    [
+        Key([MOD], "t", lazy.spawn(TERMINAL), desc="Launch terminal"),
+        Key(
+            [MOD],
+            "numbersign",
+            lazy.spawn(PASSWORD_MANAGER),
+            desc="Launch password manager",
+        ),
+        Key([MOD], "return", lazy.spawn(LAUNCHER), desc="Application launcher"),
+        Key([MOD], "r", lazy.spawncmd(), desc="Command prompt"),
+        Key([MOD], "space", lazy.group["scratchpad"].dropdown_toggle("term")),
+        Key([MOD], "u", lazy.spawn("rofimoji"), desc="Launch unicode picker"),
+    ]
+)
 
 
 # -- LAYOUT --
@@ -123,6 +128,7 @@ keys.append(Key([MOD], "return", lazy.group["scratchpad"].dropdown_toggle("term"
 
 layouts = [
     layout.Columns(
+        border_on_single=True,
         border_focus=ACCENT_COLOR,
         border_focus_stack=ACCENT_COLOR,
         border_width=2,
@@ -146,6 +152,8 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
+        wallpaper="~/Nextcloud/Bilder/Hintergründe/wallpaper.png",
+        wallpaper_mode="stretch",
         top=bar.Bar(
             [
                 # widget.CurrentLayout(),
