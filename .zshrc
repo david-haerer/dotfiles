@@ -76,3 +76,14 @@ l
 if [ -f "pyproject.toml" ]; then
     poetry shell
 fi
+
+# bun completions
+[ -s "/home/david/.bun/_bun" ] && source "/home/david/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
