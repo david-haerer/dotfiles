@@ -25,6 +25,10 @@ echo "Naming '.mp4' files..."
 exiftool -m "-filemodifydate<CreateDate" -r *.mp4
 exiftool -m '-FileName<CreateDate' -r -d "%Y-%m-%d %H-%M-%S%%-c$name.%%e" *.mp4
 
+echo "Naming '.MP4' files..."
+exiftool -m "-filemodifydate<CreateDate" -r *.MP4
+exiftool -m '-FileName<CreateDate' -r -d "%Y-%m-%d %H-%M-%S%%-c$name.%%e" *.MP4
+
 echo "Naming '.MTS' files..."
 exiftool -m "-filemodifydate<DateTimeOriginal" -r *.MTS
 exiftool -m '-FileName<datetimeoriginal' -r -d "%Y-%m-%d %H-%M-%S%%-c$name.%%e" *.MTS
