@@ -8,6 +8,7 @@ from libqtile.lazy import lazy
 
 MOD = "mod4"
 TERMINAL = "wezterm"
+SIGNAL = "/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=signal-desktop --file-forwarding org.signal.Signal @@u %U @@"
 LAUNCHER = "rofi -show drun"
 PASSWORD_MANAGER = "passmenu"
 ACCENT_COLOR = "#008abd"
@@ -107,8 +108,10 @@ groups.append(
 )
 
 keys.extend(
-    [
+    [    
+        # Key([MOD], "tab", lazy.function(Client.cycle_groups())),
         Key([MOD], "t", lazy.spawn(TERMINAL), desc="Launch terminal"),
+        Key([MOD], "s", lazy.spawn(SIGNAL), desc="Launch Signal"),
         Key(
             [MOD],
             "numbersign",
@@ -156,9 +159,7 @@ screens = [
         wallpaper_mode="stretch",
         top=bar.Bar(
             [
-                # widget.CurrentLayout(),
                 widget.GroupBox(),
-                widget.Prompt(),
                 widget.WindowName(),
                 widget.Chord(
                     chords_colors={
@@ -166,16 +167,37 @@ screens = [
                     },
                     name_transform=lambda name: name.upper(),
                 ),
-                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground=ACCENT_COLOR),
+                widget.Clock(format="%Y-%m-%d %H:%M", foreground=ACCENT_COLOR),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
+                # widget.BatteryIcon(),
                 widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %H:%M"),
                 widget.QuickExit(),
             ],
             30,
-            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+        ),
+    ),
+    Screen(
+        wallpaper="~/Nextcloud/Bilder/Hintergründe/wallpaper.png",
+        wallpaper_mode="stretch",
+        top=bar.Bar(
+            [
+                widget.GroupBox(),
+                widget.WindowName(),
+                widget.Chord(
+                    chords_colors={
+                        "launch": ("#ff0000", "#ffffff"),
+                    },
+                    name_transform=lambda name: name.upper(),
+                ),
+                widget.Clock(format="%Y-%m-%d %H:%M", foreground=ACCENT_COLOR),
+                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
+                # widget.StatusNotifier(),
+                # widget.BatteryIcon(),
+                widget.Systray(),
+                widget.QuickExit(),
+            ],
+            30,
         ),
     ),
 ]
