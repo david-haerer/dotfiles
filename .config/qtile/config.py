@@ -48,10 +48,17 @@ keys.extend(
     ]
 )
 
+keys.extend([
+        Key([MOD], "tab", lazy.screen.next_group(), desc="Switch to next group"),
+        Key([MOD, "shift"], "tab", lazy.screen.prev_group(), desc="Switch to previous group"),
+        Key([MOD], "comma", lazy.next_screen(), desc="Switch to next screen"),
+        Key([MOD, "shift"], "comma", lazy.prev_screen(), desc="Switch to previous screen"),
+    ])
+
 keys.extend(
     [
         Key([MOD], "n", L.normalize(), desc="Reset all window sizes"),
-        Key([MOD, "shift"], "Return", L.toggle_split(), desc="Toggle (un-)split"),
+        Key([MOD, "shift"], "return", L.toggle_split(), desc="Toggle (un-)split"),
     ]
 )
 
@@ -87,13 +94,13 @@ for i in groups:
                 [MOD],
                 i.name,
                 lazy.group[i.name].toscreen(),
-                desc="Switch to group {}".format(i.name),
+                desc=f"Switch to group {i.name}",
             ),
             Key(
                 [MOD, "shift"],
                 i.name,
                 lazy.window.togroup(i.name, switch_group=True),
-                desc="Switch to & move focused window to group {}".format(i.name),
+                desc=f"Switch to & move focused window to group {i.name}",
             ),
         ]
     )
@@ -108,7 +115,7 @@ groups.append(
 )
 
 keys.extend(
-    [    
+    [
         # Key([MOD], "tab", lazy.function(Client.cycle_groups())),
         Key([MOD], "t", lazy.spawn(TERMINAL), desc="Launch terminal"),
         Key([MOD], "s", lazy.spawn(SIGNAL), desc="Launch Signal"),
@@ -168,38 +175,31 @@ screens = [
                     name_transform=lambda name: name.upper(),
                 ),
                 widget.Clock(format="%Y-%m-%d %H:%M", foreground=ACCENT_COLOR),
-                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-                # widget.StatusNotifier(),
-                # widget.BatteryIcon(),
                 widget.Systray(),
                 widget.QuickExit(),
             ],
             30,
         ),
     ),
-    Screen(
-        wallpaper="~/Nextcloud/Bilder/Hintergründe/wallpaper.png",
-        wallpaper_mode="stretch",
-        top=bar.Bar(
-            [
-                widget.GroupBox(),
-                widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                widget.Clock(format="%Y-%m-%d %H:%M", foreground=ACCENT_COLOR),
-                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-                # widget.StatusNotifier(),
-                # widget.BatteryIcon(),
-                widget.Systray(),
-                widget.QuickExit(),
-            ],
-            30,
-        ),
-    ),
+    # Screen(
+    #     wallpaper="~/Nextcloud/Bilder/Hintergründe/wallpaper.png",
+    #     wallpaper_mode="stretch",
+    #     top=bar.Bar(
+    #         [
+    #             widget.GroupBox(),
+    #             widget.WindowName(),
+    #             widget.Chord(
+    #                 chords_colors={
+    #                     "launch": ("#ff0000", "#ffffff"),
+    #                 },
+    #                 name_transform=lambda name: name.upper(),
+    #             ),
+    #             widget.Clock(format="%Y-%m-%d %H:%M", foreground=ACCENT_COLOR),
+    #             widget.QuickExit(),
+    #         ],
+    #         30,
+    #     ),
+    # ),
 ]
 
 
