@@ -15,7 +15,7 @@ Curl and git must be installed and to push changes an SSH key must be added to G
 In `$HOME` execute the following command:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/david-haerer/dotfiles/main/.scripts/dotfiles-init | sh
+curl -sSL https://dotfiles.haerer.dev | sh
 ```
 
 ## Usage
