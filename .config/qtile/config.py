@@ -7,6 +7,7 @@ from libqtile.lazy import lazy
 
 
 MOD = "mod4"
+ALT = "mod1"
 TERMINAL = "wezterm"
 SIGNAL = "/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=signal-desktop --file-forwarding org.signal.Signal @@u %U @@"
 LAUNCHER = "rofi -show drun"
@@ -23,10 +24,10 @@ keys = []
 
 keys.extend(
     [
-        Key([MOD], "h", L.left(), desc="Move focus to left"),
-        Key([MOD], "l", L.right(), desc="Move focus to right"),
-        Key([MOD], "j", L.down(), desc="Move focus down"),
-        Key([MOD], "k", L.up(), desc="Move focus up"),
+        Key([MOD, ALT], "h", L.left(), desc="Move focus to left"),
+        Key([MOD, ALT], "l", L.right(), desc="Move focus to right"),
+        Key([MOD, ALT], "j", L.down(), desc="Move focus down"),
+        Key([MOD, ALT], "k", L.up(), desc="Move focus up"),
     ]
 )
 
