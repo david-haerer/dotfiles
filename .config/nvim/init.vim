@@ -120,19 +120,25 @@ syntax on
 :command ISort :! isort --profile black %
 
 " Lint Python code with ':Pylint'.
-:command Pylint :! pylint %
+:command Pylint :w | ! pylint %
 
 " Test Python code with ':Pytest'.
-:command Pytest :! pytest %
+:command Pytest :w | ! pytest %
 
 " Format R code with ':Styler'.
-:command Styler :! Rscript -e "styler::style_file('%')"
+:command Styler :w | ! Rscript -e "styler::style_file('%')"
 
 " Format Go code with ':GoFmt'.
-:command GoFmt :! gofmt -s -w %
+:command GoFmt :w | ! gofmt -s -w %
 
 " Format JavaScript and TypeScript code with ':Prettier'.
-:command Prettier :! prettier --write %
+:command Prettier :w | ! prettier --write %
+
+" Save and commit.
+:command C :w | ! git update %
+
+" Save and run.
+:command Ly :w | ! lilypond %
 
 " VimDevIcons
 let g:webdevicons_conceal_nerdtree_brackets=1
