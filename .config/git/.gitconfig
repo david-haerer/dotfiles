@@ -16,6 +16,7 @@
     stats        = "! ~/.config/git/stats"
     update       = "! ~/.config/git/update"
     view         = "!f() { git show HEAD~$1; }; f"
+    note         = "!f() { git commit --allow-empty -m \"$1\"; }; f"
 
 [init]
     defaultBranch = main
