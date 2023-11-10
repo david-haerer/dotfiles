@@ -16,19 +16,18 @@ In `$HOME` execute the following command:
 
 ```bash
 curl -sSL https://dotfiles.haerer.dev | sh
+alias dot=""
+dot pull
 ```
 
 ## Usage
 
 The `dot` alias works like the normal `git` command.
 
-## Switching CapsLock and Esc
+## Git
 
-Add the following line to your `~/.profile`:
+Include the `.config/git/.gitconfig` in you `$HOME/.gitconfig` with
 
-```bash
-setxkbmap -option caps:swapescape
-```
 
 ## Further reading
 
