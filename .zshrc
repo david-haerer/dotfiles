@@ -2,7 +2,7 @@
 bindkey -v
 
 # Source profile and aliasrc.
-source "$HOME/profile"
+source "$HOME/.config/profile"
 source "$HOME/.config/zsh/aliasrc"
 
 # Load and export environment variables.
@@ -15,20 +15,16 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-
-# Set window title.
-function set-title() {
-    print -Pn "\e]2;$USER@$(hostname | sd '\..*' '')$(pwd)\a" # Set window title.
-}
+# # Set window title.
+# function set-title() {
+#     print -Pn "\e]2;$USER@$(hostname | sd '\..*' '')$(pwd)\a" # Set window title.
+# }
 
 # List files at every directory change.
 function chpwd() {
     emulate -L zsh
     clear
     l
-    if [ -f "pyproject.toml" ]; then
-        poetry shell
-    fi
 }
 
 # Enable zsh syntax highlighting and auto-quoting.
@@ -72,18 +68,3 @@ fpath+=~/.zfunc
 # List files at shell startup.
 # set-title
 l
-
-if [ -f "pyproject.toml" ]; then
-    poetry shell
-fi
-
-# bun completions
-[ -s "/home/david/.bun/_bun" ] && source "/home/david/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
