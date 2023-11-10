@@ -1,6 +1,0 @@
-#!/bin/sh
-
-theme="$1"
-gsettings set org.gnome.desktop.interface gtk-theme "$theme"
-gsettings set org.gnome.desktop.wm.preferences theme "$theme"
-
