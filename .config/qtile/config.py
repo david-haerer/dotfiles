@@ -9,7 +9,7 @@ from libqtile.lazy import lazy
 MOD = "mod4"
 ALT = "mod1"
 TERMINAL = "wezterm"
-SIGNAL = "/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=signal-desktop --file-forwarding org.signal.Signal @@u %U @@"
+SIGNAL = "signal-desktop"
 LAUNCHER = "rofi -show drun"
 PASSWORD_MANAGER = "passmenu"
 ACCENT_COLOR = "#008abd"
