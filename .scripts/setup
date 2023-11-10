@@ -11,5 +11,8 @@ sudo apt install -y \
     git \
     bat \
     rofi \
+    fd-find \
+    gnome-keyring seahorse pinentry-gnome3 libpam-gnome-keyring \
+    dbus dbus-x11 \
     pass pass-extension-otp
 sudo apt upgrade
