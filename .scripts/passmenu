@@ -13,7 +13,7 @@ entry=$(printf '%s\n' "${password_files[@]}" | rofi -dmenu -p "pass" -i)
 [[ -n $entry ]] || exit
 
 # XXX: This doesn't work if there is only one entry which is not the password.
-if [ $(wc -l < $entry) -eq 1 ]; then
+if [ $(pass show $entry | wc -l) -eq 1 ]; then
     field="password"
 else
     field=$(pass show "$entry" | tail -n +2 | cat <(echo password:) - | rg -o "^[^:]*" | sd otpauth otp | rofi -dmenu -i)
