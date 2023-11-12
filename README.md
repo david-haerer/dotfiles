@@ -14,10 +14,16 @@ Curl and git must be installed and to push changes an SSH key must be added to G
 
 In `$HOME` execute the following command:
 
-```bash
+```sh
 curl -sSL https://dotfiles.haerer.dev | sh
-alias dot=""
+alias dot="git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME"
 dot pull
+```
+
+Once you have your SSH key setup, you have to change the remote URL:
+
+```sh
+dot-update-remote-url
 ```
 
 ## Usage
