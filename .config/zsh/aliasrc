@@ -10,7 +10,7 @@ alias md="markdown"
 alias cm="chmod"
 alias sw="source workspace"
 alias fd="fdfind"
-alias s="search"
+alias s="startx"
 alias n="note"
 alias bm="bookmarks"
 alias vs="code"
@@ -72,6 +72,11 @@ alias gmv="git rename"
 
 # dotfiles: Manage dotfiles with a bare Git repository.
 alias dot="git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME"
+alias dot-update-remote-url="sd \
+  https://github.com/DavidHeresy/dotfiles.git \
+  git@github.com:david-haerer/dotfiles.git \
+  $HOME/.dotfiles.git/config
+"
 
 # todo.txt
 alias t="bash $APPS/todo-txt/todo.sh"
@@ -130,4 +135,6 @@ alias export-pgp="gpg --output '$EMAIL.pgp' --export-secret-key '$EMAIL'"
 alias reload="source ~/.zshrc && clear && l"
 
 # qtile
-alias qtile-reload="qtile check && qtile cmd-obj -o cmd -f reload_config"
+alias qtile-reload="qtile cmd-obj -o cmd -f reload_config"
+alias qtile-python="$HOME/.local/pipx/venvs/qtile/bin/python"
+alias logout="loginctl terminate-user 1000"
