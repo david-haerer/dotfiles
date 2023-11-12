@@ -1,6 +1,30 @@
-from libqtile import bar, layout, widget
-from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, DropDown
+import sh
+from libqtile import bar, hook, layout, widget
+from libqtile.command import lazy
+from libqtile.config import Click, Drag, DropDown, Group, Key, Match, ScratchPad, Screen
 from libqtile.lazy import lazy
+
+
+@hook.subscribe.client_new
+def dialogs(window):
+    if window.window.get_wm_type() == "dialog" or window.window.get_wm_transient_for():
+        window.floating = True
+
+
+# -- AUTOSTART --
+
+
+def ensure_running(proc_name, run_proc):
+    try:
+        sh.pidof(proc_name)
+    except sh.ErrorReturnCode:
+        run_proc()
+
+@hook.subscribe.startup
+def autostart():
+    lambda: sh.autorandr("common")
+    ensure_running("nm-applet", lambda: sh.nm_applet(_bg=True))
+    ensure_running("nextcloud", lambda: sh.nextcloud(_bg=True))
 
 
 # -- CONSTANTS --
@@ -8,11 +32,12 @@ from libqtile.lazy import lazy
 
 MOD = "mod4"
 ALT = "mod1"
+HASHTAG = "numbersign"
 TERMINAL = "wezterm"
 SIGNAL = "signal-desktop"
 LAUNCHER = "rofi -show drun"
 PASSWORD_MANAGER = "passmenu"
-ACCENT_COLOR = "#008abd"
+ACCENT_COLOR = "#228B22"
 FONT = "ComicCode Nerd Font"
 L = lazy.layout
 
@@ -49,12 +74,24 @@ keys.extend(
     ]
 )
 
-keys.extend([
+keys.extend(
+    [
         Key([MOD], "tab", lazy.screen.next_group(), desc="Switch to next group"),
-        Key([MOD, "shift"], "tab", lazy.screen.prev_group(), desc="Switch to previous group"),
+        Key(
+            [MOD, "shift"],
+            "tab",
+            lazy.screen.prev_group(),
+            desc="Switch to previous group",
+        ),
         Key([MOD], "comma", lazy.next_screen(), desc="Switch to next screen"),
-        Key([MOD, "shift"], "comma", lazy.prev_screen(), desc="Switch to previous screen"),
-    ])
+        Key(
+            [MOD, "shift"],
+            "comma",
+            lazy.prev_screen(),
+            desc="Switch to previous screen",
+        ),
+    ]
+)
 
 keys.extend(
     [
@@ -122,7 +159,7 @@ keys.extend(
         Key([MOD], "s", lazy.spawn(SIGNAL), desc="Launch Signal"),
         Key(
             [MOD],
-            "numbersign",
+            HASHTAG,
             lazy.spawn(PASSWORD_MANAGER),
             desc="Launch password manager",
         ),
@@ -169,38 +206,31 @@ screens = [
             [
                 widget.GroupBox(),
                 widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
                 widget.Clock(format="%Y-%m-%d %H:%M", foreground=ACCENT_COLOR),
+                widget.Spacer(),
+                widget.Sep(),
+                widget.Notify(),
                 widget.Systray(),
-                widget.QuickExit(),
+                widget.Sep(),
+                widget.Volume(fontsize=12),
+                widget.Sep(),
+                widget.Battery(
+                    battery_name="BAT0",
+                    energy_now_file="charge_now",
+                    energy_full_file="charge_full",
+                    power_now_file="current_now",
+                    update_delay=1,
+                    charge_char="↑",
+                    discharge_char="↓",
+                    format="{char} {percent:2.0%}",
+                    fontsize=12,
+                ),
+                widget.Sep(),
+                widget.QuickExit(default_text="[ exit ]"),
             ],
             30,
         ),
     ),
-    # Screen(
-    #     wallpaper="~/Nextcloud/Bilder/Hintergründe/wallpaper.png",
-    #     wallpaper_mode="stretch",
-    #     top=bar.Bar(
-    #         [
-    #             widget.GroupBox(),
-    #             widget.WindowName(),
-    #             widget.Chord(
-    #                 chords_colors={
-    #                     "launch": ("#ff0000", "#ffffff"),
-    #                 },
-    #                 name_transform=lambda name: name.upper(),
-    #             ),
-    #             widget.Clock(format="%Y-%m-%d %H:%M", foreground=ACCENT_COLOR),
-    #             widget.QuickExit(),
-    #         ],
-    #         30,
-    #     ),
-    # ),
 ]
 
 
@@ -257,3 +287,6 @@ wl_input_rules = None
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
+
+if __name__ == "__main__":
+    autostart()
