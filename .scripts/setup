@@ -2,6 +2,7 @@
 
 sudo apt update
 sudo apt install -y \
+    pipx \
     zsh zsh-syntax-highlighting \
     neovim \
     alacritty \
@@ -14,5 +15,15 @@ sudo apt install -y \
     fd-find \
     gnome-keyring seahorse pinentry-gnome3 libpam-gnome-keyring \
     dbus dbus-x11 \
+    pipewire wireplumber \
     pass pass-extension-otp
 sudo apt upgrade
+
+pipx install apparition
+pipx install rofimoji
+pipx install black
+pipx install isort
+pipx install mypy
+pipx install qtile
+pipx install rich
+pipx install sh
