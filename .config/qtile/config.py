@@ -20,6 +20,7 @@ def ensure_running(proc_name, run_proc):
     except sh.ErrorReturnCode:
         run_proc()
 
+
 @hook.subscribe.startup
 def autostart():
     lambda: sh.autorandr("common")
@@ -181,7 +182,7 @@ layouts = [
         border_focus_stack=ACCENT_COLOR,
         border_width=2,
         grow_amount=6,
-        margin=2,
+        margin=0,
     ),
     layout.Max(),
 ]
@@ -204,13 +205,19 @@ screens = [
         wallpaper_mode="stretch",
         top=bar.Bar(
             [
-                widget.GroupBox(),
-                widget.WindowName(),
+                widget.GroupBox(
+                    # active=ACCENT_COLOR,
+                    highlight_method="line",
+                    this_current_screen_border=ACCENT_COLOR,
+                    # highlight_color=ACCENT_COLOR,
+                    # block_highlight_text_color=ACCENT_COLOR,
+                ),
+                widget.Spacer(),
                 widget.Clock(format="%Y-%m-%d %H:%M", foreground=ACCENT_COLOR),
                 widget.Spacer(),
                 widget.Notify(),
                 widget.Systray(),
-                widget.Volume(fontsize=12),
+                widget.Spacer(length=8),
                 widget.Battery(
                     battery_name="BAT0",
                     energy_now_file="charge_now",
@@ -222,7 +229,14 @@ screens = [
                     format="{char} {percent:2.0%}",
                     fontsize=12,
                 ),
-                widget.QuickExit(default_text="[ exit ]"),
+                widget.Spacer(length=8),
+                widget.LaunchBar(
+                    progs=[
+                        ("LibreWolf", "librewolf"),
+                        ("Logout", "sudo logout"),
+                        ("Shutdown", "sudo shutdown -h now"),
+                    ],
+                ),
             ],
             30,
         ),
@@ -252,6 +266,8 @@ follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(
+    border_focus=ACCENT_COLOR,
+    border_width=2,
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
@@ -261,7 +277,7 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
-    ]
+    ],
 )
 auto_fullscreen = True
 focus_on_window_activation = "smart"
@@ -283,6 +299,3 @@ wl_input_rules = None
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
-
-if __name__ == "__main__":
-    autostart()
