@@ -114,10 +114,10 @@ filetype on
 syntax on
 
 " Format Python code with ':Black'.
-:command Black :! black %
+:command Black :w | ! black %
 
 " Sort Python imports with ':ISort'.
-:command ISort :! isort --profile black %
+:command ISort :w | ! isort --profile black %
 
 " Lint Python code with ':Pylint'.
 :command Pylint :w | ! pylint %
