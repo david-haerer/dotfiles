@@ -16,7 +16,8 @@ sudo apt install -y \
     gnome-keyring seahorse pinentry-gnome3 libpam-gnome-keyring \
     dbus dbus-x11 \
     pipewire wireplumber \
-    pass pass-extension-otp
+    pass pass-extension-otp \
+    fonts-noto-color-emoji
 sudo apt upgrade
 
 pipx install apparition
@@ -25,5 +26,5 @@ pipx install black
 pipx install isort
 pipx install mypy
 pipx install qtile
+pipx inject qtile sh
 pipx install rich
-pipx install sh
