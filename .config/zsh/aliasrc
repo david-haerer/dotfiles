@@ -22,6 +22,7 @@ alias ap="apparition"
 alias utc="date -u --iso-8601=seconds | sd T ' ' | sd '\+00:00' '' | sd : -"
 alias ctrl-c='xclip -sel clip'
 alias caps-esc='setxkbmap -option caps:swapescape'
+alias hdmi='autorandr common'
 
 # ls: Show hidden files by default.
 alias ls="ls -a"

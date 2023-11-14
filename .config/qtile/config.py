@@ -5,10 +5,29 @@ from libqtile.config import Click, Drag, DropDown, Group, Key, Match, ScratchPad
 from libqtile.lazy import lazy
 
 
-@hook.subscribe.client_new
-def dialogs(window):
-    if window.window.get_wm_type() == "dialog" or window.window.get_wm_transient_for():
-        window.floating = True
+# -- CONSTANTS --
+
+
+MOD = "mod4"
+ALT = "mod1"
+HASHTAG = "numbersign"
+TERMINAL = "wezterm"
+SIGNAL = "signal-desktop"
+LAUNCHER = "rofi -show drun"
+PASSWORD_MANAGER = "passmenu"
+
+BLACK= "#0A0E14"
+RED= "#FF3333"
+GREEN= "#C2D94C"
+YELLOW= "#FF8F40"
+BLUE= "#59C2FF"
+MAGENTA= "#FFEE99"
+CYAN= "#95E6CB"
+WHITE= "#B3B1AD"
+
+ACCENT_COLOR = YELLOW
+FONT = "ComicCode Nerd Font"
+L = lazy.layout
 
 
 # -- AUTOSTART --
@@ -26,21 +45,6 @@ def autostart():
     lambda: sh.autorandr("common")
     ensure_running("nm-applet", lambda: sh.nm_applet(_bg=True))
     ensure_running("nextcloud", lambda: sh.nextcloud(_bg=True))
-
-
-# -- CONSTANTS --
-
-
-MOD = "mod4"
-ALT = "mod1"
-HASHTAG = "numbersign"
-TERMINAL = "wezterm"
-SIGNAL = "signal-desktop"
-LAUNCHER = "rofi -show drun"
-PASSWORD_MANAGER = "passmenu"
-ACCENT_COLOR = "#228B22"
-FONT = "ComicCode Nerd Font"
-L = lazy.layout
 
 
 # -- KEYS --
@@ -168,6 +172,7 @@ keys.extend(
         Key([MOD], "r", lazy.spawncmd(), desc="Command prompt"),
         Key([MOD], "space", lazy.group["scratchpad"].dropdown_toggle("term")),
         Key([MOD], "u", lazy.spawn("rofimoji"), desc="Launch unicode picker"),
+        Key([MOD], "h", lazy.spawn("autorandr common"), desc="Launch unicode picker"),
     ]
 )
 
