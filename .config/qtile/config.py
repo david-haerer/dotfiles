@@ -50,6 +50,7 @@ def ensure_running(proc_name, run_proc):
 def autostart():
     lambda: sh.autorandr("common")
     lambda: sh.setx()
+    lambda: sh.flameshot()
     ensure_running("nm-applet", lambda: sh.nm_applet(_bg=True))
     ensure_running("nextcloud", lambda: sh.nextcloud(_bg=True))
 
@@ -227,7 +228,7 @@ screens = [
                     hide_unused=True,
                 ),
                 widget.Spacer(),
-                widget.Clock(format="%Y-%m-%d %H:%M", foreground=WHITE),
+                widget.Clock(format="%Y-%m-%d %H:%M", foreground=GREEN),
                 widget.Spacer(),
                 widget.Systray(),
                 widget.Spacer(length=8),
