@@ -13,6 +13,7 @@ sudo apt install -y \
     bat \
     rofi \
     fd-find \
+    flameshot \
     gnome-keyring seahorse pinentry-gnome3 libpam-gnome-keyring \
     dbus dbus-x11 \
     pipewire wireplumber \
