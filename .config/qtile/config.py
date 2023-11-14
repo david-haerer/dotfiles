@@ -16,16 +16,22 @@ SIGNAL = "signal-desktop"
 LAUNCHER = "rofi -show drun"
 PASSWORD_MANAGER = "passmenu"
 
-BLACK= "#0A0E14"
-RED= "#FF3333"
-GREEN= "#C2D94C"
-YELLOW= "#FF8F40"
-BLUE= "#59C2FF"
-MAGENTA= "#FFEE99"
-CYAN= "#95E6CB"
-WHITE= "#B3B1AD"
+BLACK = "#0A0E14"
+GRAY = "#4D5566"
+WHITE = "#B3B1AD"
+RED = "#FF3333"
+ORANGE = "#E6B450"
+YELLOW = "#FF8F40"
+GREEN = "#C2D94C"
+CYAN = "#95E6CB"
+BLUE = "#59C2FF"
+MAGENTA = "#FFEE99"
+
 
 ACCENT_COLOR = YELLOW
+BACKGROUND = BLACK
+FOREGROUND = WHITE
+
 FONT = "ComicCode Nerd Font"
 L = lazy.layout
 
@@ -43,6 +49,7 @@ def ensure_running(proc_name, run_proc):
 @hook.subscribe.startup
 def autostart():
     lambda: sh.autorandr("common")
+    lambda: sh.setx()
     ensure_running("nm-applet", lambda: sh.nm_applet(_bg=True))
     ensure_running("nextcloud", lambda: sh.nextcloud(_bg=True))
 
@@ -152,7 +159,7 @@ groups.append(
     ScratchPad(
         "scratchpad",
         dropdowns=[
-            DropDown("term", "alacritty", config={"opacity": 0.8}),
+            DropDown("term", "alacritty"),
         ],
     )
 )
@@ -185,7 +192,7 @@ layouts = [
         border_on_single=True,
         border_focus=ACCENT_COLOR,
         border_focus_stack=ACCENT_COLOR,
-        border_width=2,
+        border_width=1,
         grow_amount=6,
         margin=0,
     ),
@@ -211,16 +218,17 @@ screens = [
         top=bar.Bar(
             [
                 widget.GroupBox(
-                    # active=ACCENT_COLOR,
-                    highlight_method="line",
-                    this_current_screen_border=ACCENT_COLOR,
-                    # highlight_color=ACCENT_COLOR,
-                    # block_highlight_text_color=ACCENT_COLOR,
+                    active=GRAY,
+                    highlight_method="text",
+                    this_current_screen_border=GREEN,
+                    block_highlight_text_color=BLACK,
+                    padding=4,
+                    margin=0,
+                    hide_unused=True,
                 ),
                 widget.Spacer(),
-                widget.Clock(format="%Y-%m-%d %H:%M", foreground=ACCENT_COLOR),
+                widget.Clock(format="%Y-%m-%d %H:%M", foreground=WHITE),
                 widget.Spacer(),
-                widget.Notify(),
                 widget.Systray(),
                 widget.Spacer(length=8),
                 widget.Battery(
@@ -237,12 +245,14 @@ screens = [
                 widget.Spacer(length=8),
                 widget.LaunchBar(
                     progs=[
-                        ("Logout", "sudo logout"),
-                        ("Shutdown", "sudo shutdown -h now"),
+                        ("🔒", "sudo loginctl terminate-user 1000"),
+                        ("❌", "sudo shutdown -h now"),
                     ],
                 ),
             ],
             30,
+            background=BLACK,
+            opacity=0.66,
         ),
     ),
 ]
@@ -271,7 +281,7 @@ bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(
     border_focus=ACCENT_COLOR,
-    border_width=2,
+    border_width=1,
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
