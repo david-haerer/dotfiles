@@ -189,15 +189,15 @@ keys.extend(
 
 
 layouts = [
+    layout.Max(),
     layout.Columns(
         border_on_single=True,
         border_focus=ACCENT_COLOR,
         border_focus_stack=ACCENT_COLOR,
-        border_width=1,
+        border_width=2,
         grow_amount=6,
-        margin=0,
+        margin=4,
     ),
-    layout.Max(),
 ]
 
 
