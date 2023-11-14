@@ -24,12 +24,12 @@ selection:
 
 font:
   normal:
-    family: ComicCodeLigatures Nerd Font
+    family: monospace
   bold:
-    family: ComicCodeLigatures Nerd Font
+    family: monospace
     style: Bold
   italic:
-    family: ComicCodeLigatures Nerd Font
+    family: monospace
     style: Italic
   size: 9
 
