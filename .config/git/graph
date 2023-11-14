@@ -14,4 +14,4 @@ git log --graph \
     --topo-order \
     --format=format:"$tab$commit $date $author$ref$eol$tab  $message$eol" \
     --date=format:'%Y-%m-%d %H:%M' \
-    --all
+    $@
