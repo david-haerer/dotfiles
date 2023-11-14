@@ -232,7 +232,6 @@ screens = [
                 widget.Spacer(length=8),
                 widget.LaunchBar(
                     progs=[
-                        ("LibreWolf", "librewolf"),
                         ("Logout", "sudo logout"),
                         ("Shutdown", "sudo shutdown -h now"),
                     ],
