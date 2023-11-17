@@ -1,2 +1,2 @@
 action = copy
-files = [emojis]
+files = [emojis, latin-1_supplement]
