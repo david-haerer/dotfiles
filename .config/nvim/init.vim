@@ -90,7 +90,7 @@ nnoremap zN [s
 :command NoWS :%s/^  $/
 
 " Remove NeoVim swap files with ':NoSwap'.
-:command NoSwap :! rm -rf $HOME/.local/share/nvim/swap/*.swp
+:command NoSwap :! rm -rf $HOME/.local/state/nvim/swap/*%.swp
 
 " Only allow certain plugins.
 :let g:airline_extensions = []
