@@ -23,6 +23,8 @@ alias utc="date -u --iso-8601=seconds | sd T ' ' | sd '\+00:00' '' | sd : -"
 alias ctrl-c='xclip -sel clip'
 alias caps-esc='setxkbmap -option caps:swapescape'
 alias hdmi='autorandr common'
+alias sm="smerge"
+alias kw="isoweekdate"
 
 # ls: Show hidden files by default.
 alias ls="ls -a"
@@ -135,6 +137,7 @@ alias export-pgp="gpg --output '$EMAIL.pgp' --export-secret-key '$EMAIL'"
 
 # zsh
 alias reload="source ~/.zshrc && clear && l"
+alias r="reload"
 
 # qtile
 alias qtile-reload="qtile cmd-obj -o cmd -f reload_config"
