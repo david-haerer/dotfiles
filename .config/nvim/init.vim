@@ -109,7 +109,7 @@ let g:doge_doc_standard_python = 'google'
 
 " Lilypond
 filetype off
-set runtimepath+=/home/david/lilypond/usr/share/lilypond/current/vim/
+set runtimepath+=/usr/share/lilypond/2.24.1/vim/
 filetype on
 syntax on
 
