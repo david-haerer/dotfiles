@@ -3,10 +3,16 @@ configuration {
   combi-modes: [ window, drun, run ];
 }
 
-@theme "DarkBlue"
+@theme "ayu-dark"
  
 /* Insert theme modifications after this */
 
 * {
     font: "ComicCode Nerd Font 16";
+}
+
+window {
+    width: 62%;
+    border-color: #FF8F40;
+    border: 1px;
 }
