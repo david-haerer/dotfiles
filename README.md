@@ -8,7 +8,7 @@
 
 ## Requirements
 
-Curl and git must be installed.
+`curl` and `git` must be installed.
 To push changes an SSH key must be added to GitHub.
 
 ## Setup
