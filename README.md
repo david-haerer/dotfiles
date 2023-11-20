@@ -1,14 +1,15 @@
 <p align="center">
-    <h1 align="center">dotfiles</h1>
+  <h1 align="center">dotfiles</h1>
 </p>
 
 <p align="center">
-    <em>Bare git repo to manage my dotfiles.</em>
+  <em>🏡 Furnishings of my `$HOME`.</em>
 </p>
 
 ## Requirements
 
-Curl and git must be installed and to push changes an SSH key must be added to GitHub.
+Curl and git must be installed.
+To push changes an SSH key must be added to GitHub.
 
 ## Setup
 
@@ -26,6 +27,12 @@ Once you have your SSH key setup, you have to change the remote URL:
 dot-update-remote-url
 ```
 
+Install a basic set of dependencies with:
+
+```sh
+setup
+```
+
 ## Usage
 
 The `dot` alias works like the normal `git` command.
@@ -33,7 +40,6 @@ The `dot` alias works like the normal `git` command.
 ## Git
 
 Include the `.config/git/.gitconfig` in you `$HOME/.gitconfig` with
-
 
 ## Further reading
 
