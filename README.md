@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <em>🏡 Furnishings of my `$HOME`.</em>
+  <em>🏡 Furnishings of my <code>$HOME</code>.</em>
 </p>
 
 ## Requirements
