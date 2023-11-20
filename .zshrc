@@ -68,3 +68,4 @@ fpath+=~/.zfunc
 # List files at shell startup.
 # set-title
 l
+
