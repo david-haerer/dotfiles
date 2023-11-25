@@ -158,3 +158,5 @@ autocmd FileType lilypond setlocal commentstring=%\ %s
 
 " Save a macro for adding two space at the end of the line in register a.
 let @a = 'A  j^'
+
+lua require'lspconfig'.pyright.setup{}
