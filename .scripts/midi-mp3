@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 if [ -z "$1" ]; then
     for infile in *.midi; do
         basepath=$(dirname "$infile")
