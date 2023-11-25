@@ -9,7 +9,6 @@ fi
 # Start Gnome Keyring.
 export $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
 
-
 # Start SSH agent.
 eval $(ssh-agent)
 export SSH_ASKPASS=/usr/libexec/seahorse/ssh-askpass
