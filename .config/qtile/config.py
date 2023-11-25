@@ -180,6 +180,7 @@ keys.extend(
         Key([MOD], "r", lazy.spawncmd(), desc="Command prompt"),
         Key([MOD], "space", lazy.group["scratchpad"].dropdown_toggle("term")),
         Key([MOD], "u", lazy.spawn("rofimoji"), desc="Launch unicode picker"),
+        Key([MOD], "g", lazy.spawn("rofi-gitmojis"), desc="Launch Gitmoji picker"),
         Key([MOD], "h", lazy.spawn("autorandr common"), desc="Launch unicode picker"),
     ]
 )
