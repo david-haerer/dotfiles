@@ -16,6 +16,8 @@ set cursorline
 set ruler
 set lazyredraw
 
+set signcolumn=yes:1
+
 " Insert whitespace in normal mode.
 nnoremap <Space> i<Space><Right><ESC>
 nnoremap <Tab> i<Tab><Right><ESC>
@@ -67,10 +69,10 @@ nnoremap B ^
 nnoremap E $
 
 " Move fast in a file.
-map J jjjjjjj
-map K kkkkkkk
-map H (
-map L )
+map J )
+map K (
+" map H (
+" map L )
 
 " Toggle the NERDTree with 'Ctrl' + 'n'.
 nnoremap <C-n> :NERDTreeToggle<CR>
@@ -160,3 +162,4 @@ autocmd FileType lilypond setlocal commentstring=%\ %s
 let @a = 'A  j^'
 
 lua require'lspconfig'.pyright.setup{}
+
