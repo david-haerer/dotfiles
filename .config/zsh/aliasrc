@@ -26,6 +26,8 @@ alias hdmi='autorandr common'
 alias sm="smerge"
 alias kw="isoweekdate"
 alias az="arbeitszeit"
+alias bs="brainstorage"
+alias p="ps aux | rg"
 
 # ls: Show hidden files by default.
 alias ls="ls -a"
