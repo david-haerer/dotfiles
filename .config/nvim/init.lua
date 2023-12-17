@@ -1,3 +1,4 @@
+vim.cmd([[
 " Use the Pathogen plugin manager.
 execute pathogen#infect()
 
@@ -127,6 +128,9 @@ syntax on
 " Test Python code with ':Pytest'.
 :command Pytest :w | ! pytest %
 
+" Format Python code with ':Ruff'.
+:command Ruff :w | ! ruff --fix format %
+
 " Format R code with ':Styler'.
 :command Styler :w | ! Rscript -e "styler::style_file('%')"
 
@@ -157,9 +161,13 @@ filetype on
 
 " Define comments for lilypond
 autocmd FileType lilypond setlocal commentstring=%\ %s
+]])
 
-" Save a macro for adding two space at the end of the line in register a.
-let @a = 'A  j^'
-
-lua require'lspconfig'.pyright.setup{}
-
+require('lspconfig').ruff_lsp.setup {
+  on_attach = on_attach,
+  init_options = {
+    settings = {
+      args = {},
+    }
+  }
+}
