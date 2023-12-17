@@ -1,5 +1,3 @@
 set icons
-set previewer ctpv
-set cleaner ctpvclear
-&ctpv -s $id
-&ctpvquit $id
+set sixel true
+set previewer ~/.config/lf/preview
