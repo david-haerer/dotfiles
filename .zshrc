@@ -30,7 +30,7 @@ function chpwd() {
 # Enable zsh syntax highlighting and auto-quoting.
 source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.config/zsh/zsh-autoquoter/zsh-autoquoter.zsh
-ZAQ_PREFIXES=('git commit( [^ ]##)# -[^ -]#m' 'ssh( [^ ]##)# [^ -][^ ]#' 'spotifydl' 'audio-dl' 'caption-dl' 'video-dl' 'rn' 'music' 's' 'bm add' 'gn' 'n a' 'bs bm a' 'bs n a' 'bm a')
+ZAQ_PREFIXES=('git commit( [^ ]##)# -[^ -]#m' 'ssh( [^ ]##)# [^ -][^ ]#' 'spotifydl' 'audio-dl' 'caption-dl' 'video-dl' 'rn' 'music' 's' 'bm add' 'gn' 'n a' 'bs bm a' 'bs n a' 'bm a' 'n s' 'bs n s' 'bs bm s' 'bm s' 'bs s' 'n g' 'bg n g' 'bg bm g' 'bm g' 'bg g')
 ZSH_HIGHLIGHT_HIGHLIGHTERS+=(zaq)
 
 # Use the 'starship' prompt.
