@@ -6,6 +6,6 @@ case "$(file -Lb --mime-type -- "$1")" in
         exit 1
         ;;
     *)
-        cat "$1"
+        batcat -p --theme ansi --terminal-width "$(($4-2))" -f "$1"
         ;;
 esac
