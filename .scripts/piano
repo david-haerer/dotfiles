@@ -1,7 +1,8 @@
 #!/bin/sh
 
-soundfont=$1
+soundfont="${1:-/usr/share/sounds/sf2/default-GM.sf2}"
 qsynth --audio-driver alsa "$soundfont" &
 output=$(aconnect -o | rg "FLUID Synth" | rg -o "^client [0-9]+*" | sd "client " "")
 input=$(aconnect -i | rg "V49" | rg -o "^client [0-9]+" | sd "client " "")
 aconnect $input $output
+
