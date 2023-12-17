@@ -29,6 +29,7 @@ __pycache__/
 !/.config/tabbed
 !/.config/rofi
 !/.config/qtile
+!/.config/zathura
 !/.config/fontconfig
 !/.config/autostart
 !/.config/key.map
