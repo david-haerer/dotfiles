@@ -1,3 +1,8 @@
 set icons
 set sixel true
 set previewer ~/.config/lf/preview
+cmd on-cd &{{
+    export STARSHIP_SHELL=
+    fmt="$(starship prompt)"
+    lf -remote "send $id set promptfmt \"$fmt\""
+}}
