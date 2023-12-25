@@ -33,6 +33,7 @@ __pycache__/
 !/.config/fontconfig
 !/.config/autostart
 !/.config/key.map
+!/.config/picom
 
 !/.config/nvim
 /.config/nvim/spell
