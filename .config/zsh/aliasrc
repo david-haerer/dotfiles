@@ -29,6 +29,7 @@ alias az="arbeitszeit"
 alias bs="brainstorage"
 alias p="ps aux | rg"
 alias ep="ephoto"
+alias mr="massren"
 
 # ls: Show hidden files by default.
 alias ls="ls -a"
