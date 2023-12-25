@@ -1,6 +1,5 @@
 import sh
 from libqtile import bar, hook, layout, widget
-from libqtile.command import lazy
 from libqtile.config import Click, Drag, DropDown, Group, Key, Match, ScratchPad, Screen
 from libqtile.lazy import lazy
 
@@ -49,10 +48,11 @@ def ensure_running(proc_name, run_proc):
 @hook.subscribe.startup
 def autostart():
     lambda: sh.autorandr("common")
-    lambda: sh.setx()
-    lambda: sh.flameshot()
     ensure_running("nm-applet", lambda: sh.nm_applet(_bg=True))
     ensure_running("nextcloud", lambda: sh.nextcloud(_bg=True))
+    ensure_running("flameshot", lambda: sh.flameshot(_bg=True))
+    ensure_running("blueman-applet", lambda: sh.blueman_applet(_bg=True))
+
 
 
 # -- KEYS --
@@ -215,10 +215,11 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-        wallpaper="~/Nextcloud/Bilder/Hintergründe/wallpaper.png",
+        wallpaper="~/Nextcloud/Bilder/Hintergründe/space.png",
         wallpaper_mode="stretch",
         top=bar.Bar(
             [
+                widget.Spacer(length=4),
                 widget.GroupBox(
                     active=GRAY,
                     highlight_method="text",
@@ -251,9 +252,11 @@ screens = [
                         ("❌", "sudo shutdown -h now"),
                     ],
                 ),
+                widget.Spacer(length=4),
             ],
-            30,
+            32,
             background=BLACK,
+            margin=0,
             opacity=0.66,
         ),
     ),
@@ -293,6 +296,7 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
+        Match(wm_class="nextcloud"),
     ],
 )
 auto_fullscreen = True
