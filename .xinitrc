@@ -13,5 +13,8 @@ export $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
 eval $(ssh-agent)
 export SSH_ASKPASS=/usr/libexec/seahorse/ssh-askpass
 
+# # Source xprofile.
+. ~/.xprofile
+
 # Start Qtile WM.
 exec qtile start
