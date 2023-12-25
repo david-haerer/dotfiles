@@ -12,6 +12,7 @@ local BLUE = "#59C2FF"
 local MAGENTA = "#FFEE99"
 
 return {
+  -- window_background_opacity = 0.8,
   color_scheme = "Ayu Dark (Gogh)",
 
   font = wezterm.font_with_fallback {
