@@ -58,8 +58,21 @@ def autostart():
 def layout_change(layout, group):
     value = 1 if layout.name == "max" else 0
     for window in group.windows:
-        window.window.set_property("QTILE_MAX", value, "CARDINAL", 32)
+        window_value = 0 if window.floating else value
+        window.window.set_property("QTILE_MAX", window_value, "CARDINAL", 32)
 
+
+@hook.subscribe.group_window_add
+def group_window_add(group, window):
+    from pathlib import Path
+    try:
+        value = 1 if group.layout.name == "max" and not window.floating else 0
+        window.window.set_property("QTILE_MAX", value, "CARDINAL", 32)
+        msg = f"Floating: {window.floating}"
+    except Exception as error:
+        msg = str(error)
+    Path("/home/david/foo").write_text(msg)
+    
 
 
 # -- KEYS --
@@ -268,7 +281,7 @@ bar = bar.Bar(
     36,
     background=BLACK,
     margin=0,
-    opacity=1,
+    opacity=0.9,
 )
 
 @hook.subscribe.startup
