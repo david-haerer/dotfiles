@@ -591,4 +591,4 @@ EOF
 )
 
 
-echo $gitmojis | jq -r '.[] | "\(.emoji) \(.description)"' | rofi -markup-rows -dmenu  -p "Gitmoji" 
+echo $gitmojis | jq -r '.[] | "\(.emoji) \(.description)"' | rofi -markup-rows -dmenu  -p "Gitmoji"  | sd " .*" "" | xclip -sel clip
