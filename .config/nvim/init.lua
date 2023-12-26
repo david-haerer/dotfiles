@@ -2,6 +2,9 @@ vim.cmd([[
 " Use the Pathogen plugin manager.
 execute pathogen#infect()
 
+set termguicolors
+highlight Cursor gui=reverse guifg=NONE guibg=NONE
+
 " Set leader and localleader.
 :let mapleader = ","
 :let maplocalleader = ";"
