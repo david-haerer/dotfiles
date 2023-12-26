@@ -2,7 +2,6 @@ import sh
 from libqtile import bar, hook, layout, widget
 from libqtile.config import Click, Drag, DropDown, Group, Key, Match, ScratchPad, Screen
 from libqtile.lazy import lazy
-import math
 
 
 # -- CONSTANTS --
@@ -53,6 +52,13 @@ def autostart():
     ensure_running("nextcloud", lambda: sh.nextcloud(_bg=True))
     ensure_running("flameshot", lambda: sh.flameshot(_bg=True))
     ensure_running("blueman-applet", lambda: sh.blueman_applet(_bg=True))
+
+
+@hook.subscribe.layout_change
+def layout_change(layout, group):
+    value = 1 if layout.name == "max" else 0
+    for window in group.windows:
+        window.window.set_property("QTILE_MAX", value, "CARDINAL", 32)
 
 
 
@@ -198,15 +204,15 @@ keys.extend(
 
 
 layouts = [
-    layout.Max(margin=4),
+    layout.Max(margin=0),
     layout.Columns(
         border_on_single=True,
         border_focus=ACCENT_COLOR,
         border_focus_stack=ACCENT_COLOR,
         border_width=2,
         grow_amount=6,
-        margin=4,
-    ),
+    margin=4,
+),
 ]
 
 
@@ -221,52 +227,59 @@ widget_defaults = dict(
 
 extension_defaults = widget_defaults.copy()
 
+
+bar = bar.Bar(
+    [
+        widget.Spacer(length=8),
+        widget.GroupBox(
+            active=GRAY,
+            highlight_method="text",
+            this_current_screen_border=GREEN,
+            block_highlight_text_color=WHITE,
+            padding=4,
+            margin=0,
+            hide_unused=True,
+        ),
+        widget.Spacer(),
+        widget.Clock(format="%Y-%m-%d %H:%M:%S", foreground=GREEN),
+        widget.Spacer(),
+        widget.Systray(),
+        widget.Spacer(length=8),
+        widget.Battery(
+            battery_name="BAT0",
+            energy_now_file="charge_now",
+            energy_full_file="charge_full",
+            power_now_file="current_now",
+            update_delay=1,
+            charge_char="↑",
+            discharge_char="↓",
+            format="{char} {percent:2.0%}",
+            fontsize=12,
+        ),
+        widget.Spacer(length=8),
+        widget.LaunchBar(
+            progs=[
+                ("🔒", "sudo loginctl terminate-user 1000"),
+                ("❌", "sudo shutdown -h now"),
+            ],
+        ),
+        widget.Spacer(length=8),
+    ],
+    36,
+    background=BLACK,
+    margin=0,
+    opacity=1,
+)
+
+@hook.subscribe.startup
+def _():
+    bar.window.window.set_property("QTILE_BAR", 1, "CARDINAL", 32)
+
 screens = [
     Screen(
         wallpaper="~/Nextcloud/Bilder/Hintergründe/space.png",
         wallpaper_mode="stretch",
-        top=bar.Bar(
-            [
-                widget.Spacer(length=8),
-                widget.GroupBox(
-                    active=WHITE,
-                    highlight_method="text",
-                    this_current_screen_border=ACCENT_COLOR,
-                    block_highlight_text_color=WHITE,
-                    padding=4,
-                    margin=0,
-                    hide_unused=False,
-                ),
-                widget.Spacer(),
-                widget.Clock(format="%Y-%m-%d %H:%M", foreground=ACCENT_COLOR),
-                widget.Spacer(),
-                widget.Systray(),
-                widget.Spacer(length=8),
-                widget.Battery(
-                    battery_name="BAT0",
-                    energy_now_file="charge_now",
-                    energy_full_file="charge_full",
-                    power_now_file="current_now",
-                    update_delay=1,
-                    charge_char="↑",
-                    discharge_char="↓",
-                    format="{char} {percent:2.0%}",
-                    fontsize=12,
-                ),
-                widget.Spacer(length=8),
-                widget.LaunchBar(
-                    progs=[
-                        ("🔒", "sudo loginctl terminate-user 1000"),
-                        ("❌", "sudo shutdown -h now"),
-                    ],
-                ),
-                widget.Spacer(length=8),
-            ],
-            36,
-            background=BLACK,
-            margin=[4, 4, 0, 4],
-            opacity=0.8,
-        ),
+        top=bar,
     ),
 ]
 
@@ -328,3 +341,4 @@ wl_input_rules = None
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
+
