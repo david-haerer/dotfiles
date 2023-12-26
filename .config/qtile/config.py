@@ -64,15 +64,8 @@ def layout_change(layout, group):
 
 @hook.subscribe.group_window_add
 def group_window_add(group, window):
-    from pathlib import Path
-    try:
-        value = 1 if group.layout.name == "max" and not window.floating else 0
-        window.window.set_property("QTILE_MAX", value, "CARDINAL", 32)
-        msg = f"Floating: {window.floating}"
-    except Exception as error:
-        msg = str(error)
-    Path("/home/david/foo").write_text(msg)
-    
+    value = 1 if group.layout.name == "max" and not window.floating else 0
+    window.window.set_property("QTILE_MAX", value, "CARDINAL", 32)
 
 
 # -- KEYS --
@@ -354,4 +347,3 @@ wl_input_rules = None
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
-
