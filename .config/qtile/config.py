@@ -2,6 +2,7 @@ import sh
 from libqtile import bar, hook, layout, widget
 from libqtile.config import Click, Drag, DropDown, Group, Key, Match, ScratchPad, Screen
 from libqtile.lazy import lazy
+import math
 
 
 # -- CONSTANTS --
@@ -12,7 +13,7 @@ ALT = "mod1"
 HASHTAG = "numbersign"
 TERMINAL = "wezterm"
 SIGNAL = "signal-desktop"
-LAUNCHER = "rofi -show drun"
+LAUNCHER = "rofi -display-drun 'Launch' -show drun"
 PASSWORD_MANAGER = "passmenu"
 
 BLACK = "#0A0E14"
@@ -156,11 +157,18 @@ for i in groups:
         ]
     )
 
+
+W, H = 0.9975, 1.035
+DX, DY = 0.0005, -0.038
+cos30, sin30 = 0.8660254037844387, 0.5
+width, height = cos30 * W, sin30 * H
+x, y = (1 - cos30) / 2 * W + DX, (1 - sin30) / 2 * H + DY
+
 groups.append(
     ScratchPad(
         "scratchpad",
         dropdowns=[
-            DropDown("term", "alacritty"),
+            DropDown("term", "alacritty", width=width, height=height, x=x, y=y, opacity=1),
         ],
     )
 )
@@ -190,7 +198,7 @@ keys.extend(
 
 
 layouts = [
-    layout.Max(),
+    layout.Max(margin=4),
     layout.Columns(
         border_on_single=True,
         border_focus=ACCENT_COLOR,
@@ -219,18 +227,18 @@ screens = [
         wallpaper_mode="stretch",
         top=bar.Bar(
             [
-                widget.Spacer(length=4),
+                widget.Spacer(length=8),
                 widget.GroupBox(
-                    active=GRAY,
+                    active=WHITE,
                     highlight_method="text",
-                    this_current_screen_border=GREEN,
-                    block_highlight_text_color=BLACK,
+                    this_current_screen_border=ACCENT_COLOR,
+                    block_highlight_text_color=WHITE,
                     padding=4,
                     margin=0,
-                    hide_unused=True,
+                    hide_unused=False,
                 ),
                 widget.Spacer(),
-                widget.Clock(format="%Y-%m-%d %H:%M", foreground=GREEN),
+                widget.Clock(format="%Y-%m-%d %H:%M", foreground=ACCENT_COLOR),
                 widget.Spacer(),
                 widget.Systray(),
                 widget.Spacer(length=8),
@@ -252,12 +260,12 @@ screens = [
                         ("❌", "sudo shutdown -h now"),
                     ],
                 ),
-                widget.Spacer(length=4),
+                widget.Spacer(length=8),
             ],
-            32,
+            36,
             background=BLACK,
-            margin=0,
-            opacity=0.66,
+            margin=[4, 4, 0, 4],
+            opacity=0.8,
         ),
     ),
 ]
@@ -284,9 +292,10 @@ dgroups_app_rules = []  # type: list
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
+floating_types = ["notification", "toolbar", "splash", "dialog"]
 floating_layout = layout.Floating(
     border_focus=ACCENT_COLOR,
-    border_width=1,
+    border_width=2,
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
