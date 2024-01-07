@@ -30,6 +30,7 @@ alias bs="brainstorage"
 alias p="ps aux | rg"
 alias ep="ephoto"
 alias mr="massren"
+alias dup='fdupes -R . | sd "^" "rm \"" | sd "$" "\"" | sd "rm \"\"" ""'
 
 # ls: Show hidden files by default.
 alias ls="ls -a"
@@ -123,9 +124,6 @@ alias dc="docker-compose"
 
 # pass
 alias otp="pass otp"
-
-# fdupes
-alias deduplicate="fdupes -r -N"
 
 # taffy
 alias tag-mp3="id3 -m '%g  -  %a  -  %l  -  %n  -  %t.mp3'"

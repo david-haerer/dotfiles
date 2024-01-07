@@ -236,7 +236,6 @@ extension_defaults = widget_defaults.copy()
 
 bar = bar.Bar(
     [
-        widget.Spacer(length=8),
         widget.GroupBox(
             active=GRAY,
             highlight_method="text",
@@ -269,9 +268,8 @@ bar = bar.Bar(
                 ("❌", "sudo shutdown -h now"),
             ],
         ),
-        widget.Spacer(length=8),
     ],
-    36,
+    30,
     background=BLACK,
     margin=0,
     opacity=0.9,

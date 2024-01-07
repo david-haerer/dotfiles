@@ -2,7 +2,12 @@
 
 case "$(file -Lb --mime-type -- "$1")" in
     image/*)
-        chafa -f sixel -s "$2x$3" --animate off --polite on "$1"
+        chafa -f sixel -s "$2x$3" --animate off --polite on "$1" \
+            || dcraw -W -c -e "$1" | chafa -f sixel -s "$2x$3" --animate off --polite on
+        exit 1
+        ;;
+    video/*)
+        ffmpegthumbnailer -i "$1" -c png -s 512 -o - | chafa
         exit 1
         ;;
     *)
