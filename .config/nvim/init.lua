@@ -1,6 +1,8 @@
 -- Use the Pathogen plugin manager.
 vim.cmd([[execute pathogen#infect()]])
 
+vim.cmd([[map D /^\(.*\)\n\ze\%(.*\n\)*\1$<cr>]])
+
 -- Use system clipboard.
 vim.cmd([[set clipboard=unnamedplus]])
 
