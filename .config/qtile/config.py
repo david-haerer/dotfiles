@@ -2,6 +2,12 @@ import sh
 from libqtile import bar, hook, layout, widget
 from libqtile.config import Click, Drag, DropDown, Group, Key, Match, ScratchPad, Screen
 from libqtile.lazy import lazy
+from libqtile.widget import base
+
+
+class VPN(base.InLoopPollText):
+    def poll(self):
+        return "VPN" if sh.mullvad("status").startswith("Connected") else "" 
 
 
 # -- CONSTANTS --
@@ -12,6 +18,7 @@ ALT = "mod1"
 HASHTAG = "numbersign"
 TERMINAL = "wezterm"
 SIGNAL = "signal-desktop"
+BROWSER = "librewolf"
 LAUNCHER = "rofi -display-drun 'Launch' -show drun"
 PASSWORD_MANAGER = "passmenu"
 
@@ -190,6 +197,7 @@ keys.extend(
         # Key([MOD], "tab", lazy.function(Client.cycle_groups())),
         Key([MOD], "t", lazy.spawn(TERMINAL), desc="Launch terminal"),
         Key([MOD], "s", lazy.spawn(SIGNAL), desc="Launch Signal"),
+        Key([MOD], "b", lazy.spawn(BROWSER), desc="Launch Signal"),
         Key(
             [MOD],
             HASHTAG,
@@ -248,8 +256,10 @@ bar = bar.Bar(
         widget.Spacer(),
         widget.Clock(format="%Y-%m-%d %H:%M:%S", foreground=GREEN),
         widget.Spacer(),
+        VPN(update_interval=1),
+        widget.Spacer(length=4),
         widget.Systray(),
-        widget.Spacer(length=8),
+        widget.Spacer(length=4),
         widget.Battery(
             battery_name="BAT0",
             energy_now_file="charge_now",
