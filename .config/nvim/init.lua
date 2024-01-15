@@ -76,6 +76,7 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType json setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
@@ -183,6 +184,8 @@ vim.cmd([[
 :command GoFmt :w | ! gofmt -s -w %
 " Format JavaScript and TypeScript code with ':Prettier'.
 :command Prettier :w | ! prettier --write %
+" Format code with ':Biome'.
+:command Biome :w | ! biome format --write %
 " Save and commit.
 :command C :w | ! git update %
 " Save and run.
