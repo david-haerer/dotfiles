@@ -291,7 +291,7 @@ def _():
 
 screens = [
     Screen(
-        wallpaper="~/Nextcloud/Bilder/Hintergründe/space.png",
+        wallpaper="~/.config/wallpaper.png",
         wallpaper_mode="stretch",
         top=bar,
     ),
