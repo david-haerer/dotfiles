@@ -1,5 +1,7 @@
 local wezterm = require 'wezterm'
 
+local FONT = os.getenv("FONT")
+
 local BLACK = "#0A0E14"
 local GRAY = "#4D5566"
 local WHITE = "#B3B1AD"
@@ -12,6 +14,7 @@ local BLUE = "#59C2FF"
 local MAGENTA = "#FFEE99"
 
 local config = {}
+
   
 config.window_background_opacity = 0.9
 config.color_scheme = "Ayu Dark (Gogh)"
@@ -19,7 +22,7 @@ config.use_fancy_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
 
 config.font = wezterm.font_with_fallback {
-  "ComicCodeLigatures Nerd Font",
+  FONT,
   "FiraCode Nerd Font",
   "Noto Sans Mono CJK SC",
 }

@@ -1,3 +1,5 @@
+import os
+
 import sh
 from libqtile import bar, hook, layout, widget
 from libqtile.config import Click, Drag, DropDown, Group, Key, Match, ScratchPad, Screen
@@ -7,7 +9,7 @@ from libqtile.widget import base
 
 class VPN(base.InLoopPollText):
     def poll(self):
-        return "VPN" if sh.mullvad("status").startswith("Connected") else "" 
+        return "VPN" if sh.mullvad("status").startswith("Connected") else ""
 
 
 # -- CONSTANTS --
@@ -16,6 +18,8 @@ class VPN(base.InLoopPollText):
 MOD = "mod4"
 ALT = "mod1"
 HASHTAG = "numbersign"
+USER = os.getenv("USER")
+FONT = os.getenv("FONT")
 TERMINAL = "wezterm"
 SIGNAL = "signal-desktop"
 BROWSER = "librewolf"
@@ -38,7 +42,6 @@ ACCENT_COLOR = YELLOW
 BACKGROUND = BLACK
 FOREGROUND = WHITE
 
-FONT = "ComicCode Nerd Font"
 L = lazy.layout
 
 
@@ -187,7 +190,9 @@ groups.append(
     ScratchPad(
         "scratchpad",
         dropdowns=[
-            DropDown("term", "alacritty", width=width, height=height, x=x, y=y, opacity=1),
+            DropDown(
+                "term", "alacritty", width=width, height=height, x=x, y=y, opacity=1
+            ),
         ],
     )
 )
@@ -225,19 +230,19 @@ layouts = [
         border_focus_stack=ACCENT_COLOR,
         border_width=2,
         grow_amount=6,
-    margin=4,
-),
+        margin=4,
+    ),
 ]
 
 
 # -- WIDGET --
 
 
-widget_defaults = dict(
-    font=FONT,
-    fontsize=13,
-    padding=2,
-)
+widget_defaults = {
+    "font": FONT,
+    "fontsize": 13,
+    "padding": 2,
+}
 
 extension_defaults = widget_defaults.copy()
 
@@ -274,7 +279,7 @@ bar = bar.Bar(
         widget.Spacer(length=8),
         widget.LaunchBar(
             progs=[
-                ("🔒", "sudo loginctl terminate-user 1000"),
+                ("🔒", f"sudo loginctl terminate-user {USER}"),
                 ("❌", "sudo shutdown -h now"),
             ],
         ),
@@ -285,9 +290,11 @@ bar = bar.Bar(
     opacity=0.9,
 )
 
+
 @hook.subscribe.startup
 def _():
     bar.window.window.set_property("QTILE_BAR", 1, "CARDINAL", 32)
+
 
 screens = [
     Screen(

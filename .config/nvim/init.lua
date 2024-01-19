@@ -1,4 +1,4 @@
--- Use the Pathogen plugin manager.
+
 vim.cmd([[execute pathogen#infect()]])
 
 vim.cmd([[map D /^\(.*\)\n\ze\%(.*\n\)*\1$<cr>]])
@@ -168,28 +168,17 @@ filetype on
 ]])
 
 vim.cmd([[
-" Format Python code with ':Black'.
-:command Black :w | ! black %
-" Sort Python imports with ':ISort'.
-:command ISort :w | ! isort --profile black %
-" Lint Python code with ':Pylint'.
-:command Pylint :w | ! pylint %
-" Test Python code with ':Pytest'.
-:command Pytest :w | ! pytest %
-" Format Python code with ':Ruff'.
-:command Ruff :w | ! ruff --fix format %
-" Format R code with ':Styler'.
-:command Styler :w | ! Rscript -e "styler::style_file('%')"
-" Format Go code with ':GoFmt'.
-:command GoFmt :w | ! gofmt -s -w %
-" Format JavaScript and TypeScript code with ':Prettier'.
+:command Black    :w | ! black %
+:command ISort    :w | ! isort --profile black %
+:command Pylint   :w | ! pylint %
+:command Pytest   :w | ! pytest %
+:command Ruff     :w | ! ruff format "%" && ruff check "%" --fix --select I
+:command Styler   :w | ! Rscript -e "styler::style_file('%')"
+:command GoFmt    :w | ! gofmt -s -w %
 :command Prettier :w | ! prettier --write %
-" Format code with ':Biome'.
-:command Biome :w | ! biome format --write %
-" Save and commit.
-:command C :w | ! git update %
-" Save and run.
-:command Ly :w | ! lilypond %
+:command Biome    :w | ! biome format --write %
+:command C        :w | ! git update %
+:command Ly       :w | ! lilypond %
 ]])
 
 -- VimDevIcons
@@ -204,9 +193,9 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 ]])
 
 -- Set font.
-vim.cmd([[
-set guifont=ComicCode\ Nerd\ Font
+vim.o.guifont = os.getenv("FONT")
 
+vim.cmd([[
 filetype off
 set runtimepath+=/usr/share/lilypond/2.22.1/vim/
 filetype on
