@@ -4,6 +4,7 @@ __pycache__/
 !/.gitignore
 !/README.md
 !/.zshrc
+!/.zprofile
 !/.xinitrc
 !/.scripts
 
