@@ -1,6 +1,0 @@
-[Desktop Entry]
-Name=NM Applet
-GenericName=Wifi Menu
-Exec=nm-applet
-Type=Application
-StartupNotify=false
