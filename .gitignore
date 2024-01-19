@@ -32,7 +32,6 @@ __pycache__/
 !/.config/qtile
 !/.config/zathura
 !/.config/fontconfig
-!/.config/autostart
 !/.config/key.map
 !/.config/picom
 
