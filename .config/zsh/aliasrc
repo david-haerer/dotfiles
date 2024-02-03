@@ -22,6 +22,7 @@ alias ap="apparition"
 alias utc="date -u --iso-8601=seconds | sd T ' ' | sd '\+00:00' '' | sd : -"
 alias ctrl-c='xclip -sel clip'
 alias caps-esc='setxkbmap -option caps:swapescape'
+alias caps-esc-tty="sudo loadkeys $HOME/.config/key.map"
 alias hdmi='autorandr common'
 alias sm="smerge"
 alias kw="isoweekdate"
