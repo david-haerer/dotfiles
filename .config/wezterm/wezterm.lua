@@ -63,4 +63,8 @@ config.colors = {
   } 
 }
 
+config.term = "wezterm"
+
+config.force_reverse_video_cursor = true
+
 return config
