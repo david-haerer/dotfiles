@@ -1,7 +1,4 @@
-
 vim.cmd([[execute pathogen#infect()]])
-
-vim.cmd([[map D /^\(.*\)\n\ze\%(.*\n\)*\1$<cr>]])
 
 -- Use system clipboard.
 vim.cmd([[set clipboard=unnamedplus]])
@@ -18,7 +15,6 @@ vim.g.airline_theme = "ayu_dark"
 
 -- Set the cursor style.
 vim.opt.termguicolors = true
-vim.cmd([[highlight Cursor gui=reverse guifg=NONE guibg=NONE]])
 
 -- Enable Ruff LSP.
 require('lspconfig').ruff_lsp.setup {
@@ -195,12 +191,15 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 -- Set font.
 vim.o.guifont = os.getenv("FONT")
 
+-- Config for Lilypond.
 vim.cmd([[
 filetype off
 set runtimepath+=/usr/share/lilypond/2.22.1/vim/
 filetype on
-
 " Define comments for lilypond
 autocmd FileType lilypond setlocal commentstring=%\ %s
 ]])
+
+-- Show duplicate lines.
+vim.cmd([[map D /^\(.*\)\n\ze\%(.*\n\)*\1$<cr>]])
 
