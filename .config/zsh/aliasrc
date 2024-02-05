@@ -112,7 +112,6 @@ alias captions-dl="youtube-dl -o './%(upload_date)s - %(uploader)s - %(title)s.m
 # alias spotify-dl="spotifydl --username $(pass spotify.com | grep -oP '(?<=username: )[^,]*') --password $(pass spotify.com | head -n 1)"
 
 # python
-alias python="python3"
 alias py="python"
 alias ipy="ipython"
 alias isort="isort --profile=black"
