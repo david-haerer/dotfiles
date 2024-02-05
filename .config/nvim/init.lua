@@ -175,6 +175,7 @@ vim.cmd([[
 :command Biome    :w | ! biome format --write %
 :command C        :w | ! git update %
 :command Ly       :w | ! lilypond %
+:command Sh       :w | ! shfmt -w % && shellcheck %
 ]])
 
 -- VimDevIcons
@@ -202,4 +203,3 @@ autocmd FileType lilypond setlocal commentstring=%\ %s
 
 -- Show duplicate lines.
 vim.cmd([[map D /^\(.*\)\n\ze\%(.*\n\)*\1$<cr>]])
-
