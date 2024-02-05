@@ -61,7 +61,7 @@ def autostart():
     ensure_running("nm-applet", lambda: sh.nm_applet(_bg=True))
     ensure_running("nextcloud", lambda: sh.nextcloud(_bg=True))
     ensure_running("flameshot", lambda: sh.flameshot(_bg=True))
-    ensure_running("blueman-applet", lambda: sh.blueman_applet(_bg=True))
+    # ensure_running("blueman-applet", lambda: sh.blueman_applet(_bg=True))
 
 
 @hook.subscribe.layout_change
@@ -203,6 +203,7 @@ keys.extend(
         Key([MOD], "t", lazy.spawn(TERMINAL), desc="Launch terminal"),
         Key([MOD], "s", lazy.spawn(SIGNAL), desc="Launch Signal"),
         Key([MOD], "b", lazy.spawn(BROWSER), desc="Launch Signal"),
+        Key([MOD], "k", lazy.spawn("killer"), desc="Launch Signal"),
         Key(
             [MOD],
             HASHTAG,
