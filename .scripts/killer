@@ -1,10 +1,20 @@
 #!/bin/bash
 
-process=$(ps -aux | tail -n +2 | fzf)
-echo "$process"
-read -p "Kill the process? [y/N]" -n 1 -r
-echo    # (optional) move to a new line
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
-    sudo kill $(echo "$process" | awk '{ print $2 }')
+process=$(ps -aux | tail -n +2 | rofi -dmenu -p "Process" -i)
+prompt=$(echo "$process" | sd "[ ]+" "  ")
+cmd=$(printf "exit\nkill\nsudo kill" | rofi -dmenu -p "$prompt")
+
+if [[ "$cmd" = "exit" ]]; then
+    exit
+fi
+
+pid=$(echo "$process" | awk '{ print $2 }')
+
+if [[ "$cmd" = "kill" ]]; then
+    kill $pid
+    exit
+fi
+
+if [[ "$cmd" = "sudo kill" ]]; then
+    sudo kill $pid
 fi
