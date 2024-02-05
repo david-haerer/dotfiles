@@ -36,7 +36,6 @@ config.window_frame = {
 config.colors = {
   tab_bar = {
     background = BLACK,
-    background_opacity = 0.5,
     active_tab = {
       bg_color = BLACK,
       fg_color = YELLOW,
