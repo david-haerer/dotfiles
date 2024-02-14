@@ -89,24 +89,28 @@ keys.extend(
         Key([MOD, ALT], "l", L.right(), desc="Move focus to right"),
         Key([MOD, ALT], "j", L.down(), desc="Move focus down"),
         Key([MOD, ALT], "k", L.up(), desc="Move focus up"),
+        Key([MOD, "control"], "h", L.left(), desc="Move focus to left"),
+        Key([MOD, "control"], "l", L.right(), desc="Move focus to right"),
+        Key([MOD, "control"], "j", L.down(), desc="Move focus down"),
+        Key([MOD, "control"], "k", L.up(), desc="Move focus up"),
     ]
 )
 
 keys.extend(
     [
-        Key([MOD, "shift"], "h", L.shuffle_left(), desc="Move window to the left"),
-        Key([MOD, "shift"], "l", L.shuffle_right(), desc="Move window to the right"),
-        Key([MOD, "shift"], "j", L.shuffle_down(), desc="Move window down"),
-        Key([MOD, "shift"], "k", L.shuffle_up(), desc="Move window up"),
+        Key([MOD, "control", "shift"], "h", L.shuffle_left(), desc="Move window to the left"),
+        Key([MOD, "control", "shift"], "l", L.shuffle_right(), desc="Move window to the right"),
+        Key([MOD, "control", "shift"], "j", L.shuffle_down(), desc="Move window down"),
+        Key([MOD, "control", "shift"], "k", L.shuffle_up(), desc="Move window up"),
     ]
 )
 
 keys.extend(
     [
-        Key([MOD, "control"], "h", L.grow_left(), desc="Grow window to the left"),
-        Key([MOD, "control"], "l", L.grow_right(), desc="Grow window to the right"),
-        Key([MOD, "control"], "j", L.grow_down(), desc="Grow window down"),
-        Key([MOD, "control"], "k", L.grow_up(), desc="Grow window up"),
+        Key([MOD, "shift"], "h", L.grow_left(), desc="Grow window to the left"),
+        Key([MOD, "shift"], "l", L.grow_right(), desc="Grow window to the right"),
+        Key([MOD, "shift"], "j", L.grow_down(), desc="Grow window down"),
+        Key([MOD, "shift"], "k", L.grow_up(), desc="Grow window up"),
     ]
 )
 
