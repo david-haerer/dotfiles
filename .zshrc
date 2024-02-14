@@ -65,7 +65,19 @@ autoload -Uz compinit
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
 
+# History search.
+bindkey "^[OA" history-beginning-search-backward
+bindkey "^[OB" history-beginning-search-forward
+
+
 # List files at shell startup.
 # set-title
 l
 
+
+# bun completions
+[ -s "/home/david/.bun/_bun" ] && source "/home/david/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
