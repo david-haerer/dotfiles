@@ -13,6 +13,12 @@ highlight Comment cterm=italic gui=italic
 ]])
 vim.g.airline_theme = "ayu_dark"
 
+-- Set line numbers.
+vim.cmd([[
+set number
+set relativenumber
+]])
+
 -- Set the cursor style.
 vim.opt.termguicolors = true
 
