@@ -136,6 +136,54 @@ class Rat:
         else:
             self.mode = MOVE
 
+    def down(self):
+        if self.mode == MOVE:
+            self.move_down()
+        if self.mode == SCROLL:
+            self.scroll_down()
+
+    def up(self):
+        if self.mode == MOVE:
+            self.move_up()
+        if self.mode == SCROLL:
+            self.scroll_up()
+
+    def left(self):
+        if self.mode == MOVE:
+            self.move_left()
+        if self.mode == SCROLL:
+            self.scroll_left()
+
+    def right(self):
+        if self.mode == MOVE:
+            self.move_right()
+        if self.mode == SCROLL:
+            self.scroll_right()
+
+    def all_down(self):
+        if self.mode == MOVE:
+            self.move_all_down()
+        if self.mode == SCROLL:
+            self.scroll_all_down()
+
+    def all_up(self):
+        if self.mode == MOVE:
+            self.move_all_up()
+        if self.mode == SCROLL:
+            self.scroll_all_up()
+
+    def all_left(self):
+        if self.mode == MOVE:
+            self.move_all_left()
+        if self.mode == SCROLL:
+            self.scroll_all_left()
+
+    def all_right(self):
+        if self.mode == MOVE:
+            self.move_all_right()
+        if self.mode == SCROLL:
+            self.scroll_all_right()
+
 
 rat = Rat()
 
