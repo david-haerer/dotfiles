@@ -1,8 +1,5 @@
 import pyautogui as gui
 
-MOVE = "MOVE"
-SCROLL = "SCROLL"
-
 
 class Rat:
     def __init__(self):
@@ -10,7 +7,7 @@ class Rat:
         self.step = 100
         self.step_scalling = 5
         self.scroll_step = 10
-        self.mode = MOVE
+        self.scroll_mode = False
         self.mouse_down = False
 
     def move_to(self, x, y):
@@ -47,62 +44,58 @@ class Rat:
         self.mouse_down = not self.mouse_down
 
     def toggle_mode(self):
-        if self.mode == MOVE:
-            self.mode = SCROLL
-        else:
-            self.mode = MOVE
+        self.scroll_mode = not self.scroll_mode
 
     def down(self):
-        if self.mode == MOVE:
-            _, y = gui.position()
-            self.move_to(None, y + self.step)
-        if self.mode == SCROLL:
+        if self.scroll_mode:
             gui.vscroll(-self.scroll_step)
+            return
+        _, y = gui.position()
+        self.move_to(None, y + self.step)
 
     def up(self):
-        if self.mode == MOVE:
-            _, y = gui.position()
-            self.move_to(None, y - self.step)
-        if self.mode == SCROLL:
+        if self.scroll_mode:
             gui.vscroll(self.scroll_step)
+            return
+        _, y = gui.position()
+        self.move_to(None, y - self.step)
 
     def left(self):
-        if self.mode == MOVE:
-            x, _ = gui.position()
-            self.move_to(x - self.step, None)
-        if self.mode == SCROLL:
+        if self.scroll_mode:
             gui.hscroll(-self.scroll_step)
+            return
+        x, _ = gui.position()
+        self.move_to(x - self.step, None)
 
     def right(self):
-        if self.mode == MOVE:
-            x, _ = gui.position()
-            self.move_to(x + self.step, None)
-        if self.mode == SCROLL:
+        if self.scroll_mode:
             gui.hscroll(self.scroll_step)
+            return
+        x, _ = gui.position()
+        self.move_to(x + self.step, None)
 
     def all_down(self):
-        if self.mode == MOVE:
-            self.move_to(None, self.height)
-        if self.mode == SCROLL:
+        if self.scroll_mode:
             gui.vscroll(-self.scroll_step * 10)
+            return
+        self.move_to(None, self.height)
 
     def all_up(self):
-        if self.mode == MOVE:
-            self.move_to(None, 0)
-        if self.mode == SCROLL:
+        if self.scroll_mode:
             gui.vscroll(self.scroll_step * 10)
+        self.move_to(None, 0)
 
     def all_left(self):
-        if self.mode == MOVE:
-            self.move_to(0, None)
-        if self.mode == SCROLL:
+        if self.scroll_mode:
             gui.hscroll(-self.scroll_step * 10)
+            return
+        self.move_to(0, None)
 
     def all_right(self):
-        if self.mode == MOVE:
-            self.move_to(self.width, None)
-        if self.mode == SCROLL:
+        if self.scroll_mode:
             gui.hscroll(self.scroll_step * 10)
+            return
+        self.move_to(self.width, None)
 
 
 rat = Rat()
