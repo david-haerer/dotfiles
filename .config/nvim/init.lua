@@ -32,6 +32,14 @@ require('lspconfig').ruff_lsp.setup {
   }
 }
 
+-- Navigate splits.
+vim.cmd([[
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
+]])
+
 -- Set leader and localleader.
 vim.cmd([[
 :let mapleader = ","
@@ -170,6 +178,7 @@ filetype on
 ]])
 
 vim.cmd([[
+:command W        :w
 :command Black    :w | ! black %
 :command ISort    :w | ! isort --profile black %
 :command Pylint   :w | ! pylint %
@@ -177,7 +186,7 @@ vim.cmd([[
 :command Ruff     :w | ! ruff format "%" && ruff check "%" --fix --select I
 :command Styler   :w | ! Rscript -e "styler::style_file('%')"
 :command GoFmt    :w | ! gofmt -s -w %
-:command Prettier :w | ! prettier --write %
+:command Prettier :w | ! bun x prettier --write %
 :command Biome    :w | ! biome format --write %
 :command C        :w | ! git update %
 :command Ly       :w | ! lilypond %
