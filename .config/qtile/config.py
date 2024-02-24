@@ -1,8 +1,19 @@
 import os
 
+import pyautogui as gui
 import sh
 from libqtile import bar, hook, layout, widget
-from libqtile.config import Click, Drag, DropDown, Group, Key, Match, ScratchPad, Screen
+from libqtile.config import (
+    Click,
+    Drag,
+    DropDown,
+    Group,
+    Key,
+    KeyChord,
+    Match,
+    ScratchPad,
+    Screen,
+)
 from libqtile.lazy import lazy
 from libqtile.widget import base
 
@@ -98,8 +109,18 @@ keys.extend(
 
 keys.extend(
     [
-        Key([MOD, "control", "shift"], "h", L.shuffle_left(), desc="Move window to the left"),
-        Key([MOD, "control", "shift"], "l", L.shuffle_right(), desc="Move window to the right"),
+        Key(
+            [MOD, "control", "shift"],
+            "h",
+            L.shuffle_left(),
+            desc="Move window to the left",
+        ),
+        Key(
+            [MOD, "control", "shift"],
+            "l",
+            L.shuffle_right(),
+            desc="Move window to the right",
+        ),
         Key([MOD, "control", "shift"], "j", L.shuffle_down(), desc="Move window down"),
         Key([MOD, "control", "shift"], "k", L.shuffle_up(), desc="Move window up"),
     ]
@@ -201,13 +222,77 @@ groups.append(
     )
 )
 
+W, H = gui.size()
+D = 100
+
+
+@lazy.function
+def rat_scale(qtile, factor):
+    global D
+    D = factor * D
+    D = max(3, min(H / 3, D))
+
+
+@lazy.function
+def rat_set(qtile, x, y):
+    x = x if x is not None else gui.position()[0]
+    y = y if y is not None else gui.position()[1]
+    # Clip position prevent the cursor from getting stuck.
+    x = max(1, min(W - 2, x))
+    y = max(1, min(H - 2, y))
+    gui.moveTo(x, y, 0.15, gui.easeInOutQuad)
+
+
+@lazy.function
+def rat_set_diff(qtile, fx, fy):
+    global D
+    x, y = gui.position()
+    x += fx * D
+    y += fy * D
+    x = max(1, min(W - 2, x))
+    y = max(1, min(H - 2, y))
+    gui.moveTo(x, y, 0.15, gui.easeInOutQuad)
+
+
+@lazy.function
+def rat_click(qtile):
+    gui.click()
+
+
+keys.append(
+    KeyChord(
+        [MOD],
+        "r",
+        [
+            Key([], "g", rat_set(None, 0)),
+            Key(["shift"], "g", rat_set(None, H)),
+            Key([], "b", rat_set(0, None)),
+            Key([], "e", rat_set(W, None)),
+            Key([], "m", rat_set(W / 2, None)),
+            Key(["shift"], "m", rat_set(None, H / 2)),
+            Key(["shift"], "h", rat_set(0, None)),
+            Key(["shift"], "j", rat_set(None, H)),
+            Key(["shift"], "k", rat_set(None, 0)),
+            Key(["shift"], "l", rat_set(W, None)),
+            Key([], "h", rat_set_diff(-1, 0)),
+            Key([], "j", rat_set_diff(0, +1)),
+            Key([], "k", rat_set_diff(0, -1)),
+            Key([], "l", rat_set_diff(+1, 0)),
+            Key([], "space", rat_click),
+            Key([], "n", rat_scale(1 / 6)),
+            Key([], "u", rat_scale(5)),
+        ],
+        mode=True,
+        name="Rat",
+    )
+)
+
 keys.extend(
     [
-        # Key([MOD], "tab", lazy.function(Client.cycle_groups())),
         Key([MOD], "t", lazy.spawn(TERMINAL), desc="Launch terminal"),
         Key([MOD], "s", lazy.spawn(SIGNAL), desc="Launch Signal"),
-        Key([MOD], "b", lazy.spawn(BROWSER), desc="Launch Signal"),
-        Key([MOD], "k", lazy.spawn("killer"), desc="Launch Signal"),
+        Key([MOD], "b", lazy.spawn(BROWSER), desc="Launch Browser"),
+        Key([MOD], "k", lazy.spawn("killer"), desc="Launch Killer"),
         Key(
             [MOD],
             HASHTAG,
@@ -215,7 +300,6 @@ keys.extend(
             desc="Launch password manager",
         ),
         Key([MOD], "return", lazy.spawn(LAUNCHER), desc="Application launcher"),
-        Key([MOD], "r", lazy.spawncmd(), desc="Command prompt"),
         Key([MOD], "space", lazy.group["scratchpad"].dropdown_toggle("term")),
         Key([MOD], "u", lazy.spawn("rofimoji"), desc="Launch unicode picker"),
         Key([MOD], "g", lazy.spawn("rofi-gitmojis"), desc="Launch Gitmoji picker"),
