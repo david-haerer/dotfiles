@@ -8,3 +8,17 @@ cmd t $touch "$@"
 map D delete
 map R $massren
 map n $name-and-convert
+
+cmd edit-config ${{
+    $EDITOR ~/.config/lf/lfrc
+    lf -remote "send $id source ~/.config/lf/lfrc"
+}}
+
+map C edit-config
+
+set statfmt ''
+set promptfmt "\033[34;1m%w\033[0m"
+
+cmd on-select %{{
+    exa -ld --time-style=long-iso --color=always "$f" | sd "/.*/" ""
+}}
