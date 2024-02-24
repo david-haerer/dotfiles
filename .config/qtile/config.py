@@ -1,6 +1,5 @@
 import os
 
-import rat
 import sh
 from libqtile import bar, hook, layout, widget
 from libqtile.config import (
@@ -16,6 +15,7 @@ from libqtile.config import (
 )
 from libqtile.lazy import lazy
 from libqtile.widget import base
+from rat import rat
 
 
 class VPN(base.InLoopPollText):
@@ -228,20 +228,21 @@ keys.append(
         [MOD],
         "i",
         [
-            Key([], "s", rat.toggle_mode),
-            Key([], "u", rat.step_up),
-            Key([], "n", rat.step_down),
-            Key(["shift"], "h", rat.all_left),
-            Key(["shift"], "j", rat.all_down),
-            Key(["shift"], "k", rat.all_up),
-            Key(["shift"], "l", rat.all_right),
-            Key([], "h", rat.left),
-            Key([], "j", rat.down),
-            Key([], "k", rat.up),
-            Key([], "l", rat.right),
-            # Clicking
-            Key([], "space", rat.click),
-            Key(["shift"], "space", rat.half_click),
+            Key([], "s", lazy.function(lambda qtile: rat.toggle_mode())),
+            Key([], "u", lazy.function(lambda qtile: rat.step_up())),
+            Key([], "n", lazy.function(lambda qtile: rat.step_down())),
+            Key(["shift"], "h", lazy.function(lambda qtile: rat.all_left())),
+            Key(["shift"], "j", lazy.function(lambda qtile: rat.all_down())),
+            Key(["shift"], "k", lazy.function(lambda qtile: rat.all_up())),
+            Key(["shift"], "l", lazy.function(lambda qtile: rat.all_right())),
+            Key([], "h", lazy.function(lambda qtile: rat.left())),
+            Key([], "j", lazy.function(lambda qtile: rat.down())),
+            Key([], "k", lazy.function(lambda qtile: rat.up())),
+            Key([], "l", lazy.function(lambda qtile: rat.right())),
+            Key([], "return", lazy.function(lambda qtile: rat.click())),
+            Key([], "space", lazy.function(lambda qtile: rat.half_click())),
+            Key([], "m", lazy.function(lambda qtile: rat.mid_x())),
+            Key(["shift"], "m", lazy.function(lambda qtile: rat.mid_y())),
         ],
         mode=True,
         name="Rat",
