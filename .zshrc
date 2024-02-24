@@ -1,3 +1,5 @@
+#!/usr/bin/zsh
+
 # Use vi mode.
 bindkey -v
 
@@ -10,31 +12,19 @@ set -a
 . $HOME/.config/zsh/zsh.env
 set +a
 
-# Setup nvm.
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-# # Set window title.
-# function set-title() {
-#     print -Pn "\e]2;$USER@$(hostname | sd '\..*' '')$(pwd)\a" # Set window title.
-# }
-
 # List files at every directory change.
 function chpwd() {
-    emulate -L zsh
-    clear
-    l
+	emulate -L zsh
+	clear
+	l
 }
 
 # Enable zsh syntax highlighting and auto-quoting.
 source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.config/zsh/zsh-autoquoter/zsh-autoquoter.zsh
-ZAQ_PREFIXES=('git commit( [^ ]##)# -[^ -]#m' 'ssh( [^ ]##)# [^ -][^ ]#' 'spotifydl' 'audio-dl' 'caption-dl' 'video-dl' 'rn' 'music' 's' 'bm add' 'gn' 'n a' 'bs bm a' 'bs n a' 'bm a' 'n s' 'bs n s' 'bs bm s' 'bm s' 'bs s' 'n g' 'bg n g' 'bg bm g' 'bm g' 'bg g')
+ZAQ_PREFIXES=('git commit( [^ ]##)# -[^ -]#m' 'ssh( [^ ]##)# [^ -][^ ]#' 'spotifydl' 'audio-dl' 'caption-dl' 'video-dl' 'rn' 'music' 's' 'bm add' 'gn' 'n a' 'bs bm a' 'bs n a' 'bm a' 'n s' 'bs n s' 'bs bm s' 'bm s' 'bs s' 'n g' 'bg n g' 'bg bm g' 'bm g' 'bg g' 'yt-dlp')
 ZSH_HIGHLIGHT_HIGHLIGHTERS+=(zaq)
 
-# Use the 'starship' prompt.
-eval "$(starship init zsh)"
 
 ################################################################################
 # Shell function for safe use of `apparition apparate`.
@@ -46,22 +36,23 @@ eval "$(starship init zsh)"
 #     Writes error messages to STDERR.
 ################################################################################
 function apparate() {
-    destination="$1"
-    if [ $destination = "--help" ]; then
-        apparition apparate --help
-        return
-    fi
+	destination="$1"
+	if [ $destination = "--help" ]; then
+		apparition apparate --help
+		return
+	fi
 
-    output=$(apparition apparate --called-from-shell-function "$1")
+	output=$(apparition apparate --called-from-shell-function "$1")
 
-    if [ $? = 0 ]; then
-        eval $output
-    else
-        apparition print-error "$output"
-    fi
+	if [ $? = 0 ]; then
+		eval $output
+	else
+		apparition print-error "$output"
+	fi
 }
 
 autoload -Uz compinit
+compinit
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
 
@@ -69,15 +60,18 @@ fpath+=~/.zfunc
 bindkey "^[OA" history-beginning-search-backward
 bindkey "^[OB" history-beginning-search-forward
 
-
 # List files at shell startup.
 # set-title
 l
 
-
-# bun completions
-[ -s "/home/david/.bun/_bun" ] && source "/home/david/.bun/_bun"
-
 # bun
+[ -s "/home/david/.bun/_bun" ] && source "/home/david/.bun/_bun"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# modular
+export MODULAR_HOME="/home/david/.modular"
+export PATH="/home/david/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
+
+# Use the 'starship' prompt.
+eval "$(starship init zsh)"
