@@ -1,6 +1,6 @@
 import os
 
-import pyautogui as gui
+import rat
 import sh
 from libqtile import bar, hook, layout, widget
 from libqtile.config import (
@@ -29,6 +29,7 @@ class VPN(base.InLoopPollText):
 MOD = "mod4"
 ALT = "mod1"
 HASHTAG = "numbersign"
+CTRL = "control"
 USER = os.getenv("USER")
 FONT = os.getenv("FONT")
 TERMINAL = "wezterm"
@@ -222,65 +223,25 @@ groups.append(
     )
 )
 
-W, H = gui.size()
-D = 100
-
-
-@lazy.function
-def rat_scale(qtile, factor):
-    global D
-    D = factor * D
-    D = max(3, min(H / 3, D))
-
-
-@lazy.function
-def rat_set(qtile, x, y):
-    x = x if x is not None else gui.position()[0]
-    y = y if y is not None else gui.position()[1]
-    # Clip position prevent the cursor from getting stuck.
-    x = max(1, min(W - 2, x))
-    y = max(1, min(H - 2, y))
-    gui.moveTo(x, y, 0.15, gui.easeInOutQuad)
-
-
-@lazy.function
-def rat_set_diff(qtile, fx, fy):
-    global D
-    x, y = gui.position()
-    x += fx * D
-    y += fy * D
-    x = max(1, min(W - 2, x))
-    y = max(1, min(H - 2, y))
-    gui.moveTo(x, y, 0.15, gui.easeInOutQuad)
-
-
-@lazy.function
-def rat_click(qtile):
-    gui.click()
-
-
 keys.append(
     KeyChord(
         [MOD],
-        "r",
+        "i",
         [
-            Key([], "g", rat_set(None, 0)),
-            Key(["shift"], "g", rat_set(None, H)),
-            Key([], "b", rat_set(0, None)),
-            Key([], "e", rat_set(W, None)),
-            Key([], "m", rat_set(W / 2, None)),
-            Key(["shift"], "m", rat_set(None, H / 2)),
-            Key(["shift"], "h", rat_set(0, None)),
-            Key(["shift"], "j", rat_set(None, H)),
-            Key(["shift"], "k", rat_set(None, 0)),
-            Key(["shift"], "l", rat_set(W, None)),
-            Key([], "h", rat_set_diff(-1, 0)),
-            Key([], "j", rat_set_diff(0, +1)),
-            Key([], "k", rat_set_diff(0, -1)),
-            Key([], "l", rat_set_diff(+1, 0)),
-            Key([], "space", rat_click),
-            Key([], "n", rat_scale(1 / 6)),
-            Key([], "u", rat_scale(5)),
+            Key([], "s", rat.toggle_mode),
+            Key([], "u", rat.step_up),
+            Key([], "n", rat.step_down),
+            Key(["shift"], "h", rat.all_left),
+            Key(["shift"], "j", rat.all_down),
+            Key(["shift"], "k", rat.all_up),
+            Key(["shift"], "l", rat.all_right),
+            Key([], "h", rat.left),
+            Key([], "j", rat.down),
+            Key([], "k", rat.up),
+            Key([], "l", rat.right),
+            # Clicking
+            Key([], "space", rat.click),
+            Key(["shift"], "space", rat.half_click),
         ],
         mode=True,
         name="Rat",
