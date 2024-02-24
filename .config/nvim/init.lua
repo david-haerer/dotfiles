@@ -40,6 +40,11 @@ nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 ]])
 
+-- Navigate inside a line.
+vim.cmd([[
+nmap m :call cursor(0, len(getline('.'))/2)<CR>
+]])
+
 -- Set leader and localleader.
 vim.cmd([[
 :let mapleader = ","
@@ -196,12 +201,6 @@ vim.cmd([[
 -- VimDevIcons
 vim.cmd([[
 let g:webdevicons_conceal_nerdtree_brackets=1
-]])
-
--- coc.nvim
-vim.cmd([[
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 ]])
 
 -- Set font.
