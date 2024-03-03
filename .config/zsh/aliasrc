@@ -4,7 +4,7 @@
 alias e="exit"
 alias c="clear && l"
 alias o="xdg-open"
-alias v="nvim"
+alias v="helix"
 alias hx="helix"
 alias m="mkdir"
 alias md="markdown"
