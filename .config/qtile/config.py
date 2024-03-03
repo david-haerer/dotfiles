@@ -8,14 +8,14 @@ from libqtile.config import (
     DropDown,
     Group,
     Key,
-    KeyChord,
     Match,
     ScratchPad,
     Screen,
 )
 from libqtile.lazy import lazy
 from libqtile.widget import base
-from rat import rat
+
+from rat import Rat
 
 
 class VPN(base.InLoopPollText):
@@ -95,115 +95,95 @@ def group_window_add(group, window):
 
 keys = []
 
-keys.extend(
-    [
-        Key([MOD, ALT], "h", L.left(), desc="Move focus to left"),
-        Key([MOD, ALT], "l", L.right(), desc="Move focus to right"),
-        Key([MOD, ALT], "j", L.down(), desc="Move focus down"),
-        Key([MOD, ALT], "k", L.up(), desc="Move focus up"),
-        Key([MOD, "control"], "h", L.left(), desc="Move focus to left"),
-        Key([MOD, "control"], "l", L.right(), desc="Move focus to right"),
-        Key([MOD, "control"], "j", L.down(), desc="Move focus down"),
-        Key([MOD, "control"], "k", L.up(), desc="Move focus up"),
-    ]
-)
+keys.extend([
+    Key([MOD, ALT], "h", L.left(), desc="Move focus to left"),
+    Key([MOD, ALT], "l", L.right(), desc="Move focus to right"),
+    Key([MOD, ALT], "j", L.down(), desc="Move focus down"),
+    Key([MOD, ALT], "k", L.up(), desc="Move focus up"),
+    Key([MOD, "control"], "h", L.left(), desc="Move focus to left"),
+    Key([MOD, "control"], "l", L.right(), desc="Move focus to right"),
+    Key([MOD, "control"], "j", L.down(), desc="Move focus down"),
+    Key([MOD, "control"], "k", L.up(), desc="Move focus up"),
+])
 
-keys.extend(
-    [
-        Key(
-            [MOD, "control", "shift"],
-            "h",
-            L.shuffle_left(),
-            desc="Move window to the left",
-        ),
-        Key(
-            [MOD, "control", "shift"],
-            "l",
-            L.shuffle_right(),
-            desc="Move window to the right",
-        ),
-        Key([MOD, "control", "shift"], "j", L.shuffle_down(), desc="Move window down"),
-        Key([MOD, "control", "shift"], "k", L.shuffle_up(), desc="Move window up"),
-    ]
-)
+keys.extend([
+    Key(
+        [MOD, "control", "shift"],
+        "h",
+        L.shuffle_left(),
+        desc="Move window to the left",
+    ),
+    Key(
+        [MOD, "control", "shift"],
+        "l",
+        L.shuffle_right(),
+        desc="Move window to the right",
+    ),
+    Key([MOD, "control", "shift"], "j", L.shuffle_down(), desc="Move window down"),
+    Key([MOD, "control", "shift"], "k", L.shuffle_up(), desc="Move window up"),
+])
 
-keys.extend(
-    [
-        Key([MOD, "shift"], "h", L.grow_left(), desc="Grow window to the left"),
-        Key([MOD, "shift"], "l", L.grow_right(), desc="Grow window to the right"),
-        Key([MOD, "shift"], "j", L.grow_down(), desc="Grow window down"),
-        Key([MOD, "shift"], "k", L.grow_up(), desc="Grow window up"),
-    ]
-)
+keys.extend([
+    Key([MOD, "shift"], "h", L.grow_left(), desc="Grow window to the left"),
+    Key([MOD, "shift"], "l", L.grow_right(), desc="Grow window to the right"),
+    Key([MOD, "shift"], "j", L.grow_down(), desc="Grow window down"),
+    Key([MOD, "shift"], "k", L.grow_up(), desc="Grow window up"),
+])
 
-keys.extend(
-    [
-        Key([MOD], "tab", lazy.screen.next_group(), desc="Switch to next group"),
-        Key(
-            [MOD, "shift"],
-            "tab",
-            lazy.screen.prev_group(),
-            desc="Switch to previous group",
-        ),
-        Key([MOD], "comma", lazy.next_screen(), desc="Switch to next screen"),
-        Key(
-            [MOD, "shift"],
-            "comma",
-            lazy.prev_screen(),
-            desc="Switch to previous screen",
-        ),
-    ]
-)
+keys.extend([
+    Key([MOD], "tab", lazy.screen.next_group(), desc="Switch to next group"),
+    Key(
+        [MOD, "shift"],
+        "tab",
+        lazy.screen.prev_group(),
+        desc="Switch to previous group",
+    ),
+    Key([MOD], "comma", lazy.next_screen(), desc="Switch to next screen"),
+    Key(
+        [MOD, "shift"],
+        "comma",
+        lazy.prev_screen(),
+        desc="Switch to previous screen",
+    ),
+])
 
-keys.extend(
-    [
-        Key([MOD], "n", L.normalize(), desc="Reset all window sizes"),
-        Key([MOD, "shift"], "return", L.toggle_split(), desc="Toggle (un-)split"),
-    ]
-)
+keys.extend([
+    Key([MOD], "n", L.normalize(), desc="Reset all window sizes"),
+    Key([MOD, "shift"], "return", L.toggle_split(), desc="Toggle (un-)split"),
+])
 
-keys.extend(
-    [
-        Key([MOD], "m", lazy.next_layout(), desc="Toggle between layouts"),
-        Key([MOD], "q", lazy.window.kill(), desc="Kill focused window"),
-        Key([MOD, "control"], "r", lazy.reload_config(), desc="Reload the config"),
-        Key([MOD, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    ]
-)
+keys.extend([
+    Key([MOD], "m", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([MOD], "q", lazy.window.kill(), desc="Kill focused window"),
+    Key([MOD, "control"], "r", lazy.reload_config(), desc="Reload the config"),
+    Key([MOD, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+])
 
-keys.extend(
-    [
-        Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),
-        Key(
-            [], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 sset Master 6- unmute")
-        ),
-        Key(
-            [], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 sset Master 6+ unmute")
-        ),
-    ]
-)
+keys.extend([
+    Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 sset Master 6- unmute")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 sset Master 6+ unmute")),
+])
 
 # -- GROUPS --
 
 groups = [Group(i) for i in "123456789"]
 
 for i in groups:
-    keys.extend(
-        [
-            Key(
-                [MOD],
-                i.name,
-                lazy.group[i.name].toscreen(),
-                desc=f"Switch to group {i.name}",
-            ),
-            Key(
-                [MOD, "shift"],
-                i.name,
-                lazy.window.togroup(i.name, switch_group=True),
-                desc=f"Switch to & move focused window to group {i.name}",
-            ),
-        ]
-    )
+    keys.extend([
+        Key(
+            [MOD],
+            i.name,
+            lazy.group[i.name].toscreen(),
+            desc=f"Switch to group {i.name}",
+        ),
+        Key(
+            [MOD, "shift"],
+            i.name,
+            lazy.window.togroup(i.name, switch_group=True),
+            desc=f"Switch to & move focused window to group {i.name}",
+        ),
+    ])
 
 
 W, H = 0.9975, 1.035
@@ -223,51 +203,23 @@ groups.append(
     )
 )
 
-keys.append(
-    KeyChord(
+keys.extend([
+    Key([MOD], "t", lazy.spawn(TERMINAL), desc="Launch terminal"),
+    Key([MOD], "s", lazy.spawn(SIGNAL), desc="Launch Signal"),
+    Key([MOD], "b", lazy.spawn(BROWSER), desc="Launch Browser"),
+    Key([MOD], "k", lazy.spawn("killer"), desc="Launch Killer"),
+    Key(
         [MOD],
-        "i",
-        [
-            Key([], "s", lazy.function(lambda qtile: rat.toggle_mode())),
-            Key([], "u", lazy.function(lambda qtile: rat.step_up())),
-            Key([], "n", lazy.function(lambda qtile: rat.step_down())),
-            Key(["shift"], "h", lazy.function(lambda qtile: rat.all_left())),
-            Key(["shift"], "j", lazy.function(lambda qtile: rat.all_down())),
-            Key(["shift"], "k", lazy.function(lambda qtile: rat.all_up())),
-            Key(["shift"], "l", lazy.function(lambda qtile: rat.all_right())),
-            Key([], "h", lazy.function(lambda qtile: rat.left())),
-            Key([], "j", lazy.function(lambda qtile: rat.down())),
-            Key([], "k", lazy.function(lambda qtile: rat.up())),
-            Key([], "l", lazy.function(lambda qtile: rat.right())),
-            Key([], "return", lazy.function(lambda qtile: rat.click())),
-            Key([], "space", lazy.function(lambda qtile: rat.half_click())),
-            Key([], "m", lazy.function(lambda qtile: rat.mid_x())),
-            Key(["shift"], "m", lazy.function(lambda qtile: rat.mid_y())),
-        ],
-        mode=True,
-        name="Rat",
-    )
-)
-
-keys.extend(
-    [
-        Key([MOD], "t", lazy.spawn(TERMINAL), desc="Launch terminal"),
-        Key([MOD], "s", lazy.spawn(SIGNAL), desc="Launch Signal"),
-        Key([MOD], "b", lazy.spawn(BROWSER), desc="Launch Browser"),
-        Key([MOD], "k", lazy.spawn("killer"), desc="Launch Killer"),
-        Key(
-            [MOD],
-            HASHTAG,
-            lazy.spawn(PASSWORD_MANAGER),
-            desc="Launch password manager",
-        ),
-        Key([MOD], "return", lazy.spawn(LAUNCHER), desc="Application launcher"),
-        Key([MOD], "space", lazy.group["scratchpad"].dropdown_toggle("term")),
-        Key([MOD], "u", lazy.spawn("rofimoji"), desc="Launch unicode picker"),
-        Key([MOD], "g", lazy.spawn("rofi-gitmojis"), desc="Launch Gitmoji picker"),
-        Key([MOD], "h", lazy.spawn("autorandr common"), desc="Launch unicode picker"),
-    ]
-)
+        HASHTAG,
+        lazy.spawn(PASSWORD_MANAGER),
+        desc="Launch password manager",
+    ),
+    Key([MOD], "return", lazy.spawn(LAUNCHER), desc="Application launcher"),
+    Key([MOD], "space", lazy.group["scratchpad"].dropdown_toggle("term")),
+    Key([MOD], "u", lazy.spawn("rofimoji"), desc="Launch unicode picker"),
+    Key([MOD], "g", lazy.spawn("rofi-gitmojis"), desc="Launch Gitmoji picker"),
+    Key([MOD], "h", lazy.spawn("autorandr common"), desc="Launch unicode picker"),
+])
 
 
 # -- LAYOUT --
@@ -297,9 +249,11 @@ widget_defaults = {
 
 extension_defaults = widget_defaults.copy()
 
-
+rat = Rat()
+keys.append(rat.key)
 bar = bar.Bar(
     [
+        widget.Spacer(length=4),
         widget.GroupBox(
             active=GRAY,
             highlight_method="text",
@@ -312,9 +266,9 @@ bar = bar.Bar(
         widget.Spacer(),
         widget.Clock(format="%Y-%m-%d %H:%M:%S", foreground=GREEN),
         widget.Spacer(),
-        VPN(update_interval=1),
+        rat.widget,
         widget.Spacer(length=4),
-        widget.Systray(),
+        VPN(update_interval=1),
         widget.Spacer(length=4),
         widget.Battery(
             battery_name="BAT0",
@@ -324,10 +278,16 @@ bar = bar.Bar(
             update_delay=1,
             charge_char="↑",
             discharge_char="↓",
-            format="{char} {percent:2.0%}",
+            unknown_char="",
+            full_char="",
+            not_charging_char="",
+            format="{char} {percent:2.0%}⚡",
             fontsize=12,
+            show_short_text=False,
         ),
-        widget.Spacer(length=8),
+        widget.Spacer(length=6),
+        widget.Systray(),
+        widget.Spacer(length=6),
         widget.LaunchBar(
             progs=[
                 ("🔒", f"sudo loginctl terminate-user {USER}"),
