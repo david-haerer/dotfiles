@@ -188,7 +188,7 @@ vim.cmd([[
 :command ISort    :w | ! isort --profile black %
 :command Pylint   :w | ! pylint %
 :command Pytest   :w | ! pytest %
-:command Ruff     :w | ! ruff format "%" && ruff check "%" --fix --select I
+:command Ruff     :w | ! ruff format "%" --preview --line-length=120 && ruff check "%" --fix --select I
 :command Styler   :w | ! Rscript -e "styler::style_file('%')"
 :command GoFmt    :w | ! gofmt -s -w %
 :command Prettier :w | ! bun x prettier --write %
