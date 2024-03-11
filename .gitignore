@@ -35,6 +35,8 @@ __pycache__/
 !/.config/key.map
 !/.config/picom
 
+!/.config/helix
+
 !/.config/nvim
 /.config/nvim/spell
 
