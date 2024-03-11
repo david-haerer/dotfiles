@@ -40,8 +40,6 @@ __pycache__/
 !/.config/nvim
 /.config/nvim/spell
 
-!/.config/helix
-
 !/.config/Code
 /.config/Code/*
 !/.config/Code/User
