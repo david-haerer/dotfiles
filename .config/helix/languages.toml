@@ -1,0 +1,27 @@
+[[language]]
+roots = []
+name = "vim"
+scope = "source.vim"
+file-types = [
+  "vim",
+]
+auto-format = true
+indent = { tab-width = 2, unit = "  " }
+
+[[grammar]]
+name = "vim"
+source = { git = "https://github.com/tree-sitter-grammars/tree-sitter-vim", rev = "bc1364d922952138957a62105171ed68e73fbb6c" }
+
+[[language]]
+roots = []
+name = "lilypond"
+scope = "source.ly"
+file-types = [
+  "ly",
+]
+auto-format = true
+indent = { tab-width = 2, unit = "  " }
+
+[[grammar]]
+name = "lilypond"
+source = { git = "https://github.com/nwhetsell/tree-sitter-lilypond", rev = "49682b4a4dc163016a43d70f7e3d0182f438fad0" }
