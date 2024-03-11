@@ -1,8 +1,5 @@
 #!/usr/bin/zsh
 
-# Use vi mode.
-bindkey -v
-
 # Source profile and aliasrc.
 source "$HOME/.config/profile"
 source "$HOME/.config/zsh/aliasrc"
@@ -25,16 +22,12 @@ source ~/.config/zsh/zsh-autoquoter/zsh-autoquoter.zsh
 ZAQ_PREFIXES=('git commit( [^ ]##)# -[^ -]#m' 'ssh( [^ ]##)# [^ -][^ ]#' 'spotifydl' 'audio-dl' 'caption-dl' 'video-dl' 'rn' 'music' 's' 'bm add' 'gn' 'n a' 'bs bm a' 'bs n a' 'bm a' 'n s' 'bs n s' 'bs bm s' 'bm s' 'bs s' 'n g' 'bg n g' 'bg bm g' 'bm g' 'bg g' 'yt-dlp')
 ZSH_HIGHLIGHT_HIGHLIGHTERS+=(zaq)
 
-
-################################################################################
-# Shell function for safe use of `apparition apparate`.
-# Arguments:
-#     $1: The destination name passed to `apparition apparate`
-#         If the value is `--help` only the help text is shown.
-#         Otherwise the command is executed with `eval`.
-# Outputs:
-#     Writes error messages to STDERR.
-################################################################################
+# Enable zsh vi mode.
+source ~/.config/zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_BEAM
+ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_BLOCK
+ZVM_OPPEND_MODE_CURSOR=$ZVM_CURSOR_UNDERLINE
+	
 function apparate() {
 	destination="$1"
 	if [ $destination = "--help" ]; then
