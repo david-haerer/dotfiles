@@ -209,8 +209,8 @@ keys.extend([
     Key([MOD], "b", lazy.spawn(BROWSER), desc="Launch Browser"),
     Key([MOD], "k", lazy.spawn("killer"), desc="Launch Killer"),
     Key(
-        [MOD],
-        HASHTAG,
+        [MOD, 'shift'],
+        '8',
         lazy.spawn(PASSWORD_MANAGER),
         desc="Launch password manager",
     ),
