@@ -1,3 +1,24 @@
+[language-server.bash]
+command = "sh-lsp"
+
+[[language]]
+name = "bash"
+file-types = ["sh", "bash"]
+auto-format = true
+formatter = { command = "shfmt", args = ["-"] }
+
+[language-server.pyright]
+command = "pyright-lsp"
+
+[language-server.ruff]
+command = "ruff-lsp"
+
+[[language]]
+name = "python"
+language-servers = [ "pylsp", "pyright", "ruff" ]
+auto-format = true
+formatter = { command = "ruff", args = ["format", "--preview", "--line-length=120", "-"] }
+
 [[language]]
 roots = []
 name = "vim"
