@@ -1,6 +1,7 @@
 #!/bin/sh
 
-gitmojis=$(cat <<EOF
+gitmojis=$(
+	cat <<EOF
   [
     {
       "emoji": "🎨",
@@ -590,5 +591,4 @@ gitmojis=$(cat <<EOF
 EOF
 )
 
-
-echo $gitmojis | jq -r '.[] | "\(.emoji) \(.description)"' | rofi -markup-rows -dmenu  -p "Gitmoji"  | sd " .*" "" | xclip -sel clip
+echo $gitmojis | jq -r '.[] | "\(.emoji) \(.description)"' | rofi -markup-rows -dmenu -p "Gitmoji" | sd " .*" "" | sd "\n" "" | xclip -sel clip

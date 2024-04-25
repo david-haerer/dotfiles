@@ -1,34 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-shopt -s nullglob globstar
-
-prefix=${PASSWORD_STORE_DIR-~/.password-store}
-
-password_files=( "$prefix"/**/*.gpg )
-password_files=( "${password_files[@]#"$prefix"/}" )
-password_files=( "${password_files[@]%.gpg}" )
-
-entry=$(printf '%s\n' "${password_files[@]}" | rofi -dmenu -p "Password" -i)
-
-[[ -n $entry ]] || exit
-
-# XXX: This doesn't work if there is only one entry which is not the password.
-if [ $(pass show $entry | wc -l) -eq 1 ]; then
-    field="password"
-else
-    field=$(pass show "$entry" | tail -n +2 | cat <(echo password:) - | rg -o "^[^:]*" | sd otpauth otp | rofi -dmenu -i)
-fi
-
-case "$field" in
-  password)
-	pass show "$entry" | head -n 1 | xclip -selection c
-    ;;
-
-  otp)
-	pass otp "$entry" | xclip -selection c
-    ;;
-
-  *)
-    pass show "$entry" | rg "^$field" | rg -o ": .*$" | sd ": " "" | xclip -selection c
-    ;;
-esac
+name=$(nitropy nk3 secrets list | rg -o '^[0-9]{2}\. [^\t]*' | sd '^[0-9]{2}\. ' '' | rofi -dmenu -p "Nitrokey" -i)
+nitropy nk3 secrets get-password "$name" | rg password | sd 'password            : ' '' | sd '\n' '' | xclip -sel clip
