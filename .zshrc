@@ -12,6 +12,7 @@ set +a
 # List files at every directory change.
 function chpwd() {
 	emulate -L zsh
+	[[ -f .aliases ]] && . ./.aliases
 	clear
 	l
 }
@@ -27,7 +28,7 @@ source ~/.config/zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_BEAM
 ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_BLOCK
 ZVM_OPPEND_MODE_CURSOR=$ZVM_CURSOR_UNDERLINE
-	
+
 function apparate() {
 	destination="$1"
 	if [ $destination = "--help" ]; then
@@ -53,8 +54,9 @@ fpath+=~/.zfunc
 bindkey "^[OA" history-beginning-search-backward
 bindkey "^[OB" history-beginning-search-forward
 
+[[ -f .aliases ]] && . ./.aliases
+
 # List files at shell startup.
-# set-title
 l
 
 # bun
