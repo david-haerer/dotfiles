@@ -2,20 +2,9 @@ import os
 
 import sh
 from libqtile import bar, hook, layout, widget
-from libqtile.config import (
-    Click,
-    Drag,
-    DropDown,
-    Group,
-    Key,
-    Match,
-    ScratchPad,
-    Screen,
-)
+from libqtile.config import Click, Drag, DropDown, Group, Key, Match, ScratchPad, Screen
 from libqtile.lazy import lazy
 from libqtile.widget import base
-
-from rat import Rat
 
 
 class VPN(base.InLoopPollText):
@@ -92,7 +81,6 @@ def group_window_add(group, window):
 
 # -- KEYS --
 
-
 keys = []
 
 keys.extend([
@@ -131,25 +119,10 @@ keys.extend([
 ])
 
 keys.extend([
-    Key([MOD], "tab", lazy.screen.next_group(), desc="Switch to next group"),
-    Key(
-        [MOD, "shift"],
-        "tab",
-        lazy.screen.prev_group(),
-        desc="Switch to previous group",
-    ),
+    Key([MOD], "n", lazy.screen.next_group(), desc="Switch to next group"),
+    Key([MOD], "p", lazy.screen.prev_group(), desc="Switch to previous group"),
     Key([MOD], "comma", lazy.next_screen(), desc="Switch to next screen"),
-    Key(
-        [MOD, "shift"],
-        "comma",
-        lazy.prev_screen(),
-        desc="Switch to previous screen",
-    ),
-])
-
-keys.extend([
-    Key([MOD], "n", L.normalize(), desc="Reset all window sizes"),
-    Key([MOD, "shift"], "return", L.toggle_split(), desc="Toggle (un-)split"),
+    Key([MOD, "shift"], "comma", lazy.prev_screen(), desc="Switch to previous screen"),
 ])
 
 keys.extend([
@@ -163,6 +136,8 @@ keys.extend([
     Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 sset Master 6- unmute")),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 sset Master 6+ unmute")),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set 5%+")),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-")),
 ])
 
 # -- GROUPS --
@@ -171,12 +146,7 @@ groups = [Group(i) for i in "123456789"]
 
 for i in groups:
     keys.extend([
-        Key(
-            [MOD],
-            i.name,
-            lazy.group[i.name].toscreen(),
-            desc=f"Switch to group {i.name}",
-        ),
+        Key([MOD], i.name, lazy.group[i.name].toscreen(), desc=f"Switch to group {i.name}"),
         Key(
             [MOD, "shift"],
             i.name,
@@ -195,11 +165,7 @@ x, y = (1 - cos30) / 2 * W + DX, (1 - sin30) / 2 * H + DY
 groups.append(
     ScratchPad(
         "scratchpad",
-        dropdowns=[
-            DropDown(
-                "term", "alacritty", width=width, height=height, x=x, y=y, opacity=1
-            ),
-        ],
+        dropdowns=[DropDown("term", "alacritty", width=width, height=height, x=x, y=y, opacity=1)],
     )
 )
 
@@ -208,17 +174,13 @@ keys.extend([
     Key([MOD], "s", lazy.spawn(SIGNAL), desc="Launch Signal"),
     Key([MOD], "b", lazy.spawn(BROWSER), desc="Launch Browser"),
     Key([MOD], "k", lazy.spawn("killer"), desc="Launch Killer"),
-    Key(
-        [MOD, 'shift'],
-        '8',
-        lazy.spawn(PASSWORD_MANAGER),
-        desc="Launch password manager",
-    ),
-    Key([MOD], "return", lazy.spawn(LAUNCHER), desc="Application launcher"),
+    Key([MOD], "s", lazy.spawn(PASSWORD_MANAGER), desc="Launch password manager"),
+    Key([MOD], "period", lazy.spawn(LAUNCHER), desc="Application launcher"),
     Key([MOD], "space", lazy.group["scratchpad"].dropdown_toggle("term")),
     Key([MOD], "u", lazy.spawn("rofimoji"), desc="Launch unicode picker"),
     Key([MOD], "g", lazy.spawn("rofi-gitmojis"), desc="Launch Gitmoji picker"),
     Key([MOD], "h", lazy.spawn("autorandr common"), desc="Launch unicode picker"),
+    Key([MOD], "return", lazy.spawn("rat"), desc="Launch the rat"),
 ])
 
 
@@ -241,16 +203,9 @@ layouts = [
 # -- WIDGET --
 
 
-widget_defaults = {
-    "font": FONT,
-    "fontsize": 13,
-    "padding": 2,
-}
-
+widget_defaults = {"font": FONT, "fontsize": 13, "padding": 2}
 extension_defaults = widget_defaults.copy()
 
-rat = Rat()
-keys.append(rat.key)
 bar = bar.Bar(
     [
         widget.Spacer(length=4),
@@ -266,8 +221,6 @@ bar = bar.Bar(
         widget.Spacer(),
         widget.Clock(format="%Y-%m-%d %H:%M:%S", foreground=GREEN),
         widget.Spacer(),
-        rat.widget,
-        widget.Spacer(length=4),
         VPN(update_interval=1),
         widget.Spacer(length=4),
         widget.Battery(
@@ -288,12 +241,7 @@ bar = bar.Bar(
         widget.Spacer(length=6),
         widget.Systray(),
         widget.Spacer(length=6),
-        widget.LaunchBar(
-            progs=[
-                ("🔒", f"sudo loginctl terminate-user {USER}"),
-                ("❌", "sudo shutdown -h now"),
-            ],
-        ),
+        widget.LaunchBar(progs=[("🔒", f"sudo loginctl terminate-user {USER}"), ("❌", "sudo shutdown -h now")]),
     ],
     30,
     background=BLACK,
@@ -307,33 +255,13 @@ def _():
     bar.window.window.set_property("QTILE_BAR", 1, "CARDINAL", 32)
 
 
-screens = [
-    Screen(
-        wallpaper="~/.config/wallpaper.png",
-        wallpaper_mode="stretch",
-        top=bar,
-    ),
-]
-
+screens = [Screen(wallpaper="~/.config/wallpaper.png", wallpaper_mode="stretch", top=bar)]
 
 # -- MOUSE --
 
-
-mouse = [
-    Drag(
-        [MOD],
-        "Button1",
-        lazy.window.set_position_floating(),
-        start=lazy.window.get_position(),
-    ),
-    Drag(
-        [MOD], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
-    ),
-    Click([MOD], "Button2", lazy.window.bring_to_front()),
-]
-
+mouse = []
 dgroups_key_binder = None
-dgroups_app_rules = []  # type: list
+dgroups_app_rules = []
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
@@ -344,11 +272,7 @@ floating_layout = layout.Floating(
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
-        Match(wm_class="confirmreset"),  # gitk
-        Match(wm_class="makebranch"),  # gitk
-        Match(wm_class="maketag"),  # gitk
         Match(wm_class="ssh-askpass"),  # ssh-askpass
-        Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
         Match(wm_class="nextcloud"),
     ],

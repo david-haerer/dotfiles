@@ -15,7 +15,7 @@ SPACE, RETURN, DOT, COMMA = "space", "return", "period", "comma"
 J, K, L, H = "j", "k", "l", "h"
 
 LEFT, MIDDLE, RIGHT = "left", "middle", "right"
-DECEL, SLIDE, ACCEL = "DECEL", "SLIDE","ACCEL"
+DECEL, SLIDE, ACCEL = "DECEL", "SLIDE", "ACCEL"
 
 
 @lazy.function
@@ -39,9 +39,13 @@ class Rat:
             [Key([], key, cmd(self.step, key)) for key in [J, K, L, H]]
             + [Key([SHIFT], key, cmd(self.jump, key)) for key in [J, K, L, H]]
             + [
-                Key([], "a", cmd(self.set_mode, SLIDE), cmd(self.accel), cmd(self.step)),
+                Key(
+                    [], "a", cmd(self.set_mode, SLIDE), cmd(self.accel), cmd(self.step)
+                ),
                 Key([], "s", cmd(self.set_mode, SLIDE), cmd(self.step)),
-                Key([], "d", cmd(self.set_mode, SLIDE), cmd(self.decel), cmd(self.step)),
+                Key(
+                    [], "d", cmd(self.set_mode, SLIDE), cmd(self.decel), cmd(self.step)
+                ),
                 Key([SHIFT], "a", cmd(self.set_mode, ACCEL)),
                 Key([SHIFT], "s", cmd(self.set_mode, SLIDE)),
                 Key([SHIFT], "d", cmd(self.set_mode, DECEL)),
@@ -91,7 +95,7 @@ class Rat:
     def toggle_scroll(self):
         self.scroll = not self.scroll
         self.button = MIDDLE if self.scroll else LEFT
-    
+
     def set_mode(self, mode):
         self.mode = mode if self.mode != mode else SLIDE
         self.render()
@@ -144,7 +148,7 @@ class Rat:
         x = x + dx if dx is not None else None
         y = y + dy if dy is not None else None
         self.move_to(x, y)
-    
+
     def undo(self):
         key = {
             J: K,
