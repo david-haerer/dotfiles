@@ -1,3 +1,41 @@
+[[language]]
+name = "c"
+formatter = { command = "clang-format", args = ["--style=file"] }
+auto-format = true
+
+[[language]]
+name = "zig"
+formatter = { command = "zig", args = ["fmt", "--stdin"] }
+auto-format = true
+
+[[language]]
+name = "go"
+formatter = { command = "go-fmt", args = [""] }
+auto-format = true
+
+[[language]]
+name = "latex"
+file-types = ["tex"]
+auto-format = true
+formatter = { command = "prettier", args = ["--write"] }
+
+[[language]]
+name = "html"
+formatter = { command = "prettier", args = ["--parser", "html"] }
+auto-format = true
+
+[[language]]
+name = "css"
+formatter = { command = "prettier", args = ["--parser", "css"] }
+auto-format = true
+
+[[language]]
+name = "javascript"
+formatter = { command = "prettier", args = ["--parser", "babel"] }
+auto-format = true
+scope = "source.mylang"
+file-types = ["js", "ts"]
+
 [language-server.bash]
 command = "sh-lsp"
 
@@ -37,12 +75,21 @@ source = { git = "https://github.com/tree-sitter-grammars/tree-sitter-vim", rev 
 roots = []
 name = "lilypond"
 scope = "source.ly"
-file-types = [
-  "ly",
-]
+file-types = ["ly"]
+comment-tokens = "%"
 auto-format = true
 indent = { tab-width = 2, unit = "  " }
+formatter = { command = "ly", args = ["reformat"] }
 
 [[grammar]]
 name = "lilypond"
 source = { git = "https://github.com/nwhetsell/tree-sitter-lilypond", rev = "49682b4a4dc163016a43d70f7e3d0182f438fad0" }
+
+[[language]]
+roots = []
+name = "lco"
+scope = "source.lco"
+file-types = ["lco"]
+comment-tokens = "%"
+auto-format = true
+indent = { tab-width = 2, unit = "  " }
