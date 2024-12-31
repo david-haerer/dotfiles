@@ -17,6 +17,16 @@ function chpwd() {
 	l
 }
 
+# yazi
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
 # Enable zsh syntax highlighting and auto-quoting.
 source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.config/zsh/zsh-autoquoter/zsh-autoquoter.zsh
@@ -50,10 +60,6 @@ compinit
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
 
-# History search.
-bindkey "^[OA" history-beginning-search-backward
-bindkey "^[OB" history-beginning-search-forward
-
 [[ -f .aliases ]] && . ./.aliases
 
 # List files at shell startup.
@@ -63,10 +69,6 @@ l
 [ -s "/home/david/.bun/_bun" ] && source "/home/david/.bun/_bun"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-
-# modular
-export MODULAR_HOME="/home/david/.modular"
-export PATH="/home/david/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 
 # Use the 'starship' prompt.
 eval "$(starship init zsh)"
