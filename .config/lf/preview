@@ -1,20 +1,28 @@
 #!/bin/sh
 
-case "$(file -Lb --mime-type -- "$1")" in
-    image/*)
-        chafa -f sixel -s "$2x$3" --animate off --polite on "$1" \
-            || dcraw -W -c -e "$1" | chafa -f sixel -s "$2x$3" --animate off --polite on
-        exit 1
-        ;;
-    video/*)
-        ffmpegthumbnailer -i "$1" -c png -s 512 -o - | chafa
-        exit 1
-        ;;
-	*/pdf)
-        pdftoppm -jpeg -f 1 -singlefile "$1" | chafa -f sixel -s "$2x$3" --animate off --polite on
-        exit 1
-		;;
-    *)
-        batcat -p --theme ansi --terminal-width "$(($4-2))" -f "$1"
-        ;;
+file="$1"
+w="$2"
+h="$3"
+x="$4"
+y="$5"
+
+case "$(file -Lb --mime-type -- "$file")" in
+image/x-sony-arw)
+	dcraw -W -c -e "$1" | chafa -s "$2x$3" --animate off --polite on
+	;;
+image/*)
+	# chafa -s "$2x$3" --animate off --polite on "$1"
+	# kitty +kitten icat --stdin no --transfer-mode file --place "${w}x${h}@${x}x${y}" "$file" </dev/null >/dev/tty
+	chafa -f kitty -s "{$w}x{$h}" "$file"
+	exit 1
+	;;
+video/*)
+	ffmpegthumbnailer -i "$1" -c png -s 512 -o - | chafa -f kitty
+	;;
+*/pdf)
+	pdftoppm -jpeg -f 1 -singlefile "$1" | chafa -s "$2x$3" --animate off --polite on
+	;;
+*)
+	batcat -p --theme ansi --terminal-width "$(($4 - 2))" -f "$1"
+	;;
 esac
