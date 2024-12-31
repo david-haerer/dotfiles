@@ -2,7 +2,7 @@ import os
 
 import sh
 from libqtile import bar, hook, layout, widget
-from libqtile.config import Click, Drag, DropDown, Group, Key, Match, ScratchPad, Screen
+from libqtile.config import DropDown, Group, Key, Match, ScratchPad, Screen
 from libqtile.lazy import lazy
 from libqtile.widget import base
 
@@ -14,16 +14,16 @@ class VPN(base.InLoopPollText):
 
 # -- CONSTANTS --
 
-
 MOD = "mod4"
 ALT = "mod1"
+ALTGR = "mod5"
 HASHTAG = "numbersign"
 CTRL = "control"
 USER = os.getenv("USER")
 FONT = os.getenv("FONT")
 TERMINAL = "wezterm"
 SIGNAL = "signal-desktop"
-BROWSER = "librewolf"
+BROWSER = os.getenv("BROWSER", "firefox")
 LAUNCHER = "rofi -display-drun 'Launch' -show drun"
 PASSWORD_MANAGER = "passmenu"
 
@@ -37,7 +37,6 @@ GREEN = "#C2D94C"
 CYAN = "#95E6CB"
 BLUE = "#59C2FF"
 MAGENTA = "#FFEE99"
-
 
 ACCENT_COLOR = YELLOW
 BACKGROUND = BLACK
@@ -133,9 +132,9 @@ keys.extend([
 ])
 
 keys.extend([
-    Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 sset Master 6- unmute")),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 sset Master 6+ unmute")),
+    Key([], "XF86AudioMute", lazy.spawn("amixer -D pulse set Master toggle")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -D pulse sset Master 7%- unmute")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -D pulse sset Master 7%+ unmute")),
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set 5%+")),
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-")),
 ])
@@ -165,7 +164,7 @@ x, y = (1 - cos30) / 2 * W + DX, (1 - sin30) / 2 * H + DY
 groups.append(
     ScratchPad(
         "scratchpad",
-        dropdowns=[DropDown("term", "alacritty", width=width, height=height, x=x, y=y, opacity=1)],
+        dropdowns=[DropDown("term", TERMINAL, width=width, height=height, x=x, y=y)],
     )
 )
 
@@ -177,7 +176,8 @@ keys.extend([
     Key([MOD], "s", lazy.spawn(PASSWORD_MANAGER), desc="Launch password manager"),
     Key([MOD], "period", lazy.spawn(LAUNCHER), desc="Application launcher"),
     Key([MOD], "space", lazy.group["scratchpad"].dropdown_toggle("term")),
-    Key([MOD], "u", lazy.spawn("rofimoji"), desc="Launch unicode picker"),
+    Key([MOD], "e", lazy.spawn("rofimoji"), desc="Launch unicode picker"),
+    Key([MOD], "u", lazy.spawn("umlaut"), desc="Launch umlaut picker"),
     Key([MOD], "g", lazy.spawn("rofi-gitmojis"), desc="Launch Gitmoji picker"),
     Key([MOD], "h", lazy.spawn("autorandr common"), desc="Launch unicode picker"),
     Key([MOD], "return", lazy.spawn("rat"), desc="Launch the rat"),
@@ -246,7 +246,6 @@ bar = bar.Bar(
     30,
     background=BLACK,
     margin=0,
-    opacity=0.9,
 )
 
 
