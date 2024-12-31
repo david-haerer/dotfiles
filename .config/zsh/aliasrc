@@ -3,23 +3,24 @@
 # shell
 alias e="exit"
 alias c="clear && l"
-alias o="xdg-open"
+alias o="file-opener"
 alias m="mkdir"
 alias lg="lazygit"
 alias md="markdown"
 alias cm="chmod"
+alias cmx="chmod +x"
 alias sw="source workspace"
 alias fd="fdfind"
 alias n="brainstorage note"
 alias bm="brainstorage bookmark"
 alias vs="code"
-alias ly="sudo watchexec -e ly lilypond *.ly"
+alias lily="sudo watchexec -e ly lilypond *.ly"
 alias ag="ag -W 255"
 alias tex-pdf="tectonic"
 alias a="apparate"
 alias ap="apparition"
 alias utc="date -u --iso-8601=seconds | sd T ' ' | sd '\+00:00' '' | sd : -"
-alias ctrl-c='xclip -sel clip'
+alias copy='xclip -sel clip'
 alias caps-esc='setxkbmap -option caps:swapescape'
 alias caps-esc-tty="sudo loadkeys $HOME/.config/key.map"
 alias hdmi='autorandr common'
@@ -31,6 +32,8 @@ alias p="ps aux | rg"
 alias ep="ephoto"
 alias mr="massren"
 alias dup='fdupes -R . | sd "^" "rm \"" | sd "$" "\"" | sd "rm \"\"" ""'
+alias epub-mp3='epub-to-audiobook'
+alias installs='deborphan --all-packages'
 
 # ls: Show hidden files by default.
 alias ls="ls -a"
