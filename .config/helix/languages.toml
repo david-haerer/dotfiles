@@ -14,14 +14,20 @@ formatter = { command = "go-fmt", args = [""] }
 auto-format = true
 
 [[language]]
+name = "markdown"
+file-types = ["md"]
+formatter = { command = "prettier", args = ["--parser", "markdown"]}
+auto-format = true
+
+[[language]]
 name = "latex"
 file-types = ["tex"]
 auto-format = true
-formatter = { command = "prettier", args = ["--write"] }
+formatter = { command = "prettier", args = ["--plugin", "prettier-plugin-latex", "--write"] }
 
 [[language]]
 name = "html"
-formatter = { command = "prettier", args = ["--parser", "html"] }
+formatter = { command = "prettier", args = ["--plugin", "/home/david/.bun/install/global/node_modules/prettier-plugin-jinja-template/lib/index.js", "--parser", "jinja-template"] }
 auto-format = true
 
 [[language]]
