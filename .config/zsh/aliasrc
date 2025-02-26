@@ -6,6 +6,7 @@ alias c="clear && l"
 alias o="file-opener"
 alias m="mkdir"
 alias lg="lazygit"
+alias z="zellij"
 alias md="markdown"
 alias cm="chmod"
 alias cmx="chmod +x"
@@ -34,6 +35,8 @@ alias mr="massren"
 alias dup='fdupes -R . | sd "^" "rm \"" | sd "$" "\"" | sd "rm \"\"" ""'
 alias epub-mp3='epub-to-audiobook'
 alias installs='deborphan --all-packages'
+alias adoc='asciidoctor'
+alias adoc-pdf='asciidoctor-pdf'
 
 # ls: Show hidden files by default.
 alias ls="ls -a"
@@ -140,8 +143,7 @@ alias restore-pgp="paperkey --pubring publickey.asc --secrets paperkey.txt | gpg
 alias export-pgp="gpg --output '$EMAIL.pgp' --export-secret-key '$EMAIL'"
 
 # zsh
-alias reload="source ~/.zshrc && clear && l"
-alias r="reload"
+alias re="exec $SHELL"
 
 # qtile
 alias qtile-reload="qtile cmd-obj -o cmd -f reload_config"
