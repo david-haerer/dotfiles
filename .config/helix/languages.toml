@@ -16,23 +16,37 @@ auto-format = true
 [[language]]
 name = "markdown"
 file-types = ["md"]
-formatter = { command = "prettier", args = ["--parser", "markdown"]}
+formatter = { command = "prettier", args = ["--parser", "markdown"] }
 auto-format = true
 
 [[language]]
 name = "latex"
 file-types = ["tex"]
 auto-format = true
-formatter = { command = "prettier", args = ["--plugin", "prettier-plugin-latex", "--write"] }
+formatter = { command = "prettier", args = [
+  "--plugin",
+  "prettier-plugin-latex",
+  "--write",
+] }
 
 [[language]]
 name = "html"
-formatter = { command = "prettier", args = ["--plugin", "/home/david/.bun/install/global/node_modules/prettier-plugin-jinja-template/lib/index.js", "--parser", "jinja-template"] }
+formatter = { command = "prettier", args = [
+  "--plugin",
+  "/home/david/.bun/install/global/node_modules/prettier-plugin-jinja-template/lib/index.js",
+  "--parser",
+  "jinja-template",
+] }
 auto-format = true
 
 [[language]]
 name = "css"
 formatter = { command = "prettier", args = ["--parser", "css"] }
+auto-format = true
+
+[[language]]
+name = "toml"
+formatter = { command = "taplo", args = ["format", "-"] }
 auto-format = true
 
 [[language]]
@@ -51,25 +65,24 @@ file-types = ["sh", "bash"]
 auto-format = true
 formatter = { command = "shfmt", args = ["-"] }
 
-[language-server.pyright]
-command = "pyright-lsp"
-
 [language-server.ruff]
-command = "ruff-lsp"
+command = "ruff"
+args = ["server"]
 
 [[language]]
 name = "python"
-language-servers = [ "pylsp", "pyright", "ruff" ]
+language-servers = ["ruff"]
 auto-format = true
-formatter = { command = "ruff", args = ["format", "--preview", "--line-length=120", "-"] }
+formatter = { command = "bash", args = [
+  "-c",
+  "ruff check --select I --fix - | ruff format -",
+] }
 
 [[language]]
 roots = []
 name = "vim"
 scope = "source.vim"
-file-types = [
-  "vim",
-]
+file-types = ["vim"]
 auto-format = true
 indent = { tab-width = 2, unit = "  " }
 
@@ -99,3 +112,8 @@ file-types = ["lco"]
 comment-tokens = "%"
 auto-format = true
 indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "lua"
+auto-format = true
+formatter = { command = "stylua", args = ["-"] }
