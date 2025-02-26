@@ -70,5 +70,8 @@ l
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+# brew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 # Use the 'starship' prompt.
 eval "$(starship init zsh)"
