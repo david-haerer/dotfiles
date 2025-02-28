@@ -87,11 +87,7 @@ alias gmv="git rename"
 
 # dotfiles: Manage dotfiles with a bare Git repository.
 alias dot="git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME"
-alias dot-update-remote-url="sd \
-  https://github.com/DavidHeresy/dotfiles.git \
-  git@github.com:david-haerer/dotfiles.git \
-  $HOME/.dotfiles.git/config
-"
+alias dot-lg="lg --git-dir=$HOME/.dotfiles.git --work-tree=$HOME"
 
 # todo.txt
 alias t="bash $APPS/todo-txt/todo.sh"
