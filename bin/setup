@@ -1,0 +1,31 @@
+#!/bin/sh
+
+sudo apt update
+sudo apt install -y \
+    pipx \
+    zsh zsh-syntax-highlighting \
+    neovim \
+    alacritty \
+    exa \
+    ripgrep silversearcher-ag \
+    libimage-exiftool-perl perl-doc \
+    git \
+    bat \
+    rofi \
+    fd-find \
+    flameshot \
+    gnome-keyring seahorse pinentry-gnome3 libpam-gnome-keyring \
+    dbus dbus-x11 \
+    pipewire wireplumber \
+    pass pass-extension-otp \
+    fonts-noto-color-emoji
+sudo apt upgrade
+
+pipx install apparition
+pipx install rofimoji
+pipx install black
+pipx install isort
+pipx install mypy
+pipx install qtile
+pipx inject qtile sh
+pipx install rich

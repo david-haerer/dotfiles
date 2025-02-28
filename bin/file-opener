@@ -1,0 +1,43 @@
+#!/bin/sh
+
+file="${1}"
+
+if [ -z "${file}" ]; then
+	"${EXPLORER}"
+	exit 0
+fi
+
+mimetype=$(file -Lb --mime-type -- "${file}")
+
+case "${mimetype}" in
+video/*)
+	"${PLAYER}" "${file}"
+	;;
+audio/midi)
+	"playmidi" "${file}"
+	;;
+audio/mpeg)
+	"${PLAYER}" "${file}"
+	;;
+text/* | application/json)
+	"${EDITOR}" "${file}"
+	;;
+image/*)
+	"${VIEWER}" "${file}"
+	;;
+application/pdf)
+	"${READER_PDF}" "${file}"
+	;;
+application/epub+zip)
+	"${READER_EPUB}" "${file}"
+	;;
+application/x-executable)
+	"${file}"
+	;;
+inode/directory)
+	"${EXPLORER} ${file}"
+	;;
+*)
+	open "${file}"
+	;;
+esac

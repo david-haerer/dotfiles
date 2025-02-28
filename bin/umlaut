@@ -1,0 +1,7 @@
+#!/bin/sh
+
+printf 'a: ä\nb: ♭\nB: ₿\ne: é\nE: €\no: ö\ns: ß\nu: ü\n' |
+	rofi -dmenu -p "Umlauts" -i |
+	sd '.+: ' '' |
+	sd '\n' '' |
+	xclip -sel clip

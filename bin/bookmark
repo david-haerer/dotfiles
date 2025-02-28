@@ -1,0 +1,32 @@
+#!/bin/sh
+
+basedir="$HOME/Schreibtisch/Bookmarks"
+
+if [ -z $1 ]; then
+    for path in $basedir/*.md; do
+        name=$(basename "$path")
+        if [ "$name" = "Bookmarks.md" ]; then
+            continue
+        fi
+        echo "${name%.*}"
+        cat "$path" | rg --color never "^\*" | sd "\*" "  *"
+    done
+    exit 0
+fi
+
+url="$1"
+
+if [ -z "$2" ]; then
+    title="$(echo $url | sd https:// '' | sd http:// '')"
+else
+    title="$2"
+fi
+filepath="$basedir/$title.md"
+
+if [ -z "$3" ]; then
+    description=""
+else
+    description=": $3"
+fi
+
+echo "* [$title$description]($url)" >> "$filepath"

@@ -1,0 +1,16 @@
+#!/bin/sh
+
+filename=$1
+name="${filename%.*}"
+gpg -d "${filename}" 2>/dev/null | python3 -c '
+import fileinput
+part=0
+mail=[]
+for line in fileinput.input():
+    if "Content-Type: text/" in line:
+        part += 1
+    if part != 1:
+        continue
+    mail.append(line[:-2])
+print("\n".join(mail[1:-1]))
+' > $name.txt

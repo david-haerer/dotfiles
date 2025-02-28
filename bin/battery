@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+
+import subprocess
+
+info = subprocess.check_output(["acpi", "-b"]).decode("utf-8")
+print(info[:-1])
+parts = info.split("Discharging, ")
+if len(parts) == 1:
+    exit(0)
+value = int(parts[1].split("%")[0])
+if value > 10:
+    exit(0)
+subprocess.run(["beep"])
+subprocess.run(["beep"])
+subprocess.run(["beep"])

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+search="$1"
+cd /home/david/Nextcloud/Musik && fdfind "$search" | sed 's/\(.*\)/"\1"/' | xargs mpv

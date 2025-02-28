@@ -1,0 +1,10 @@
+#!/bin/sh
+
+file=$(mktemp)
+hx "$file"
+content=$(cat "$file")
+rm "$file"
+
+nsec=$(nitropy nk3 secrets get-password "Nostr" --password)
+
+nak event --content "$content" --sec "$nsec" "relay.damus.io"

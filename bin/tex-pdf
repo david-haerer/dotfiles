@@ -1,0 +1,24 @@
+#!/bin/sh
+
+file=$(readlink -f "$1")
+dir=$(dirname "$file")
+base="${file%.*}"
+
+# printf "1/4 - pdflatex\n" 
+pdflatex -halt-on-error -interaction=nonstopmode "$base.tex" > "$base.txt" 
+grep '^!.*' --color=never "$base.txt" 
+
+# printf "2/4 - bibtex\n" 
+bibtex "$base.aux" > "$base.txt" 
+grep '^!.*' --color=never "$base.txt" 
+
+# printf "3/4 - pdflatex\n" 
+pdflatex -halt-on-error -interaction=nonstopmode "$base.tex" > "$base.txt" 
+grep '^!.*' --color=never "$base.txt" 
+
+# printf "4/4 - pdflatex\n" 
+pdflatex -halt-on-error -interaction=nonstopmode "$base.tex" > "$base.txt" 
+grep '^!.*' --color=never "$base.txt" 
+
+rm -f "$base.txt" "$base.aux" "$base.bbl" "$base.blg" "$base.log" "$base.out"
+rm -f "$base.toc" "$base.snm" "$base.nav" "$base.sfp" "$base.sfr""texput.log" 

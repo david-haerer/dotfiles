@@ -1,0 +1,4 @@
+#/bin/sh
+
+title=$(bookmarks show --no-url | rofi -dmenu -i -p "Bookmarks" | sd "\(.*\)" "" | sd '\s+$' '')
+bookmarks search "$title" | xclip -selection c
