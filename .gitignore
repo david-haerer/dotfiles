@@ -6,7 +6,7 @@ __pycache__/
 !/.zshrc
 !/.zprofile
 !/.xinitrc
-!/.scripts
+!/bin
 
 !/.local
 /.local/*
@@ -36,6 +36,8 @@ __pycache__/
 !/.config/picom
 
 !/.config/helix
+/.config/helix/runtime/*
+/.config/helix/themes/*
 
 !/.config/nvim
 /.config/nvim/spell
