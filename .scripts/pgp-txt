@@ -1,5 +1,0 @@
-#!/bin/sh
-set -eu
-filename=$1
-name="${filename%.*}"
-gpg -d -o "${name}.txt" ${filename}

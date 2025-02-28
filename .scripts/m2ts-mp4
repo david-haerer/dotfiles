@@ -1,7 +1,0 @@
-#!/bin/zsh
-
-for file in *.m2ts
-do
-    ffmpeg -i $file -q:v 0 ${file/%.m2ts/.mp4}
-    rm $file
-done

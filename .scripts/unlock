@@ -1,5 +1,0 @@
-#!/bin/bash
-
-read -rsp "Password: " pass
-export $(echo -n "$pass" | gnome-keyring-daemon --unlock)
-unset pass

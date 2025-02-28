@@ -1,8 +1,0 @@
-#!/bin/sh
-# ALIAS: pu
-
-pass git pull \
-    && pass git add . \
-    && pass git commit -m "$HOST" \
-    && pass git push
-

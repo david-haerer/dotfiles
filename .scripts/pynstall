@@ -1,7 +1,0 @@
-#!/bin/sh
-
-package=$1
-
-pipx uninstall $package
-poetry build
-pipx install dist/$package-*-py3-none-any.whl

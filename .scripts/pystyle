@@ -1,4 +1,0 @@
-#!/bin/sh
-
-isort --profile=black $1
-black $1

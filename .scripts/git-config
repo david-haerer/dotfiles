@@ -1,6 +1,0 @@
-#!/bin/sh
-
-envsubst '${NAME} ${EMAIL}' \
-    < $GIT/gitconfig.template \
-    > $HOME/.gitconfig
-

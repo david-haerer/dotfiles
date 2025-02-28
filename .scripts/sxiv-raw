@@ -1,5 +1,0 @@
-#!/bin/sh
-
-id=$(uuid)
-dcraw -W -c -e "$1" | cp /dev/stdin  /tmp/$id
-nsxiv /tmp/$id

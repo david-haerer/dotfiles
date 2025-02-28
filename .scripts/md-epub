@@ -1,8 +1,0 @@
-#!/bin/sh
-
-filepath="$1"
-filename=$(basename "${filepath}")
-path=$(dirname "${filepath}")
-name="${filename%.*}"
-
-pandoc "$filepath" -o "$path/$name.epub"

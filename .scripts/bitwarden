@@ -1,7 +1,0 @@
-#!/bin/sh
-
-email="$EMAIL"
-password=$(nitropy nk3 secrets get-password "Bitwarden" | rg password | sd 'password            : ' '' | sd '\n' '')
-session=$(bw login "$email" "$password" --raw --method 3)
-bw --session "$session" "$@"
-bw logout >/dev/null

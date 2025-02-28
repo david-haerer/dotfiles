@@ -1,8 +1,0 @@
-#!/bin/sh
-
-for file in *.*;
-do
-    ffmpeg -i "$file" -q:v 0 "${file%.*}.mp4"
-    rm "$file"
-done
-

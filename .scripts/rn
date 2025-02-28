@@ -1,4 +1,0 @@
-#!/bin/sh
-
-pattern="$1"
-rename -f "s/$pattern" *
