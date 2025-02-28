@@ -5,6 +5,7 @@ __pycache__/
 !/README.md
 !/.zshrc
 !/.zprofile
+!/.zshenv
 !/.xinitrc
 !/bin
 
