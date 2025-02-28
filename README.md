@@ -8,16 +8,29 @@
 
 ## Requirements
 
-`curl` and `git` must be installed.
-To push changes an SSH key must be added to GitHub.
+* `git` must be installed.
+* To push changes an SSH key must be added to GitHub.
 
 ## Setup
 
 In `$HOME` execute the following command:
 
 ```sh
-curl -sSL https://dotfiles.haerer.dev | sh
+# 1. Clone the repo.
+git clone git@github.com:david-haerer/dotfiles.git
+# or
+git clone https://github.com/david-haerer/dotfiles.git
+
+# 2. Copy the .git folder
+cp $HOME/dotfiles/.git $HOME/.dotfiles.git
+
+# 3. Set the dot alias.
 alias dot="git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME"
+
+# 4. Restore the unstaged changes.
+dot restore $HOME
+
+# 5. Pull the latest changes.
 dot pull
 ```
 
