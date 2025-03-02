@@ -17,4 +17,4 @@ fi
 . ~/.xprofile
 
 # Start Qtile WM.
-exec uvx --python 3.10 --with sh qtile start
+exec qtile start
