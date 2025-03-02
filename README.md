@@ -18,10 +18,12 @@ In `$HOME` execute the following command:
 1. Clone the repo
    ```sh
    git clone git@github.com:david-haerer/dotfiles.git
-   # or
+   ```
+   or
+   ```sh
    git clone https://github.com/david-haerer/dotfiles.git
    ```
-2. Copy the .git folder
+2. Copy the `.git` folder
    ```sh
    cp $HOME/dotfiles/.git $HOME/.dotfiles.git
    ```
@@ -29,13 +31,9 @@ In `$HOME` execute the following command:
    ```sh
    alias dot="git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME"
    ```
-4. Restore the unstaged changes.
+4. Restore the working directory.
    ```sh
    dot restore $HOME
-   ```
-5. Pull the latest changes.
-   ```sh
-   dot pull
    ```
 
 ## Usage
