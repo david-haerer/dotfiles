@@ -141,6 +141,7 @@ alias export-pgp="gpg --output '$EMAIL.pgp' --export-secret-key '$EMAIL'"
 alias re="exec $SHELL"
 
 # qtile
+alias qtile="uvx --python 3.11 --with sh qtile"
 alias qtile-reload="qtile cmd-obj -o cmd -f reload_config"
 alias qtile-logs="cat $HOME/.local/share/qtile/qtile.log"
 alias qtile-python="$HOME/.local/pipx/venvs/qtile/bin/python"
