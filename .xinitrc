@@ -16,5 +16,8 @@ fi
 # # Source xprofile.
 . ~/.xprofile
 
+wezterm &
+librewolf &
+
 # Start Qtile WM.
 exec qtile start
