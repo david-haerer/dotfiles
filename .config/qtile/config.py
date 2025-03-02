@@ -1,15 +1,24 @@
 import os
 
+import sh
 from libqtile import bar, hook, layout, widget
-from libqtile.config import DropDown, Group, Key, Match, ScratchPad, Screen
+from libqtile.config import (
+    # DropDown,
+    Group,
+    Key,
+    KeyChord,
+    Match,
+    # ScratchPad,
+    Screen,
+)
 from libqtile.lazy import lazy
+from libqtile.log_utils import logger
 from libqtile.widget import base
 
 
 class VPN(base.InLoopPollText):
     def poll(self):
-        return ""
-        # return "VPN" if sh.mullvad("status").startswith("Connected") else ""
+        return "VPN" if sh.mullvad("status").startswith("Connected") else ""
 
 
 # -- CONSTANTS --
@@ -19,6 +28,13 @@ ALT = "mod1"
 ALTGR = "mod5"
 HASHTAG = "numbersign"
 CTRL = "control"
+
+AUDIO_MUTE = "XF86AudioMute"
+AUDIO_DOWN = "XF86AudioLowerVolume"
+AUDIO_UP = "XF86AudioRaiseVolume"
+BRIGHTNESS_DOWN = "XF86MonBrightnessUp"
+BRIGHTNESS_UP = "XF86MonBrightnessDown"
+
 USER = os.getenv("USER")
 FONT = os.getenv("FONT")
 TERMINAL = os.getenv("TERMINAL", "wezterm")
@@ -42,26 +58,24 @@ ACCENT_COLOR = YELLOW
 BACKGROUND = BLACK
 FOREGROUND = WHITE
 
-L = lazy.layout
-
 
 # -- AUTOSTART --
 
 
 def ensure_running(proc_name, run_proc):
     return
-    # try:
-    #     sh.pidof(proc_name)
-    # except sh.ErrorReturnCode:
-    #     run_proc()
+    try:
+        sh.pidof(proc_name)
+    except sh.ErrorReturnCode:
+        run_proc()
 
 
 @hook.subscribe.startup
 def autostart():
     # lambda: sh.autorandr("common")
-    # ensure_running("nm-applet", lambda: sh.nm_applet(_bg=True))
-    # ensure_running("nextcloud", lambda: sh.nextcloud(_bg=True))
-    # ensure_running("flameshot", lambda: sh.flameshot(_bg=True))
+    ensure_running("nm-applet", lambda: sh.nm_applet(_bg=True))
+    ensure_running("nextcloud", lambda: sh.nextcloud(_bg=True))
+    ensure_running("flameshot", lambda: sh.flameshot(_bg=True))
     # ensure_running("blueman-applet", lambda: sh.blueman_applet(_bg=True))
     return
 
@@ -80,157 +94,165 @@ def group_window_add(group, window):
     window.window.set_property("QTILE_MAX", value, "CARDINAL", 32)
 
 
+@hook.subscribe.client_focus
+def client_focus(client):
+    client.group.set_label(client.name)
+
+
+@hook.subscribe.client_name_updated
+def client_name_updated(client):
+    client.group.set_label(client.name)
+
+
 # -- KEYS --
 
-keys = []
 
-# keys.extend(
-#     [
-#         Key([MOD, ALT], "h", L.left(), desc="Move focus to left"),
-#         Key([MOD, ALT], "l", L.right(), desc="Move focus to right"),
-#         Key([MOD, ALT], "j", L.down(), desc="Move focus down"),
-#         Key([MOD, ALT], "k", L.up(), desc="Move focus up"),
-#         Key([MOD, "control"], "h", L.left(), desc="Move focus to left"),
-#         Key([MOD, "control"], "l", L.right(), desc="Move focus to right"),
-#         Key([MOD, "control"], "j", L.down(), desc="Move focus down"),
-#         Key([MOD, "control"], "k", L.up(), desc="Move focus up"),
-#     ]
-# )
+@lazy.function
+def new_group(qtile):
+    logger.warning("new_group")
+    qtile.add_group(str(len(qtile.groups)), label="New Tab")
 
-# keys.extend(
-#     [
-#         Key(
-#             [MOD, "control", "shift"],
-#             "h",
-#             L.shuffle_left(),
-#             desc="Move window to the left",
-#         ),
-#         Key(
-#             [MOD, "control", "shift"],
-#             "l",
-#             L.shuffle_right(),
-#             desc="Move window to the right",
-#         ),
-#         Key([MOD, "control", "shift"], "j", L.shuffle_down(), desc="Move window down"),
-#         Key([MOD, "control", "shift"], "k", L.shuffle_up(), desc="Move window up"),
-#     ]
-# )
 
-# keys.extend(
-#     [
-#         Key([MOD, "shift"], "h", L.grow_left(), desc="Grow window to the left"),
-#         Key([MOD, "shift"], "l", L.grow_right(), desc="Grow window to the right"),
-#         Key([MOD, "shift"], "j", L.grow_down(), desc="Grow window down"),
-#         Key([MOD, "shift"], "k", L.grow_up(), desc="Grow window up"),
-#     ]
-# )
+@lazy.function
+def delete_group(qtile):
+    logger.warning("delete_group")
+    logger.warning(qtile.current_group)
+    logger.warning(qtile.current_group.windows)
+    if qtile.current_group.windows:
+        return
+    qtile.delete_group(qtile.current_group.name)
 
-keys.extend(
-    [
-        Key([MOD], "n", lazy.screen.next_group(), desc="Switch to next group"),
-        Key([MOD], "p", lazy.screen.prev_group(), desc="Switch to previous group"),
-        Key([MOD], "comma", lazy.next_screen(), desc="Switch to next screen"),
-        Key(
-            [MOD, "shift"],
-            "comma",
-            lazy.prev_screen(),
-            desc="Switch to previous screen",
-        ),
-    ]
-)
 
-keys.extend(
-    [
-        Key([MOD], "m", lazy.next_layout(), desc="Toggle between layouts"),
-        Key([MOD], "q", lazy.window.kill(), desc="Kill focused window"),
-        # Key([MOD, "control"], "r", lazy.reload_config(), desc="Reload the config"),
-        # Key([MOD, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    ]
-)
+@lazy.function
+def to_next_group(qtile):
+    if qtile.current_window is None:
+        return
+    if qtile.current_group.name == qtile.groups[-1].name:
+        # logger.warning("to_next_group new_group")
+        group_index_next = 0
+        # qtile.add_group(str(len(qtile.groups)), label="QTile")
+    else:
+        group_index_next = qtile.groups.index(qtile.current_group) + 1
+    qtile.current_window.togroup(qtile.groups[group_index_next].name)
+    qtile.current_screen.next_group()
 
-keys.extend(
-    [
-        Key([], "XF86AudioMute", lazy.spawn("amixer -D pulse set Master toggle")),
-        Key(
-            [],
-            "XF86AudioLowerVolume",
-            lazy.spawn("amixer -D pulse sset Master 7%- unmute"),
-        ),
-        Key(
-            [],
-            "XF86AudioRaiseVolume",
-            lazy.spawn("amixer -D pulse sset Master 7%+ unmute"),
-        ),
-        Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set 5%+")),
-        Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-")),
-    ]
-)
+
+@lazy.function
+def to_prev_group(qtile):
+    logger.warning("to_prev_group")
+    if qtile.current_window is None:
+        return
+    # qtile.current_window.togroup(qtile.groups[i - 1].name)
+    # qtile.current_screen.toggle_group(qtile.groups[i - 1])
+    if qtile.current_group.name == qtile.groups[0].name:
+        logger.warning("to_next_group new_group")
+        # qtile.add_group(str(len(qtile.groups)), label="QTile")
+        group_index_prev = -1
+    else:
+        group_index_prev = qtile.groups.index(qtile.current_group) - 1
+    qtile.current_window.togroup(qtile.groups[group_index_prev].name)
+    qtile.current_screen.next_group()
+
+
+keys = [
+    # Device
+    Key([], AUDIO_MUTE, lazy.spawn("amixer -D pulse set Master toggle")),
+    Key([], AUDIO_DOWN, lazy.spawn("amixer -D pulse sset Master 7%- unmute")),
+    Key([], AUDIO_UP, lazy.spawn("amixer -D pulse sset Master 7%+ unmute")),
+    Key([], BRIGHTNESS_UP, lazy.spawn("brightnessctl set 5%+")),
+    Key([], BRIGHTNESS_DOWN, lazy.spawn("brightnessctl set 5%-")),
+    # Window
+    Key([MOD], "q", lazy.window.kill()),
+    # Focus
+    Key([MOD], "h", lazy.layout.left()),
+    Key([MOD], "j", lazy.layout.down()),
+    Key([MOD], "k", lazy.layout.up()),
+    Key([MOD], "l", lazy.layout.right()),
+    # Tabs
+    Key([MOD], "t", new_group),
+    Key([MOD], "w", delete_group),
+    Key([MOD], "n", lazy.screen.next_group()),
+    Key([MOD], "p", lazy.screen.prev_group()),
+    Key([MOD, "shift"], "n", to_next_group),
+    Key([MOD, "shift"], "p", to_prev_group),
+    # Layout
+    Key([MOD], "m", lazy.next_layout()),
+    # # Screens
+    Key([MOD], "bracketright", lazy.next_screen()),
+    Key([MOD], "bracketleft", lazy.prev_screen()),
+    # Shuffle
+    KeyChord(
+        [MOD],
+        "s",
+        mode=True,
+        submappings=[
+            Key([], "h", lazy.layout.shuffle_left()),
+            Key([], "j", lazy.layout.shuffle_down()),
+            Key([], "k", lazy.layout.shuffle_up()),
+            Key([], "l", lazy.layout.shuffle_right()),
+        ],
+    ),
+    # Resize
+    KeyChord(
+        [MOD],
+        "r",
+        mode=True,
+        submappings=[
+            Key([], "h", lazy.layout.grow_left()),
+            Key([], "j", lazy.layout.grow_down()),
+            Key([], "k", lazy.layout.grow_up()),
+            Key([], "l", lazy.layout.grow_right()),
+        ],
+    ),
+    # Exec
+    KeyChord(
+        [MOD],
+        "x",
+        [
+            Key([], "t", lazy.spawn(TERMINAL)),
+            Key([], "b", lazy.spawn(BROWSER)),
+            Key([], "s", lazy.spawn(PASSWORD_MANAGER)),
+            Key([], "l", lazy.spawn(LAUNCHER)),
+            Key([], "e", lazy.spawn("rofimoji")),
+            Key([], "u", lazy.spawn("umlaut")),
+            Key([], "g", lazy.spawn("rofi-gitmojis")),
+            Key([], "h", lazy.spawn("autorandr common")),
+            Key([], "return", lazy.spawn("rat")),
+        ],
+    ),
+    # Key([MOD], "space", lazy.group["scratchpad"].dropdown_toggle("term")),
+]
 
 # -- GROUPS --
 
-groups = [Group(i) for i in "123456789"]
-
-for i in groups:
-    keys.extend(
-        [
-            Key(
-                [MOD],
-                i.name,
-                lazy.group[i.name].toscreen(),
-                desc=f"Switch to group {i.name}",
-            ),
-            Key(
-                [MOD, "shift"],
-                i.name,
-                lazy.window.togroup(i.name, switch_group=True),
-                desc=f"Switch to & move focused window to group {i.name}",
-            ),
-        ]
-    )
+groups = [Group("0", label="", layout="columns")]
 
 
-W, H = 0.9975, 1.035
-DX, DY = 0.0005, -0.038
-cos30, sin30 = 0.8660254037844387, 0.5
-width, height = cos30 * W, sin30 * H
-x, y = (1 - cos30) / 2 * W + DX, (1 - sin30) / 2 * H + DY
+# W, H = 0.9975, 1.035
+# DX, DY = 0.0005, -0.038
+# cos30, sin30 = 0.8660254037844387, 0.5
+# width, height = cos30 * W, sin30 * H
+# x, y = (1 - cos30) / 2 * W + DX, (1 - sin30) / 2 * H + DY
 
-groups.append(
-    ScratchPad(
-        "scratchpad",
-        dropdowns=[DropDown("term", TERMINAL, width=width, height=height, x=x, y=y)],
-    )
-)
-
-keys.extend(
-    [
-        Key([MOD], "t", lazy.spawn(TERMINAL), desc="Launch terminal"),
-        # Key([MOD], "s", lazy.spawn(SIGNAL), desc="Launch Signal"),
-        Key([MOD], "b", lazy.spawn(BROWSER), desc="Launch Browser"),
-        Key([MOD], "s", lazy.spawn(PASSWORD_MANAGER), desc="Launch password manager"),
-        Key([MOD], "period", lazy.spawn(LAUNCHER), desc="Application launcher"),
-        Key([MOD], "space", lazy.group["scratchpad"].dropdown_toggle("term")),
-        Key([MOD], "e", lazy.spawn("rofimoji"), desc="Launch unicode picker"),
-        Key([MOD], "u", lazy.spawn("umlaut"), desc="Launch umlaut picker"),
-        Key([MOD], "g", lazy.spawn("rofi-gitmojis"), desc="Launch Gitmoji picker"),
-        Key([MOD], "h", lazy.spawn("autorandr common"), desc="Launch unicode picker"),
-        Key([MOD], "return", lazy.spawn("rat"), desc="Launch the rat"),
-    ]
-)
+# groups.append(
+#     ScratchPad(
+#         "scratchpad",
+#         dropdowns=[DropDown("term", TERMINAL, width=width, height=height, x=x, y=y)],
+#     )
+# )
 
 
 # -- LAYOUT --
 
 
 layouts = [
-    layout.Max(margin=0),
+    layout.Max(),
     layout.Columns(
         border_on_single=True,
         border_focus=ACCENT_COLOR,
         border_focus_stack=ACCENT_COLOR,
-        border_width=2,
-        grow_amount=6,
-        margin=4,
+        border_width=1,
+        grow_amount=4,
     ),
 ]
 
@@ -251,7 +273,7 @@ bar = bar.Bar(
             block_highlight_text_color=WHITE,
             padding=4,
             margin=0,
-            hide_unused=True,
+            # hide_unused=True,
         ),
         widget.Spacer(),
         widget.Clock(format="%GW%V %Y-%m-%d %H:%M:%S", foreground=GREEN),
