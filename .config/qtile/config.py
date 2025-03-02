@@ -84,46 +84,46 @@ def group_window_add(group, window):
 
 keys = []
 
-keys.extend(
-    [
-        Key([MOD, ALT], "h", L.left(), desc="Move focus to left"),
-        Key([MOD, ALT], "l", L.right(), desc="Move focus to right"),
-        Key([MOD, ALT], "j", L.down(), desc="Move focus down"),
-        Key([MOD, ALT], "k", L.up(), desc="Move focus up"),
-        Key([MOD, "control"], "h", L.left(), desc="Move focus to left"),
-        Key([MOD, "control"], "l", L.right(), desc="Move focus to right"),
-        Key([MOD, "control"], "j", L.down(), desc="Move focus down"),
-        Key([MOD, "control"], "k", L.up(), desc="Move focus up"),
-    ]
-)
+# keys.extend(
+#     [
+#         Key([MOD, ALT], "h", L.left(), desc="Move focus to left"),
+#         Key([MOD, ALT], "l", L.right(), desc="Move focus to right"),
+#         Key([MOD, ALT], "j", L.down(), desc="Move focus down"),
+#         Key([MOD, ALT], "k", L.up(), desc="Move focus up"),
+#         Key([MOD, "control"], "h", L.left(), desc="Move focus to left"),
+#         Key([MOD, "control"], "l", L.right(), desc="Move focus to right"),
+#         Key([MOD, "control"], "j", L.down(), desc="Move focus down"),
+#         Key([MOD, "control"], "k", L.up(), desc="Move focus up"),
+#     ]
+# )
 
-keys.extend(
-    [
-        Key(
-            [MOD, "control", "shift"],
-            "h",
-            L.shuffle_left(),
-            desc="Move window to the left",
-        ),
-        Key(
-            [MOD, "control", "shift"],
-            "l",
-            L.shuffle_right(),
-            desc="Move window to the right",
-        ),
-        Key([MOD, "control", "shift"], "j", L.shuffle_down(), desc="Move window down"),
-        Key([MOD, "control", "shift"], "k", L.shuffle_up(), desc="Move window up"),
-    ]
-)
+# keys.extend(
+#     [
+#         Key(
+#             [MOD, "control", "shift"],
+#             "h",
+#             L.shuffle_left(),
+#             desc="Move window to the left",
+#         ),
+#         Key(
+#             [MOD, "control", "shift"],
+#             "l",
+#             L.shuffle_right(),
+#             desc="Move window to the right",
+#         ),
+#         Key([MOD, "control", "shift"], "j", L.shuffle_down(), desc="Move window down"),
+#         Key([MOD, "control", "shift"], "k", L.shuffle_up(), desc="Move window up"),
+#     ]
+# )
 
-keys.extend(
-    [
-        Key([MOD, "shift"], "h", L.grow_left(), desc="Grow window to the left"),
-        Key([MOD, "shift"], "l", L.grow_right(), desc="Grow window to the right"),
-        Key([MOD, "shift"], "j", L.grow_down(), desc="Grow window down"),
-        Key([MOD, "shift"], "k", L.grow_up(), desc="Grow window up"),
-    ]
-)
+# keys.extend(
+#     [
+#         Key([MOD, "shift"], "h", L.grow_left(), desc="Grow window to the left"),
+#         Key([MOD, "shift"], "l", L.grow_right(), desc="Grow window to the right"),
+#         Key([MOD, "shift"], "j", L.grow_down(), desc="Grow window down"),
+#         Key([MOD, "shift"], "k", L.grow_up(), desc="Grow window up"),
+#     ]
+# )
 
 keys.extend(
     [
@@ -143,8 +143,8 @@ keys.extend(
     [
         Key([MOD], "m", lazy.next_layout(), desc="Toggle between layouts"),
         Key([MOD], "q", lazy.window.kill(), desc="Kill focused window"),
-        Key([MOD, "control"], "r", lazy.reload_config(), desc="Reload the config"),
-        Key([MOD, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+        # Key([MOD, "control"], "r", lazy.reload_config(), desc="Reload the config"),
+        # Key([MOD, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     ]
 )
 
@@ -205,7 +205,7 @@ groups.append(
 keys.extend(
     [
         Key([MOD], "t", lazy.spawn(TERMINAL), desc="Launch terminal"),
-        Key([MOD], "s", lazy.spawn(SIGNAL), desc="Launch Signal"),
+        # Key([MOD], "s", lazy.spawn(SIGNAL), desc="Launch Signal"),
         Key([MOD], "b", lazy.spawn(BROWSER), desc="Launch Browser"),
         Key([MOD], "s", lazy.spawn(PASSWORD_MANAGER), desc="Launch password manager"),
         Key([MOD], "period", lazy.spawn(LAUNCHER), desc="Application launcher"),
@@ -278,8 +278,8 @@ bar = bar.Bar(
         widget.Spacer(length=6),
         widget.LaunchBar(
             progs=[
-                ("🔒", f"sudo loginctl terminate-user {USER}"),
-                ("❌", "sudo shutdown -h now"),
+                ("🔒", f"doas loginctl terminate-user {USER}"),
+                ("❌", "doas shutdown -h now"),
             ]
         ),
     ],
