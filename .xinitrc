@@ -16,8 +16,5 @@ fi
 # # Source xprofile.
 . ~/.xprofile
 
-wezterm &
-librewolf &
-
 # Start Qtile WM.
-exec qtile start
+exec uvx --python 3.10 --with sh qtile start
