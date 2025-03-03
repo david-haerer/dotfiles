@@ -96,12 +96,12 @@ def group_window_add(group, window):
 
 @hook.subscribe.client_focus
 def client_focus(client):
-    client.group.set_label(client.name)
+    client.group.set_label(client.name[:25])
 
 
 @hook.subscribe.client_name_updated
 def client_name_updated(client):
-    client.group.set_label(client.name)
+    client.group.set_label(client.name[:25])
 
 
 # -- KEYS --
@@ -109,7 +109,6 @@ def client_name_updated(client):
 
 @lazy.function
 def new_group(qtile):
-    logger.warning("new_group")
     qtile.add_group(str(len(qtile.groups)), label="New Tab")
 
 
@@ -117,8 +116,10 @@ def new_group(qtile):
 def delete_group(qtile):
     logger.warning("delete_group")
     logger.warning(qtile.current_group)
-    logger.warning(qtile.current_group.windows)
     if qtile.current_group.windows:
+        logger.info(
+            f"{qtile.current_group} has windows {qtile.current_group.windows}, not closing"
+        )
         return
     qtile.delete_group(qtile.current_group.name)
 
@@ -127,12 +128,11 @@ def delete_group(qtile):
 def to_next_group(qtile):
     if qtile.current_window is None:
         return
-    if qtile.current_group.name == qtile.groups[-1].name:
-        # logger.warning("to_next_group new_group")
-        group_index_next = 0
-        # qtile.add_group(str(len(qtile.groups)), label="QTile")
-    else:
-        group_index_next = qtile.groups.index(qtile.current_group) + 1
+    group_index_next = (
+        0
+        if qtile.current_group.name == qtile.groups[-1].name
+        else qtile.groups.index(qtile.current_group) + 1
+    )
     qtile.current_window.togroup(qtile.groups[group_index_next].name)
     qtile.current_screen.next_group()
 
@@ -142,14 +142,11 @@ def to_prev_group(qtile):
     logger.warning("to_prev_group")
     if qtile.current_window is None:
         return
-    # qtile.current_window.togroup(qtile.groups[i - 1].name)
-    # qtile.current_screen.toggle_group(qtile.groups[i - 1])
-    if qtile.current_group.name == qtile.groups[0].name:
-        logger.warning("to_next_group new_group")
-        # qtile.add_group(str(len(qtile.groups)), label="QTile")
-        group_index_prev = -1
-    else:
-        group_index_prev = qtile.groups.index(qtile.current_group) - 1
+    group_index_prev = (
+        -1
+        if qtile.current_group.name == qtile.groups[0].name
+        else qtile.groups.index(qtile.current_group) - 1
+    )
     qtile.current_window.togroup(qtile.groups[group_index_prev].name)
     qtile.current_screen.next_group()
 
