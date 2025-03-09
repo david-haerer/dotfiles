@@ -28,6 +28,8 @@ ALT = "mod1"
 ALTGR = "mod5"
 HASHTAG = "numbersign"
 CTRL = "control"
+SHIFT = "shift"
+SUPER = "Super_L"
 
 AUDIO_MUTE = "XF86AudioMute"
 AUDIO_DOWN = "XF86AudioLowerVolume"
@@ -128,12 +130,12 @@ def delete_group(qtile):
 def to_next_group(qtile):
     if qtile.current_window is None:
         return
-    group_index_next = (
-        0
-        if qtile.current_group.name == qtile.groups[-1].name
-        else qtile.groups.index(qtile.current_group) + 1
+    next_group_index = (
+        qtile.groups.index(qtile.current_group) + 1
+        if qtile.current_group.name != qtile.groups[-1].name
+        else 0
     )
-    qtile.current_window.togroup(qtile.groups[group_index_next].name)
+    qtile.current_window.togroup(qtile.groups[next_group_index].name)
     qtile.current_screen.next_group()
 
 
@@ -143,12 +145,17 @@ def to_prev_group(qtile):
     if qtile.current_window is None:
         return
     group_index_prev = (
-        -1
-        if qtile.current_group.name == qtile.groups[0].name
-        else qtile.groups.index(qtile.current_group) - 1
+        qtile.groups.index(qtile.current_group) - 1
+        if qtile.current_group.name != qtile.groups[0].name
+        else -1
     )
     qtile.current_window.togroup(qtile.groups[group_index_prev].name)
     qtile.current_screen.next_group()
+
+
+@hook.subscribe.selection_notify
+def selection_notify(qtile, selection):
+    qtile.primary_selection = selection
 
 
 keys = [
@@ -170,17 +177,17 @@ keys = [
     Key([MOD], "w", delete_group),
     Key([MOD], "n", lazy.screen.next_group()),
     Key([MOD], "p", lazy.screen.prev_group()),
-    Key([MOD, "shift"], "n", to_next_group),
-    Key([MOD, "shift"], "p", to_prev_group),
+    Key([MOD, SHIFT], "n", to_next_group),
+    Key([MOD, SHIFT], "p", to_prev_group),
     # Layout
-    Key([MOD], "m", lazy.next_layout()),
+    Key([MOD], "f", lazy.next_layout()),
     # # Screens
     Key([MOD], "bracketright", lazy.next_screen()),
     Key([MOD], "bracketleft", lazy.prev_screen()),
     # Shuffle
     KeyChord(
         [MOD],
-        "s",
+        "m",
         mode=True,
         submappings=[
             Key([], "h", lazy.layout.shuffle_left()),
@@ -243,14 +250,8 @@ groups = [Group("0", label="", layout="columns")]
 
 
 layouts = [
-    layout.Max(),
-    layout.Columns(
-        border_on_single=True,
-        border_focus=ACCENT_COLOR,
-        border_focus_stack=ACCENT_COLOR,
-        border_width=1,
-        grow_amount=4,
-    ),
+    layout.Max(border_width=1),
+    layout.Columns(border_width=1, grow_amount=4),
 ]
 
 
