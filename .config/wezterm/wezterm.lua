@@ -15,7 +15,7 @@ local MAGENTA = "#FFEE99"
 
 local config = {}
 
-config.window_background_opacity = 0.9
+-- config.window_background_opacity = 0.9
 config.color_scheme = "Ayu Dark (Gogh)"
 config.use_fancy_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
@@ -39,20 +39,22 @@ config.colors = {
 }
 
 config.force_reverse_video_cursor = true
+config.disable_default_key_bindings = true
 
 config.keys = {
-	{ key = "n", mods = "CTRL", action = wezterm.action.ActivateTabRelative(1) },
-	{ key = "p", mods = "CTRL", action = wezterm.action.ActivateTabRelative(-1) },
+	{ mods="CTRL", key = "n", action = wezterm.action.ActivateTabRelative(1) },
+	{ mods="CTRL", key = "p", action = wezterm.action.ActivateTabRelative(-1) },
 
-	{ key = "h", mods = "CTRL", action = wezterm.action.ActivatePaneDirection("Left") },
-	{ key = "j", mods = "CTRL", action = wezterm.action.ActivatePaneDirection("Down") },
-	{ key = "k", mods = "CTRL", action = wezterm.action.ActivatePaneDirection("Up") },
-	{ key = "l", mods = "CTRL", action = wezterm.action.ActivatePaneDirection("Right") },
+	{ mods="CTRL", key = "h", action = wezterm.action.ActivatePaneDirection("Left") },
+	{ mods="CTRL", key = "j", action = wezterm.action.ActivatePaneDirection("Down") },
+	{ mods="CTRL", key = "k", action = wezterm.action.ActivatePaneDirection("Up") },
+	{ mods="CTRL", key = "l", action = wezterm.action.ActivatePaneDirection("Right") },
 
-	{ key = "t", mods = "CTRL", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
-	{ key = "v", mods = "CTRL", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-	{ key = "s", mods = "CTRL", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
-	{ key = "r", mods = "CTRL", action = wezterm.action.ActivateKeyTable({ name = "resize", one_shot = false }) },
+	{ mods="CTRL", key = "t", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
+	{ mods="CTRL", key = "f", action = wezterm.action.TogglePaneZoomState },
+	{ mods="CTRL", key = "v", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	{ mods="CTRL", key = "s", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	{ mods="CTRL", key = "r", action = wezterm.action.ActivateKeyTable({ name = "resize", one_shot = false }) },
 }
 
 config.key_tables = {
