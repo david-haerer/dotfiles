@@ -69,9 +69,12 @@ formatter = { command = "shfmt", args = ["-"] }
 command = "ruff"
 args = ["server"]
 
+[language-server.pylsp]
+command = "pylsp"
+
 [[language]]
 name = "python"
-language-servers = ["ruff"]
+language-servers = ["ruff", "pylsp"]
 auto-format = true
 formatter = { command = "bash", args = [
   "-c",
