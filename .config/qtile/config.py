@@ -250,8 +250,8 @@ groups = [Group("0", label="", layout="columns")]
 
 
 layouts = [
-    layout.Max(border_width=1),
-    layout.Columns(border_width=1, grow_amount=4),
+    layout.Max(border_width=1, border_focus=BLACK),
+    layout.Columns(border_width=1, grow_amount=4, border_focus=YELLOW),
 ]
 
 
