@@ -16,7 +16,7 @@ __pycache__/
 !/.config/fontconfig
 !/.config/git
 !/.config/key.map
-!/.config/lazygit
+!/.config/lazygit/config.yml
 !/.config/picom
 !/.config/qtile
 !/.config/rofi
