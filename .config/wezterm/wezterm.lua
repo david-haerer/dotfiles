@@ -42,6 +42,9 @@ config.force_reverse_video_cursor = true
 config.disable_default_key_bindings = true
 
 config.keys = {
+	{ mods="SUPER", key= "c", action = wezterm.action.CopyTo("Clipboard")},
+	{ mods="SUPER", key= "v", action = wezterm.action.PasteFrom("Clipboard")},
+	
 	{ mods="CTRL", key = "n", action = wezterm.action.ActivateTabRelative(1) },
 	{ mods="CTRL", key = "p", action = wezterm.action.ActivateTabRelative(-1) },
 
