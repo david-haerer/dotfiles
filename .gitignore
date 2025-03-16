@@ -16,7 +16,6 @@ __pycache__/
 !/.config/fontconfig
 !/.config/git
 !/.config/key.map
-!/.config/lazygit/config.yml
 !/.config/picom
 !/.config/qtile
 !/.config/rofi
@@ -30,3 +29,7 @@ __pycache__/
 !/.config/helix
 /.config/helix/runtime/*
 /.config/helix/themes/*
+
+!/.config/lazygit/
+/.config/lazygit/*
+!/.config/lazygit/config.yml
