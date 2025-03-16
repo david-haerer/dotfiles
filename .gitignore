@@ -9,6 +9,8 @@ __pycache__/
 !/.zshenv
 !/.zshrc
 
+/bin/autostart
+
 !/.config
 /.config/*
 
