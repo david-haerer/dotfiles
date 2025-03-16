@@ -1,47 +1,40 @@
 #!/bin/sh
 
-# shell
-alias e="exit"
-alias c="clear && l"
-alias o="file-opener"
-alias m="mkdir"
-alias lg="lazygit"
-alias z="zellij"
-alias md="markdown"
-alias cm="chmod"
-alias cmx="chmod +x"
-alias sw="source workspace"
-alias fd="fdfind"
-alias n="brainstorage note"
-alias bm="brainstorage bookmark"
-alias vs="code"
-alias lily="sudo watchexec -e ly lilypond *.ly"
-alias ag="ag -W 255"
-alias tex-pdf="tectonic"
 alias a="apparate"
 alias ap="apparition"
-alias utc="date -u --iso-8601=seconds | sd T ' ' | sd '\+00:00' '' | sd : -"
+
+alias adoc='asciidoctor'
+alias ag="ag -W 255"
+alias az="arbeitszeit"
+alias bat="batcat"
+alias b="batcat"
+alias c="clear && l"
+alias cm="chmod"
+alias cmx="chmod +x"
 alias copy='xclip -sel clip'
+alias dup='fdupes -R . | sd "^" "rm \"" | sd "$" "\"" | sd "rm \"\"" ""'
+alias e="exit"
+alias fd="fdfind"
+alias hdmi='autorandr common'
+alias installs='deborphan --all-packages'
+alias ipy="uvx ipython"
+alias kw="isoweekdate"
+alias lily="sudo watchexec -e ly lilypond *.ly"
+alias logout="loginctl terminate-user 1000"
+alias md="markdown"
+alias m="mkdir"
+alias mr="massren"
+alias o="file-opener"
+alias r="radian"
+alias sm="smerge"
+alias s="wezterm ssh"
+alias tmux="tmux -u"
+alias utc="date -u --iso-8601=seconds | sd T ' ' | sd '\+00:00' '' | sd : -"
+alias z="exec $SHELL"
+
 alias caps-esc='setxkbmap -option caps:swapescape'
 alias caps-esc-tty="sudo loadkeys $HOME/.config/key.map"
-alias hdmi='autorandr common'
-alias sm="smerge"
-alias kw="isoweekdate"
-alias az="arbeitszeit"
-alias bs="brainstorage"
-alias p="ps aux | rg"
-alias ep="ephoto"
-alias mr="massren"
-alias dup='fdupes -R . | sd "^" "rm \"" | sd "$" "\"" | sd "rm \"\"" ""'
-alias epub-mp3='epub-to-audiobook'
-alias installs='deborphan --all-packages'
-alias adoc='asciidoctor'
-alias adoc-pdf='asciidoctor-pdf'
 
-# ls: Show hidden files by default.
-alias ls="ls -a"
-
-# cd: Navigate quickly.
 alias d="cd"
 alias ..="cd .."
 alias ...="cd ../.."
@@ -49,98 +42,50 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
 
-# bat
-alias bat="batcat"
-alias b="batcat"
+alias dl-audio="youtube-dl -o './%(upload_date)s - %(uploader)s - %(title)s.mp3' -f bestaudio "
+alias dl-captions="youtube-dl -o './%(upload_date)s - %(uploader)s - %(title)s.mp4' --all-subs --skip-download"
+# alias dl-spotify="spotifydl --username $(pass spotify.com | grep -oP '(?<=username: )[^,]*') --password $(pass spotify.com | head -n 1)"
+alias dl-video="youtube-dl -o './%(upload_date)s - %(uploader)s - %(title)s.mp4' -f bestvideo+bestaudio "
 
-# apparition
-alias a="apparate"
-alias ap="apparition"
+alias ft-adoc-pdf='asciidoctor-pdf'
+alias ft-epub-mp3='epub-to-audiobook'
+alias ft-tag-mp3="id3 -m '%g  -  %a  -  %l  -  %n  -  %t.mp3'"
+alias ft-tex-pdf="tectonic"
 
-# eza: Use as default list tool.
-alias l="eza --color=always --group-directories-first --icons"
-alias la="eza -a --color=always --group-directories-first --icons"
-alias ll="eza -l --color=always --group-directories-first --icons"
-alias lt="eza -aT --color=always --group-directories-first --icons"
-alias l.="eza -a --color=always --group-directories-first --icons | grep '^\.'"
-
-# tmux: Use UTF-8 in tmux.
-alias tmux="tmux -u"
-
-# git: Use lots of shortcuts.
 alias g="git"
+alias g.="git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME"
+alias lg="lazygit"
+alias lg.="lg --git-dir=$HOME/.dotfiles.git --work-tree=$HOME"
 alias ga="git add"
-alias gc="git commit"
+alias gc="git checkout"
 alias gd="git diff"
-alias gl="git log"
 alias gg="git graph"
-alias gr="git rebase -i"
+alias gi="git rebase -i"
+alias gl="git log"
+alias gls="git ls-files"
+alias gm="git commit"
+alias gmv="git rename"
+alias gn="git note"
+alias gr="git rebase"
+alias grm="git remove"
 alias gs="git status"
 alias gu="git update"
 alias gv="git view"
-alias gn="git note"
-alias gco="git checkout"
-alias gls="git ls-files"
-alias grm="git remove"
-alias gmv="git rename"
 
-# dotfiles: Manage dotfiles with a bare Git repository.
-alias dot="git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME"
-alias dot-lg="lg --git-dir=$HOME/.dotfiles.git --work-tree=$HOME"
-
-# todo.txt
-alias t="bash $APPS/todo-txt/todo.sh"
-alias ta="append $TODO_FILE"
-alias to="nvim $TODO_FILE"
-alias td="icloud-todotxt download"
-alias tu="icloud-todotxt upload"
-
-# notes
-alias na="append $NOTES/$(date +%Y-%m-%d) $(date +%H:%M)"
-alias no="nvim "$NOTES""
-
-# newsboat
-alias feed="newsboat -u $HOME/Schreibtisch/rss"
-
-# docker
-alias dc="docker-compose"
-
-# downloads
-alias audio-dl="youtube-dl -o './%(upload_date)s - %(uploader)s - %(title)s.mp3' -f bestaudio "
-alias video-dl="youtube-dl -o './%(upload_date)s - %(uploader)s - %(title)s.mp4' -f bestvideo+bestaudio "
-alias captions-dl="youtube-dl -o './%(upload_date)s - %(uploader)s - %(title)s.mp4' --all-subs --skip-download"
-# alias spotify-dl="spotifydl --username $(pass spotify.com | grep -oP '(?<=username: )[^,]*') --password $(pass spotify.com | head -n 1)"
-
-# python
-alias py="python"
-alias ipy="ipython"
-alias isort="isort --profile=black"
-
-# R
-alias r="radian"
-
-# docker-compose
-alias dc="docker-compose"
-
-# pass
-alias otp="pass otp"
-
-# taffy
-alias tag-mp3="id3 -m '%g  -  %a  -  %l  -  %n  -  %t.mp3'"
-
-# crypto
-# alias gen-pw="openssl rand -base64"
-alias gen-uuid="python -c 'import uuid; print(uuid.uuid4())'"
-alias gen-ssh="ssh-keygen -t ed25519"
 alias gen-pgp="gpg --default-new-key-algo 'ed25519/cert,sign+cv25519/encr' --quick-generate-key '$NAME <$EMAIL>' 'future-default' 'default' 'never'"
-# alias backup-pgp="gpg --export-secret-key '$EMAIL' | paperkey --output paperkey.asc && echo '\n# Passphrase: $(pass pgp/$EMAIL | head -n 1)' >> paperkey.asc"
-alias restore-pgp="paperkey --pubring publickey.asc --secrets paperkey.txt | gpg --import"
-alias export-pgp="gpg --output '$EMAIL.pgp' --export-secret-key '$EMAIL'"
+alias gen-pw="openssl rand -base64"
+alias gen-ssh="ssh-keygen -t ed25519"
+alias gen-uuid="python -c 'import uuid; print(uuid.uuid4())'"
 
-# zsh
-alias re="exec $SHELL"
+alias l="eza --color=always --group-directories-first --icons"
+alias la="eza -a --color=always --group-directories-first --icons"
+alias l.="eza -a --color=always --group-directories-first --icons | grep '^\.'"
+alias ll="eza -l --color=always --group-directories-first --icons"
+alias lt="eza -aT --color=always --group-directories-first --icons"
 
-# qtile
-alias qtile-reload="qtile cmd-obj -o cmd -f reload_config"
+# alias pgp-backup="gpg --export-secret-key '$EMAIL' | paperkey --output paperkey.asc && echo '\n# Passphrase: $(pass pgp/$EMAIL | head -n 1)' >> paperkey.asc"
+alias pgp-export="gpg --output '$EMAIL.pgp' --export-secret-key '$EMAIL'"
+alias pgp-restore="paperkey --pubring publickey.asc --secrets paperkey.txt | gpg --import"
+
 alias qtile-logs="tail -f $HOME/.local/share/qtile/qtile.log"
-alias logout="loginctl terminate-user 1000"
+alias qtile-reload="qtile cmd-obj -o cmd -f reload_config"
