@@ -1,24 +1,21 @@
 import os
+import subprocess
 
-import sh
 from libqtile import bar, hook, layout, widget
-from libqtile.config import (
-    # DropDown,
-    Group,
-    Key,
-    KeyChord,
-    Match,
-    # ScratchPad,
-    Screen,
-)
+from libqtile.config import Group, Key, KeyChord, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.log_utils import logger
 from libqtile.widget import base
 
 
+def run(cmd):
+    return subprocess.run(cmd, text=True, capture_output=True).stdout.strip()
+
+
 class VPN(base.InLoopPollText):
     def poll(self):
-        return "VPN" if sh.mullvad("status").startswith("Connected") else ""
+        status = run(["mullvad", "status"]).split("\n")[0]
+        return f"VPN: {status}"
 
 
 # -- CONSTANTS --
@@ -59,27 +56,6 @@ MAGENTA = "#FFEE99"
 ACCENT_COLOR = YELLOW
 BACKGROUND = BLACK
 FOREGROUND = WHITE
-
-
-# -- AUTOSTART --
-
-
-def ensure_running(proc_name, run_proc):
-    return
-    try:
-        sh.pidof(proc_name)
-    except sh.ErrorReturnCode:
-        run_proc()
-
-
-@hook.subscribe.startup
-def autostart():
-    # lambda: sh.autorandr("common")
-    ensure_running("nm-applet", lambda: sh.nm_applet(_bg=True))
-    ensure_running("nextcloud", lambda: sh.nextcloud(_bg=True))
-    ensure_running("flameshot", lambda: sh.flameshot(_bg=True))
-    # ensure_running("blueman-applet", lambda: sh.blueman_applet(_bg=True))
-    return
 
 
 @hook.subscribe.layout_change
@@ -224,26 +200,11 @@ keys = [
             Key([], "return", lazy.spawn("rat")),
         ],
     ),
-    # Key([MOD], "space", lazy.group["scratchpad"].dropdown_toggle("term")),
 ]
 
 # -- GROUPS --
 
 groups = [Group("0", label="", layout="columns")]
-
-
-# W, H = 0.9975, 1.035
-# DX, DY = 0.0005, -0.038
-# cos30, sin30 = 0.8660254037844387, 0.5
-# width, height = cos30 * W, sin30 * H
-# x, y = (1 - cos30) / 2 * W + DX, (1 - sin30) / 2 * H + DY
-
-# groups.append(
-#     ScratchPad(
-#         "scratchpad",
-#         dropdowns=[DropDown("term", TERMINAL, width=width, height=height, x=x, y=y)],
-#     )
-# )
 
 
 # -- LAYOUT --
@@ -271,7 +232,6 @@ bar = bar.Bar(
             block_highlight_text_color=WHITE,
             padding=4,
             margin=0,
-            # hide_unused=True,
         ),
         widget.Spacer(),
         widget.Clock(format="%GW%V %Y-%m-%d %H:%M:%S", foreground=GREEN),
