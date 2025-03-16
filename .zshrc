@@ -30,7 +30,7 @@ function y() {
 # Enable zsh syntax highlighting and auto-quoting.
 source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.config/zsh/zsh-autoquoter/zsh-autoquoter.zsh
-ZAQ_PREFIXES=('git commit( [^ ]##)# -[^ -]#m' 'ssh( [^ ]##)# [^ -][^ ]#' 'spotifydl' 'audio-dl' 'caption-dl' 'video-dl' 'rn' 'music' 's' 'bm add' 'gn' 'n a' 'bs bm a' 'bs n a' 'bm a' 'n s' 'bs n s' 'bs bm s' 'bm s' 'bs s' 'n g' 'bg n g' 'bg bm g' 'bm g' 'bg g' 'yt-dlp')
+ZAQ_PREFIXES=('spotifydl' 'audio-dl' 'caption-dl' 'video-dl' 'rn' 'music' 'bm add' 'gn' 'n a' 'bs bm a' 'bs n a' 'bm a' 'n s' 'bs n s' 'bs bm s' 'bm s' 'bs s' 'n g' 'bg n g' 'bg bm g' 'bm g' 'bg g' 'yt-dlp')
 ZSH_HIGHLIGHT_HIGHLIGHTERS+=(zaq)
 
 # Enable zsh vi mode.
