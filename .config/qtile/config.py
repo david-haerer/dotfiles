@@ -255,13 +255,6 @@ bar = bar.Bar(
         ),
         widget.Spacer(length=6),
         widget.Systray(),
-        widget.Spacer(length=6),
-        widget.LaunchBar(
-            progs=[
-                ("🔒", f"doas loginctl terminate-user {USER}"),
-                ("❌", "doas shutdown -h now"),
-            ]
-        ),
     ],
     30,
     background=BLACK,
