@@ -9,7 +9,10 @@ from libqtile.widget import base
 
 
 def run(cmd):
-    return subprocess.run(cmd, text=True, capture_output=True).stdout.strip()
+    try:
+        return subprocess.run(cmd, text=True, capture_output=True).stdout.strip()
+    except FileNotFoundError:
+        return "-"
 
 
 class VPN(base.InLoopPollText):
