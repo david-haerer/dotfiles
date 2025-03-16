@@ -21,6 +21,7 @@
 
 [core]
     pager = delta
+	editor = hx
 
 [pager]
     log = "batcat --style=grid"
