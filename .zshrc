@@ -72,3 +72,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Use the 'starship' prompt.
 eval "$(starship init zsh)"
+
+# Umlauts.
+xmodmap ~/.Xmodmap

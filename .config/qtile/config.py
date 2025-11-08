@@ -34,8 +34,8 @@ SUPER = "Super_L"
 AUDIO_MUTE = "XF86AudioMute"
 AUDIO_DOWN = "XF86AudioLowerVolume"
 AUDIO_UP = "XF86AudioRaiseVolume"
-BRIGHTNESS_DOWN = "XF86MonBrightnessUp"
-BRIGHTNESS_UP = "XF86MonBrightnessDown"
+BRIGHTNESS_DOWN = "XF86MonBrightnessDown"
+BRIGHTNESS_UP = "XF86MonBrightnessUp"
 
 USER = os.getenv("USER")
 FONT = os.getenv("FONT")
@@ -43,7 +43,6 @@ TERMINAL = os.getenv("TERMINAL", "wezterm")
 SIGNAL = "signal-desktop"
 BROWSER = os.getenv("BROWSER", "firefox")
 LAUNCHER = "rofi -display-drun 'Launch' -show drun"
-PASSWORD_MANAGER = "passmenu"
 
 BLACK = "#0A0E14"
 GRAY = "#4D5566"
@@ -142,8 +141,8 @@ keys = [
     Key([], AUDIO_MUTE, lazy.spawn("amixer -D pulse set Master toggle")),
     Key([], AUDIO_DOWN, lazy.spawn("amixer -D pulse sset Master 7%- unmute")),
     Key([], AUDIO_UP, lazy.spawn("amixer -D pulse sset Master 7%+ unmute")),
-    Key([], BRIGHTNESS_UP, lazy.spawn("brightnessctl set 5%+")),
     Key([], BRIGHTNESS_DOWN, lazy.spawn("brightnessctl set 5%-")),
+    Key([], BRIGHTNESS_UP, lazy.spawn("brightnessctl set 5%+")),
     # Window
     Key([MOD], "q", lazy.window.kill()),
     # Focus
@@ -188,21 +187,7 @@ keys = [
         ],
     ),
     # Exec
-    KeyChord(
-        [MOD],
-        "x",
-        [
-            Key([], "t", lazy.spawn(TERMINAL)),
-            Key([], "b", lazy.spawn(BROWSER)),
-            Key([], "s", lazy.spawn(PASSWORD_MANAGER)),
-            Key([], "l", lazy.spawn(LAUNCHER)),
-            Key([], "e", lazy.spawn("rofimoji")),
-            Key([], "u", lazy.spawn("umlaut")),
-            Key([], "g", lazy.spawn("rofi-gitmojis")),
-            Key([], "h", lazy.spawn("autorandr common")),
-            Key([], "return", lazy.spawn("rat")),
-        ],
-    ),
+    Key([MOD], "space", lazy.spawn(LAUNCHER)),
 ]
 
 # -- GROUPS --
@@ -215,7 +200,14 @@ groups = [Group("0", label="", layout="columns")]
 
 layouts = [
     layout.Max(border_width=0, border_focus=BLACK),
-    layout.Columns(border_width=0, grow_amount=4, border_focus=YELLOW),
+    layout.Columns(
+        border_width=0,
+        grow_amount=4,
+        border_focus=YELLOW,
+        wrap_focus_stacks=False,
+        wrap_focu_columns=False,
+        wrap_focus_rows=False,
+    ),
 ]
 
 

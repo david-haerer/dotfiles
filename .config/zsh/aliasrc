@@ -19,7 +19,7 @@ alias hdmi='autorandr common'
 alias installs='deborphan --all-packages'
 alias ipy="uvx ipython"
 alias kw="isoweekdate"
-alias lily="sudo watchexec -e ly lilypond *.ly"
+alias lily="doas watchexec -e ly lilypond *.ly"
 alias logout="loginctl terminate-user 1000"
 alias md="markdown"
 alias m="mkdir"
@@ -106,6 +106,10 @@ alias lt="eza -aT --color=always --group-directories-first --icons"
 # alias pgp-backup="gpg --export-secret-key '$EMAIL' | paperkey --output paperkey.asc && echo '\n# Passphrase: $(pass pgp/$EMAIL | head -n 1)' >> paperkey.asc"
 alias pgp-export="gpg --output '$EMAIL.pgp' --export-secret-key '$EMAIL'"
 alias pgp-restore="paperkey --pubring publickey.asc --secrets paperkey.txt | gpg --import"
+
+alias pw-bw="nitropy nk3 secrets get-password --format json Bitwarden | tail -n 1 | jq -r '.password' | xclip -sel clip"
+alias pw-ssh="nitropy nk3 secrets get-password --format json SSH | tail -n 1 | jq -r '.password' | xclip -sel clip"
+alias pw-contabo="nitropy nk3 secrets get-password --format json Contabo | tail -n 1 | jq -r '.password' | xclip -sel clip"
 
 alias qtile-logs="tail -f $HOME/.local/share/qtile/qtile.log"
 alias qtile-reload="qtile cmd-obj -o cmd -f reload_config"

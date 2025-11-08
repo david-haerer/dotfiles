@@ -9,6 +9,16 @@ formatter = { command = "zig", args = ["fmt", "--stdin"] }
 auto-format = true
 
 [[language]]
+name = "lilypond"
+scope = "source.ly"
+file-types = ["ly"]
+formatter = { command = "bash", args = [
+  "-c",
+  "uvx --from python-ly ly indent",
+] }
+auto-format = true
+
+[[language]]
 name = "go"
 formatter = { command = "gofmt" }
 auto-format = true
@@ -75,16 +85,20 @@ formatter = { command = "shfmt", args = ["-"] }
 command = "ruff"
 args = ["server"]
 
+[language-server.ty]
+command = "ty"
+args = ["server"]
+
 [language-server.pylsp]
 command = "pylsp"
 
 [[language]]
 name = "python"
-language-servers = ["ruff", "pylsp"]
+language-servers = ["ruff", "pylsp", "ty"]
 auto-format = true
 formatter = { command = "bash", args = [
   "-c",
-  "ruff check --select I --fix - | ruff format -",
+  "ruff check --fix - | ruff format --preview -",
 ] }
 
 [[language]]

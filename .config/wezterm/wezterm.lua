@@ -42,6 +42,8 @@ config.force_reverse_video_cursor = true
 config.disable_default_key_bindings = true
 
 config.keys = {
+	{ key = "w", mods = "CTRL", action = wezterm.action.CloseCurrentTab({ confirm = true }) },
+
 	{ key = "-", mods = "CTRL", action = wezterm.action.DecreaseFontSize },
 	{ key = "=", mods = "CTRL", action = wezterm.action.IncreaseFontSize },
 
