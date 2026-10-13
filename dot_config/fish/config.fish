@@ -1,0 +1,50 @@
+if status is-interactive
+    fish_vi_key_bindings
+    starship init fish | source
+    zoxide init fish | source
+    eza --icons=always
+end
+
+function y
+    set tmp (mktemp -t "yazi-cwd.XXXXXX")
+    command yazi $argv --cwd-file="$tmp"
+    if read -z cwd <"$tmp"; and [ "$cwd" != "$PWD" ]; and test -d "$cwd"
+        builtin cd -- "$cwd"
+    end
+    rm -f -- "$tmp"
+end
+
+
+abbr ... cd ../..
+abbr .... cd ../../..
+abbr b cd -
+abbr c "clear; eza --icons=always"
+abbr cmx chmod
+abbr cmx chmod +x
+abbr p podman
+abbr e exit
+abbr g git
+abbr hx helix
+abbr kb kanban-md tui
+abbr l eza --icons=always
+abbr la eza --icons=always -a
+abbr ld lazydocker
+abbr lg lazygit
+abbr ll eza --icons=always -l
+abbr lla eza --icons=always -la
+abbr n note
+
+set -g fish_greeting
+set -xg YEAR $(year)
+fish_add_path $HOME/bin
+fish_add_path $HOME/.bun/bin
+fish_add_path $HOME/go/bin
+fish_add_path $HOME/.cargo/bin
+
+function chpwd --on-variable PWD
+    clear
+    eza --icons=always
+end
+
+clear
+eza --icons=always
