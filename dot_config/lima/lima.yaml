@@ -1,0 +1,118 @@
+minimumLimaVersion: "2.2.1"
+
+base: [./base.yaml]
+
+vmType: vz
+arch: aarch64
+cpus: 4
+memory: "4GiB"
+disk: "30GiB"
+
+user:
+  name: dev
+  home: /home/dev
+  shell: /usr/bin/fish
+
+env:
+  COLORTERM: "truecolor"
+  TERM: xterm-256color
+  DISABLE_TELEMETRY: "1"
+  EDITOR: "hx"
+  VISUAL: "hx"
+  SHELL: "fish"
+
+vmOpts:
+  vz:
+    rosetta:
+      enabled: true
+      binfmt: true
+
+mounts:
+  - location: "~/lima/{{.Name}}"
+    mountPoint: "{{.Home}}/share"
+    writable: true
+
+ssh:
+  forwardAgent: false
+
+provision:
+  - mode: system
+    script: |
+      #!/bin/bash
+      set -euo pipefail
+      mountpoint -q "/mnt/lima-{{.Name}}"
+      chown "{{.User}}:{{.User}}" "/mnt/lima-{{.Name}}"
+      ln -sfnT "/mnt/lima-{{.Name}}" "{{.Home}}/{{.Name}}"
+
+  - mode: data
+    path: "{{.Home}}/.config/fish/conf.d/nix-path.fish"
+    owner: "{{.User}}"
+    permissions: 644
+    content: |
+      if test -r /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish
+          source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish
+      end
+      fish_add_path --path $HOME/.nix-profile/bin $HOME/.local/bin
+      if set -q XDG_STATE_HOME
+          fish_add_path --path $XDG_STATE_HOME/nix/profile/bin
+      else
+          fish_add_path --path $HOME/.local/state/nix/profile/bin
+      end
+
+  - mode: dependency
+    script: |
+      #!/bin/bash
+      set -euo pipefail
+      export DEBIAN_FRONTEND=noninteractive
+      apt-get update
+      apt-get install -y fish
+      usermod --shell /usr/bin/fish "{{.User}}"
+
+  - mode: user
+    script: |
+      #!/bin/bash
+      set -euo pipefail
+      [ -x /nix/var/nix/profiles/default/bin/nix ] && exit 0
+      export NIX_INSTALLER_YES=1
+      curl --fail --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh -s -- --daemon
+
+  - mode: user
+    script: |
+      #!/bin/bash
+      set -euo pipefail
+      . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+      nix --extra-experimental-features 'nix-command flakes' \
+        profile add \
+        nixpkgs#bash-language-server \
+        nixpkgs#bat \
+        nixpkgs#btop \
+        nixpkgs#chezmoi \
+        nixpkgs#devcontainer \
+        nixpkgs#delta \
+        nixpkgs#diffnav \
+        nixpkgs#dockerfmt \
+        nixpkgs#eza \
+        nixpkgs#fastfetch \
+        nixpkgs#fd \
+        nixpkgs#fzf \
+        nixpkgs#helix \
+        nixpkgs#lazydocker \
+        nixpkgs#lazygit \
+        nixpkgs#marksman \
+        nixpkgs#ripgrep \
+        nixpkgs#shellcheck \
+        nixpkgs#shfmt \
+        nixpkgs#starship \
+        nixpkgs#taplo \
+        nixpkgs#tombi \
+        nixpkgs#typescript-language-server \
+        nixpkgs#vscode-langservers-extracted \
+        nixpkgs#yazi \
+        nixpkgs#zoxide
+
+  - mode: user
+    script: |
+      #!/bin/bash
+      set -euo pipefail
+      . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+      chezmoi init --apply --promptDefaults https://github.com/david-haerer/dotfiles
