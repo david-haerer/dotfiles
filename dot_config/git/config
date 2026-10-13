@@ -63,6 +63,3 @@
     numbers = true
 [log]
     date = iso
-[user]
-	name = David Härer
-	email = david@haerer.dev
