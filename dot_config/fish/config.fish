@@ -33,6 +33,8 @@ abbr m mkdir
 
 set -g fish_greeting
 set -xg YEAR $(year)
+set -xg EDITOR hx
+set -xg VISUAL hx
 
 function chpwd --on-variable PWD
     clear
