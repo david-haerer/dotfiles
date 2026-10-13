@@ -18,7 +18,7 @@ abbr ... cd ../..
 abbr .... cd ../../..
 abbr b cd -
 abbr c "clear; eza --icons=always"
-abbr cmx chmod
+abbr cm chezmoi
 abbr cmx chmod +x
 abbr p podman
 abbr e exit
