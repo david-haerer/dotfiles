@@ -20,7 +20,6 @@ abbr b cd -
 abbr c "clear; eza --icons=always"
 abbr cm chezmoi
 abbr cmx chmod +x
-abbr p podman
 abbr e exit
 abbr g git
 abbr kb kanban-md tui
@@ -30,7 +29,9 @@ abbr ld lazydocker
 abbr lg lazygit
 abbr ll eza --icons=always -l
 abbr lla eza --icons=always -la
+abbr m mkdir
 abbr n note
+abbr p podman
 
 set -g fish_greeting
 set -xg YEAR $(year)
