@@ -14,7 +14,6 @@ function y
     rm -f -- "$tmp"
 end
 
-
 abbr ... cd ../..
 abbr .... cd ../../..
 abbr b cd -
@@ -24,7 +23,6 @@ abbr cmx chmod +x
 abbr p podman
 abbr e exit
 abbr g git
-abbr hx helix
 abbr kb kanban-md tui
 abbr l eza --icons=always
 abbr la eza --icons=always -a
