@@ -30,6 +30,9 @@ abbr lg lazygit
 abbr ll eza --icons=always -l
 abbr lla eza --icons=always -la
 abbr m mkdir
+{{- if eq .chezmoi.osRelease.id "omarchy" }}
+abbr hx helix
+{{- end }}
 
 set -g fish_greeting
 set -xg YEAR $(year)
