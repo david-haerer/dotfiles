@@ -51,7 +51,7 @@
 	autoupdate = true        # Apply stored conflict resolutions automatically
 [core]
     pager = delta
-	editor = helix
+	editor = hx
 [pager]
     log = "bat --style=grid"
 [interactive]
