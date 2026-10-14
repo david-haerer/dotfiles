@@ -86,9 +86,10 @@ provision:
         nixpkgs#bash-language-server \
         nixpkgs#bat \
         nixpkgs#btop \
+        nixpkgs#bun \
         nixpkgs#chezmoi \
-        nixpkgs#devcontainer \
         nixpkgs#delta \
+        nixpkgs#devcontainer \
         nixpkgs#diffnav \
         nixpkgs#dockerfmt \
         nixpkgs#eza \
@@ -106,6 +107,7 @@ provision:
         nixpkgs#taplo \
         nixpkgs#tombi \
         nixpkgs#typescript-language-server \
+        nixpkgs#uv \
         nixpkgs#vscode-langservers-extracted \
         nixpkgs#yazi \
         nixpkgs#zoxide
