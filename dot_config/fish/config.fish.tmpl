@@ -31,7 +31,7 @@ abbr lc limactl
 abbr ll eza --icons=always -l
 abbr lla eza --icons=always -la
 abbr m mkdir
-{{- if eq .chezmoi.osRelease.id "omarchy" }}
+{{- if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "omarchy") }}
 abbr hx helix
 {{- end }}
 
